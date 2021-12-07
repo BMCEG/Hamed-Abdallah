@@ -1,0 +1,37 @@
+.container {
+  min-height: 80vh;
+  /* width: 75%; */
+  /* margin: auto; */
+}
+
+.box {
+  /* background-color: lightsalmon; */
+  margin: 25px;
+}
+
+.boxButton {
+  /* background-color: lightseagreen !important; */
+  text-align: center !important;
+}
+
+.layout {
+  padding: 4vmin;
+  min-height: 80vh !important;
+  width: 100%;
+  /* background-color: lightskyblue !important; */
+}
+.table {
+  min-height: 100% !important;
+}
+.createModal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  padding: 2vmin !important;
+  background-color: white;
+}
+.createModalTitle {
+  text-align: center !important;
+}

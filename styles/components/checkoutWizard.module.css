@@ -1,0 +1,14 @@
+.root {
+  background-color: transparent !important;
+}
+.MuiStepIcon-completed {
+  color: #ca222a !important;
+  background-color: aqua !important;
+}
+.MuiStepIcon-active {
+  color: #ca222a !important;
+}
+#hello {
+  color: #ca222a !important;
+  background-color: aqua !important;
+}

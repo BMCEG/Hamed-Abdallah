@@ -1,0 +1,78 @@
+import bcrypt from 'bcryptjs';
+
+const data = {
+  users: [
+    {
+      name: 'John Doe',
+      email: 'john@email.com',
+      password: bcrypt.hashSync('123456'),
+      isAdmin: true,
+    },
+    {
+      name: 'Jane Smith',
+      email: 'jane@email.com',
+      password: bcrypt.hashSync('123456'),
+      isAdmin: false,
+    },
+  ],
+  products: [
+    {
+      name: 'TEST free shirt',
+      status: 'active',
+      description: 'A popular shirt',
+      // brand: 'Nike',
+      slug: 'free-shirt',
+      color: 'yellow',
+      material: 'plastic',
+      shape: 'round',
+      gender: 'girls',
+      type: 'eyeglasses',
+      stock: 20,
+      price: 70,
+    },
+    {
+      name: 'TEST free shirt 2',
+      status: 'active',
+      description: 'A popular shirt 2',
+      // brand: 'Umbro',
+      slug: 'free-shirt-2',
+      color: 'grey',
+      material: 'titanium',
+      shape: 'cat-eye',
+      gender: 'male',
+      type: 'sunglasses',
+      stock: 20,
+      price: 170,
+    },
+    {
+      name: 'Oversized Shirt',
+      status: 'active',
+      description: 'A popular shirt 3',
+      // brand: 'Umbro',
+      slug: 'oversized-shirt',
+      color: 'grey',
+      material: 'metal',
+      shape: 'cat-eye',
+      gender: 'female',
+      type: 'sunglasses',
+      stock: 20,
+      price: 720,
+    },
+    {
+      name: 'Hiking Boots',
+      status: 'active',
+      description: 'Popular Hiking Boots',
+      // brand: 'Umbro',
+      slug: 'hiking-boots',
+      color: 'grey',
+      material: 'plastic',
+      shape: 'round',
+      gender: 'female',
+      type: 'eyeglasses',
+      stock: 30,
+      price: 250,
+    },
+  ],
+};
+
+export default data;

@@ -1,0 +1,17 @@
+.container {
+  min-height: 80vh;
+  width: 75%;
+  margin: auto;
+}
+.storesGrid {
+  display: flex !important;
+  justify-content: center !important;
+  /* background-color: crimson; */
+}
+.storeInfo {
+  /* background-color: cyan; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3% !important;
+}

@@ -1,0 +1,64 @@
+.container {
+  min-height: 80vh;
+  width: 75%;
+  margin: auto;
+}
+
+.branches {
+  /* background-color: cyan; */
+}
+.storesGrid {
+  display: flex !important;
+  justify-content: center !important;
+  /* background-color: crimson; */
+}
+.storeInfo {
+  /* background-color: cyan; */
+  /* margin: auto !important; */
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+  /* padding: 3% !important; */
+}
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.btn {
+  color: white !important;
+  /* width: 20vmin !important; */
+  text-align: center;
+  margin: auto !important;
+  border-radius: 100px !important;
+  background-color: #ca222a !important;
+  font-size: 22px !important;
+  box-shadow: 1px 1px 10px black !important;
+}
+.locationImg {
+  margin: auto !important;
+}
+.locationImgBase {
+  /* background-color: blue; */
+  text-align: center;
+}
+.accordionSummary {
+  background-color: #ca222a !important;
+  border-radius: 10px !important;
+}
+.accordion {
+  /* border-radius: 10px !important; */
+  box-shadow: none !important;
+}
+.accordionTitle {
+  /* text-align: center !important; */
+  margin: auto !important;
+  /* background-color: blue; */
+}
+.root {
+  background-color: white !important;
+}
+.accordionDetails {
+  background-color: white;
+}

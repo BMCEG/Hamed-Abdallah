@@ -1,0 +1,68 @@
+.container {
+  min-height: 80vh;
+  width: 75%;
+  margin: auto;
+}
+.banner {
+  height: 70vh;
+  background-color: crimson;
+}
+.text__p__bold {
+  /* background-color: aqua; */
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.text__p {
+  font-size: 18px !important;
+  /* background-color: cyan; */
+}
+.about {
+  /* background-color: darkcyan; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.storesGrid {
+  display: flex !important;
+  justify-content: center !important;
+  /* background-color: crimson; */
+}
+.storeInfo {
+  /* background-color: cyan; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3% !important;
+}
+.root {
+  background-color: #ca222a;
+}
+.text__header__base {
+  height: 70px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: yellow; */
+}
+.text__header {
+  font-size: 30px !important;
+  font-weight: bolder !important;
+  /* background-  display: flex;
+  flex-direction: column;
+  justify-content: center;: coral; */
+  /* width: 95%; */
+  color: white;
+  /* margin: auto !important; */
+}
+.text__p__bold {
+  /* background-color: aqua; */
+  font-size: 18px !important;
+  font-weight: bold;
+  color: white;
+}
+
+.text__p {
+  font-size: 18px !important;
+  color: white;
+}

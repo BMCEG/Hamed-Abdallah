@@ -1,13 +1,68 @@
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  background-color: white;
+}
+
+.about {
+  width: 65%;
+  margin: auto;
+  padding: 1vmin;
+}
+
+.ourBrands {
+  /* background-color: burlywood; */
+  width: 70%;
+  margin: auto;
+  /* padding: 1vmin; */
+}
+.ourBrands__header {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100% !important;
+}
+.hr__base {
+  width: 30%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+}
+.hor {
+  border-top: 3px solid white !important;
+  border-radius: 0px;
+}
+.text__header__base {
+  height: 70px !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.text__header {
+  font-size: 30px !important;
+  font-weight: bolder !important;
+}
+#brands__header {
+  color: white;
+}
+.text__p__bold {
+  font-size: 18px !important;
+  font-weight: bold;
 }
 
+.text__p {
+  font-size: 18px !important;
+}
+
+.ourStores {
+  margin-top: -10px;
+  padding: 2vmin;
+  background-color: #ca222a;
+  text-align: center;
+}
+.ourStores__img {
+  margin: auto !important;
+  /* background-color: aqua; */
+  padding: 2vmin !important;
+}
 .main {
   padding: 5rem 0;
   flex: 1;
@@ -118,4 +173,10 @@
     width: 100%;
     flex-direction: column;
   }
+}
+.brands {
+  background-color: blue;
+}
+.brandsLogo {
+  padding: 3vmin !important;
 }

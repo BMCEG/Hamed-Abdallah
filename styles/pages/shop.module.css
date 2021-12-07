@@ -1,0 +1,64 @@
+.root {
+  min-height: 100vh;
+}
+.container {
+  min-height: 80vh;
+  width: 75%;
+  margin: auto;
+}
+
+.filterBar {
+  background-color: #e6e7e8;
+  padding: 1vmin !important;
+  border-radius: 10px;
+  /* min-height: 60vh !important; */
+}
+.filterBarMob {
+  background-color: transparent;
+  padding: 1vmin !important;
+  border-radius: 10px;
+  /* min-height: 60vh !important; */
+}
+
+.brandsCarousel {
+  background-color: #e6e7e8;
+  padding: 1%;
+  margin-top: 2%;
+}
+
+.brands {
+  width: 75% !important;
+  margin: auto !important;
+}
+
+.filterAccordion {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  width: 100%;
+}
+.filterAccordionName {
+  border-bottom: 1px solid #ca222a !important;
+}
+.cardAction {
+  display: flex;
+  justify-content: space-evenly;
+}
+.banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.card {
+  /* background-color: red !important; */
+  min-height: 300px;
+  object-fit: contain !important;
+}
+.button {
+  color: white !important;
+  /* width: 20vmin !important; */
+  margin: auto !important;
+  border-radius: 100px !important;
+  background-color: #ca222a !important;
+  font-size: 16px !important;
+  box-shadow: 1px 1px 10px black !important;
+}

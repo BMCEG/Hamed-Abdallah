@@ -1,0 +1,29 @@
+.container {
+  min-height: 80vh;
+  width: 75%;
+  margin: auto;
+}
+.banner {
+  height: 70vh;
+  background-color: crimson;
+}
+.btn {
+  color: white !important;
+  /* width: 20vmin !important; */
+  text-align: center;
+  margin: auto !important;
+  border-radius: 100px !important;
+  background-color: #ca222a !important;
+  font-size: 18px !important;
+  box-shadow: 1px 1px 10px black !important;
+}
+.btnBack {
+  background-color: white !important;
+  /* width: 20vmin !important; */
+  text-align: center;
+  margin: auto !important;
+  border-radius: 100px !important;
+  color: #ca222a !important;
+  font-size: 18px !important;
+  box-shadow: 1px 1px 10px black !important;
+}

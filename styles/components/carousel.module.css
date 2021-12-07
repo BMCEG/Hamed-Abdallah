@@ -1,0 +1,7 @@
+.container {
+  /* background-color: turquoise; */
+  display: flex;
+  text-align: center;
+  max-height: 800px;
+  justify-content: center !important;
+}

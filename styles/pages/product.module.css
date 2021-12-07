@@ -1,0 +1,52 @@
+.container {
+  min-height: 80vh;
+  width: 75%;
+  margin: auto;
+}
+.reviews {
+  margin: auto;
+  width: 75%;
+}
+.productInfo {
+  /* padding: 1% !important; */
+  /* background-color: lightpink; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.relatedItems {
+  background-color: crimson;
+  padding: 3%;
+}
+
+.relatedCarousel {
+  width: 85% !important;
+  margin: auto !important;
+}
+
+.review {
+  background-color: lightgray;
+  padding: 2vmin;
+  margin: 2vmin;
+  border-radius: 10px;
+}
+.thumbnail {
+  object-fit: cover !important;
+}
+.button {
+  background-color: white !important;
+  /* width: 20vmin !important; */
+  border-radius: 100px !important;
+  color: #ca222a !important;
+  font-size: 22px !important;
+  box-shadow: 1px 1px 10px black !important;
+}
+.root {
+  background-color: white !important;
+}
+.laiAQh {
+  background-color: aqua !important;
+  object-fit: contain !important;
+}
