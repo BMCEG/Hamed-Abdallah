@@ -5,7 +5,7 @@ import { Store } from '../../../utils/Store';
 import db from '../../../utils/db';
 import { ReactPhotoCollage } from 'react-photo-collage';
 import { useMediaQuery } from '@mui/material';
-import tableIcons from '../MaterialTableIcons';
+import tableIcons from '../../../components/MaterialTableIcons';
 import Moment from 'react-moment';
 
 import {
