@@ -33,7 +33,7 @@ function AdminReturns(props) {
     //   field: 'orderItems',
     //   render: (rowData) => rowData.orderItems.length,
     // },
-    { title: 'User', field: 'user' },
+    { title: 'User', field: 'user.name' },
     { title: 'Shipping Address', field: 'shippingAddress.address' },
     { title: 'Shipping Phone', field: 'shippingAddress.phone' },
     { title: 'Items Price', field: 'itemsPrice', type: 'numeric' },
@@ -49,7 +49,7 @@ function AdminReturns(props) {
       title: 'Actions',
       field: '',
       render: (rowData) => (
-        <Button variant="contained" href={`/product/${rowData.slug}`}>
+        <Button variant="contained" href={`/admin/returns/${rowData._id}`}>
           Details
         </Button>
       ),
@@ -80,9 +80,9 @@ function AdminReturns(props) {
                 <ListItem>
                   <Image
                     alt="Hamed Abdallah"
-                    src={'/placeholder1.png'}
-                    width={100}
-                    height={100}
+                    src={'/Hamed-logo-Fullcolor.png'}
+                    width={152.5}
+                    height={87.5}
                   />
                 </ListItem>
                 <hr></hr>
@@ -119,16 +119,6 @@ function AdminReturns(props) {
                 <ListItem>
                   <Button className={Styles.boxButton} href="/admin/users">
                     USERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/reviews">
-                    REVIEWS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/branches">
-                    BRANCHES
                   </Button>
                 </ListItem>
               </List>
@@ -171,7 +161,7 @@ function AdminReturns(props) {
 export async function getServerSideProps({ query }) {
   await db.connect();
 
-  let returns = await Return.find({}).lean();
+  let returns = await Return.find({}).lean().populate('user');
 
   const allReturns = JSON.parse(JSON.stringify(returns));
   await db.disconnect();

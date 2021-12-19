@@ -15,6 +15,7 @@ import {
   ListItem,
   ListItemText,
   Table,
+  Link,
   TableBody,
   Grid,
   Card,
@@ -83,6 +84,8 @@ function Wishlist() {
         const { data } = await axios.get(`/api/users/wishlist/list`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
+        console.log(data);
+
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
         dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
@@ -182,14 +185,21 @@ function Wishlist() {
                           {wishlist.map((item) => (
                             <TableRow key={item._id}>
                               <TableCell>
-                                <Image
-                                  alt={item.name}
-                                  src={`/uploads/products/${item.images[0]}`}
-                                  width={100}
-                                  height={100}
-                                  className={Styles.productImg}
-                                  // style={{ backgroundSize }}
-                                />
+                                <NextLink
+                                  href={`/product/${item.slug}`}
+                                  passHref
+                                >
+                                  <Link>
+                                    <Image
+                                      alt={item.name}
+                                      src={`/uploads/products/${item.images[0]}`}
+                                      width={152.5}
+                                      height={87.5}
+                                      className={Styles.productImg}
+                                      // style={{ backgroundSize }}
+                                    />
+                                  </Link>
+                                </NextLink>
                               </TableCell>
                               <TableCell>{item.name}</TableCell>
                               <TableCell>{item.brand.name}</TableCell>

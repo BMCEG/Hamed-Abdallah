@@ -122,7 +122,7 @@ function PlaceOrder() {
                                 href={`/product/${item.slug}`}
                               >
                                 <Image
-                                  src="/placeholder1.png"
+                                  src="/Hamed-logo-Fullcolor.png"
                                   alt={item.name}
                                   width={50}
                                   height={50}

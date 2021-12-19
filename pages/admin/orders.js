@@ -15,9 +15,11 @@ import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import DataTable from 'react-data-table-component';
 import db from '../../utils/db';
 import Order from '../../models/Order';
+// import User from '../../models/User';
 import MaterialTable from 'material-table';
 import tableIcons from './MaterialTableIcons';
 import axios from 'axios';
+import Moment from 'react-moment';
 
 function AdminOrders(props) {
   const [isOpened, setIsOpened] = useState(false);
@@ -26,14 +28,15 @@ function AdminOrders(props) {
   const columns = [
     {
       title: 'Order ID',
-      field: '_id',
+      field: 'shortID',
     },
     {
       title: 'Number of Items',
       field: 'orderItems',
       render: (rowData) => rowData.orderItems.length,
     },
-    { title: 'User', field: 'user' },
+    { title: 'User', field: 'user.name' },
+    { title: 'Shipping Name', field: 'shippingAddress.fullName' },
     { title: 'Shipping Address', field: 'shippingAddress.address' },
     { title: 'Shipping Phone', field: 'shippingAddress.phone' },
     { title: 'Items Price', field: 'itemsPrice', type: 'numeric' },
@@ -50,11 +53,20 @@ function AdminOrders(props) {
       title: 'Actions',
       field: '',
       render: (rowData) => (
-        <Button variant="contained" href={`/product/${rowData.slug}`}>
+        <Button variant="contained" href={`/admin/orders/${rowData._id}`}>
           Details
         </Button>
       ),
     },
+    // {
+    //   title: 'Actions',
+    //   field: '',
+    //   render: (rowData) => (
+    //     <Button variant="contained" href={`/product/${rowData.slug}`}>
+    //       Details
+    //     </Button>
+    //   ),
+    // },
   ];
 
   const toggleDrawer = (open) => (event) => {
@@ -81,9 +93,9 @@ function AdminOrders(props) {
                 <ListItem>
                   <Image
                     alt="Hamed Abdallah"
-                    src={'/placeholder1.png'}
-                    width={100}
-                    height={100}
+                    src={'/Hamed-logo-Fullcolor.png'}
+                    width={152.5}
+                    height={87.5}
                   />
                 </ListItem>
                 <hr></hr>
@@ -120,16 +132,6 @@ function AdminOrders(props) {
                 <ListItem>
                   <Button className={Styles.boxButton} href="/admin/users">
                     USERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/reviews">
-                    REVIEWS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/branches">
-                    BRANCHES
                   </Button>
                 </ListItem>
               </List>
@@ -172,8 +174,8 @@ function AdminOrders(props) {
 export async function getServerSideProps({ query }) {
   await db.connect();
 
-  let orders = await Order.find({}).lean();
-
+  let orders = await Order.find({}).lean().populate('user');
+  // console.log(orders);
   const allOrders = JSON.parse(JSON.stringify(orders));
   await db.disconnect();
 

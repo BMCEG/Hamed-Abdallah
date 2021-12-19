@@ -115,7 +115,7 @@ function Order({ params }) {
   return (
     <div className={Styles.container}>
       <HamedAbdallahWhiteSpace />
-      <HamedAbdallahCheckoutWizard activeStep={3} />
+      <HamedAbdallahCheckoutWizard activeStep={4} />
       <HamedAbdallahWhiteSpace />
       {matches ? (
         <Typography variant="h3" component="h1">
@@ -178,7 +178,7 @@ function Order({ params }) {
                                   href={`/product/${item.slug}`}
                                 >
                                   <Image
-                                    src="/placeholder1.png"
+                                    src={`/uploads/products/${item.images[0]}"`}
                                     alt={item.name}
                                     width={50}
                                     height={50}

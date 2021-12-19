@@ -1,6 +1,6 @@
 import Styles from '../styles/components/collage.module.css';
 import Image from 'next/image';
-import { Button } from '@material-ui/core';
+import { Button, Typography } from '@material-ui/core';
 
 const HamedAbdallahCollage = () => {
   return (
@@ -17,6 +17,17 @@ const HamedAbdallahCollage = () => {
               backgroundRepeat: 'no-repeat',
             }}
           ></a>
+          <div className={Styles.block_caption}>
+            <Typography
+              variant="h2"
+              component="h2"
+              className={Styles.block_title}
+            >
+              <strong>Boys</strong>
+              <br></br>
+              Eyewear
+            </Typography>
+          </div>
         </div>
 
         <div className={Styles.block}>
@@ -30,6 +41,17 @@ const HamedAbdallahCollage = () => {
             }}
             href="/shop?gender=male"
           ></a>
+          <div className={Styles.block_caption}>
+            <Typography
+              variant="h2"
+              component="h2"
+              className={Styles.block_title}
+            >
+              <strong>Men</strong>
+              <br></br>
+              Eyewear
+            </Typography>
+          </div>
         </div>
       </div>
       {/* <br></br> */}
@@ -45,6 +67,17 @@ const HamedAbdallahCollage = () => {
             }}
             href="/shop?type=sunglasses"
           ></a>
+          <div className={Styles.block_caption}>
+            <Typography
+              variant="h2"
+              component="h2"
+              className={Styles.block_title}
+            >
+              <strong>Hottest</strong>
+              <br></br>
+              Sunglasses
+            </Typography>
+          </div>
         </div>
 
         <div className={Styles.block}>
@@ -58,6 +91,17 @@ const HamedAbdallahCollage = () => {
             }}
             href="/shop?type=eyeglasses"
           ></a>
+          <div className={Styles.block_caption}>
+            <Typography
+              variant="h2"
+              component="h2"
+              className={Styles.block_title}
+            >
+              <strong>Hottest</strong>
+              <br></br>
+              eyeglasses
+            </Typography>
+          </div>
         </div>
       </div>
     </div>

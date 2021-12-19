@@ -61,8 +61,8 @@ const HamedAbdallahNav = () => {
             <Image
               src="/Hamed-logo-White.png"
               alt="Vercel Logo"
-              width={152}
-              height={82}
+              width={76}
+              height={41}
             />
           </Button>
           <Button color="inherit" href="/">

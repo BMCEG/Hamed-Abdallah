@@ -17,17 +17,23 @@ import {
   FormGroup,
   FormControlLabel,
   Checkbox,
+  Slider,
+  Input,
+  Link,
 } from '@material-ui/core';
 import Image from 'next/image';
 import data from '../utils/data';
 import NextLink from 'next/link';
 import db from '../utils/db';
 import Product from '../models/Product';
+import Brand from '../models/Brand';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useContext, useState } from 'react';
 import { Store } from '../utils/Store';
 import Carousel from 'react-elastic-carousel';
+import noUiSlider from 'nouislider';
+
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useSnackbar } from 'notistack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -37,6 +43,7 @@ import {
   faFilter,
 } from '@fortawesome/free-solid-svg-icons';
 import { useMediaQuery } from '@mui/material';
+import { Box } from '@mui/system';
 
 const shop = (props) => {
   const matches = useMediaQuery(`(min-width: 1024px)`);
@@ -45,13 +52,18 @@ const shop = (props) => {
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
 
-  const { products, queryFilterProp } = props;
+  const { products, queryFilterProp, brands, maxPrice, minPrice } = props;
   const [queryFilter, setQueryFilter] = useState({
     type: queryFilterProp.type || [],
     gender: queryFilterProp.gender || [],
     material: queryFilterProp.material || [],
     shape: queryFilterProp.shape || [],
+    brand: queryFilterProp.brand || [],
   });
+  const [price, setPrice] = useState([minPrice, maxPrice]);
+  const [lowPrice, setLowPrice] = useState(minPrice);
+  const [highPrice, setHighPrice] = useState(maxPrice);
+
   const [filterAnchor, setFilterAnchor] = useState(false);
   const router = useRouter();
 
@@ -135,6 +147,11 @@ const shop = (props) => {
 
     let queryParams = `?`;
 
+    if (queryFilter.brand && queryFilter.brand.length > 0) {
+      queryFilter.brand.map((param) => {
+        queryParams = queryParams.concat(`brand=${param}&`);
+      });
+    }
     if (queryFilter.type && queryFilter.type.length > 0) {
       queryFilter.type.map((param) => {
         queryParams = queryParams.concat(`type=${param}&`);
@@ -158,8 +175,11 @@ const shop = (props) => {
         queryParams = queryParams.concat(`shape=${param}&`);
       });
     }
-    queryParams = queryParams.substring(0, queryParams.length - 1);
 
+    if (price[0] !== minPrice || price[1] !== maxPrice) {
+      queryParams = queryParams.concat(`price=${price}&`);
+    }
+    queryParams = queryParams.substring(0, queryParams.length - 1);
     router.push(`/shop${queryParams}`);
   };
 
@@ -174,15 +194,19 @@ const shop = (props) => {
     return returnVal;
   };
 
-  const brands = [
-    { name: 'rayban', image: '/placeholder1.png' },
-    { name: 'stiffany', image: '/placeholder1.png' },
-    { name: 'vogue', image: '/placeholder2.jpg' },
-    { name: 'fossil', image: '/placeholder1.png' },
-    { name: 'vilar', image: '/placeholder1.png' },
-    { name: 'gucci', image: '/placeholder2.jpg' },
-    { name: 'guess', image: '/placeholder1.png' },
-  ];
+  const handleChange = (e, newValue) => {
+    setLowPrice(newValue[0]);
+    setHighPrice(newValue[1]);
+    setPrice(newValue);
+  };
+  const handleLowPriceChange = (e) => {
+    setLowPrice(e.target.value);
+    setPrice([lowPrice, highPrice]);
+  };
+  const handleHighPriceChange = (e) => {
+    setHighPrice(e.target.value);
+    setPrice([lowPrice, highPrice]);
+  };
 
   return (
     <>
@@ -289,15 +313,95 @@ const shop = (props) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <FormGroup>
-                          <FormControlLabel
-                            control={<Checkbox />}
-                            label="Sun Glasses"
-                          />
-                          <FormControlLabel
-                            control={<Checkbox />}
-                            label="Eye Glasses"
-                          />
+                          {brands.map((brand) => (
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  checked={checkboxCheckHandler(
+                                    'brand',
+                                    brand.name
+                                  )}
+                                />
+                              }
+                              label={brand.name}
+                              name="brand"
+                              value={brand.name}
+                              onChange={(e) =>
+                                updateFilterQueryHandler(
+                                  e.target.name,
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                          ))}
                         </FormGroup>
+                      </AccordionDetails>
+                    </Accordion>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Accordion className={Styles.filterAccordion}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        className={Styles.filterAccordionName}
+                      >
+                        <Typography
+                          style={{ color: '#ca222a' }}
+                          variant="h6"
+                          component="h6"
+                        >
+                          PRICE
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Grid
+                          container
+                          spacing={1}
+                          className={Styles.sliderContainer}
+                        >
+                          <Grid item md={3}>
+                            <Input
+                              value={lowPrice}
+                              size="small"
+                              onChange={(e) => handleLowPriceChange(e)}
+                              // onBlur={handleBlur}
+                              inputProps={{
+                                step: 10,
+                                min: minPrice,
+                                max: maxPrice,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                              }}
+                            />
+                          </Grid>
+                          <Grid item className={Styles.slider} md={6}>
+                            <Slider
+                              min={minPrice}
+                              max={maxPrice}
+                              step={10}
+                              style={{ color: '#ca222a' }}
+                              value={price}
+                              onChange={handleChange}
+                            />
+                          </Grid>
+                          <Grid item md={3}>
+                            <Input
+                              value={highPrice}
+                              size="small"
+                              onChange={(e) => handleHighPriceChange(e)}
+                              // onBlur={handleBlur}
+                              inputProps={{
+                                step: 10,
+                                min: minPrice,
+                                max: maxPrice,
+                                type: 'number',
+                                'aria-labelledby': 'input-slider',
+                              }}
+                            />
+                          </Grid>
+                        </Grid>
                       </AccordionDetails>
                     </Accordion>
                   </ListItem>{' '}
@@ -1120,24 +1224,37 @@ const shop = (props) => {
               {products.map((product) => (
                 <Grid item md={4} sm={6} xs={12} key={product.name}>
                   <Card>
-                    <NextLink href={`/product/${product.slug}`}>
-                      <CardActionArea>
-                        <CardMedia
-                          className={Styles.card}
-                          component="img"
-                          image={`/uploads/products/${product.images[0]}`}
-                          title={product.name}
-                        ></CardMedia>
-                        <CardContent>
-                          <Typography variant="h5" component="h5">
-                            {product.name}
-                          </Typography>
-                          {/* <br></br> */}
-                          <Typography variant="body1" component="h6">
-                            {product.brandName}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
+                    <NextLink href={`/product/${product.slug}`} passHref>
+                      <Link>
+                        <CardActionArea>
+                          <CardMedia
+                            className={Styles.card}
+                            component="img"
+                            image={`/uploads/products/${product.images[0]}`}
+                            title={product.name}
+                          ></CardMedia>
+                          <CardContent>
+                            <Typography
+                              variant="h5"
+                              component="h5"
+                              style={{
+                                color: 'black',
+                                textDecoration: 'none !important',
+                              }}
+                            >
+                              {product.name}
+                            </Typography>
+                            {/* <br></br> */}
+                            <Typography
+                              variant="body1"
+                              style={{ color: 'black' }}
+                              component="h6"
+                            >
+                              {product.brandName}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Link>
                     </NextLink>
                     <br></br>
                     <CardActions className={Styles.cardAction}>
@@ -1194,7 +1311,7 @@ const shop = (props) => {
             <Image
               key={brand.name}
               alt="Hamed Abdallah Brand"
-              src={brand.image}
+              src={`/uploads/${brand.logo}`}
               width={75}
               height={75}
             />
@@ -1209,10 +1326,39 @@ const shop = (props) => {
 export async function getServerSideProps({ query }) {
   await db.connect();
 
-  const { type, gender, material, shape } = query;
+  const { type, gender, material, shape, brand, price } = query;
+  // console.log(price);/
 
   let products = await Product.find({}).lean();
 
+  let maxPrice = Math.max.apply(
+    Math,
+    products.map(function (o) {
+      return o.price;
+    })
+  );
+
+  let minPrice = Math.min.apply(
+    Math,
+    products.map(function (o) {
+      return o.price;
+    })
+  );
+
+  if (brand) {
+    products = products.filter((product) => {
+      {
+        return product.brandName === brand;
+      }
+    });
+  }
+  if (price) {
+    const priceArr = price.split(',');
+
+    products = products.filter((product) => {
+      return product.price >= priceArr[0] && product.price <= priceArr[1];
+    });
+  }
   if (type) {
     products = products.filter((product) => {
       {
@@ -1243,12 +1389,18 @@ export async function getServerSideProps({ query }) {
   }
 
   const allProducts = JSON.parse(JSON.stringify(products));
+
+  let brands = await Brand.find({}).lean();
+  const allBrands = JSON.parse(JSON.stringify(brands));
   await db.disconnect();
 
   return {
     props: {
       products: allProducts,
+      brands: allBrands,
       queryFilterProp: query,
+      maxPrice,
+      minPrice,
     },
   };
 }

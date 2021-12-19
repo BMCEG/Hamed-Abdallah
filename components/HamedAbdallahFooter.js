@@ -15,8 +15,8 @@ const HamedAbdallahFooter = () => {
               <Image
                 alt="Hamed Abdallah Logo"
                 src="/Hamed-logo-Fullcolor.png"
-                width={305}
-                height={175}
+                width={152.5}
+                height={87.5}
               />
             </div>
             <div className={Styles.vertical__line} />
@@ -110,8 +110,8 @@ const HamedAbdallahFooter = () => {
               <Image
                 alt="Hamed Abdallah Logo"
                 src="/Hamed-logo-Fullcolor.png"
-                width={305}
-                height={175}
+                width={152.5}
+                height={87.5}
               />
             </div>
             <br></br>

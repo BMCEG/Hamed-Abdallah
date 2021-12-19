@@ -23,14 +23,14 @@ handler.post(async (req, res) => {
     slug,
     gender,
     material,
+    sku,
+    featuredImage,
     type,
     stock,
     price,
     status,
     images,
   } = req.body;
-
-  console.log(req.body);
 
   await db.connect();
 
@@ -44,6 +44,8 @@ handler.post(async (req, res) => {
       brandName: prodBrand.name,
       color,
       shape,
+      sku,
+      featuredImage,
       slug,
       gender,
       material,

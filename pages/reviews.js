@@ -25,10 +25,12 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Link,
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { RatingView } from 'react-simple-star-rating';
 function reducer(state, action) {
+  console.log('action.payload', action.payload);
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };
@@ -80,11 +82,6 @@ function Reviews() {
           <Grid item md={3} xs={12}>
             <Card className={Styles.section}>
               <List>
-                {/* <NextLink href="/profile" passHref> */}
-                {/* <ListItem button component="a">
-                    <ListItemText primary="User Profile"></ListItemText>
-                  </ListItem> */}
-                {/* </NextLink>{' '} */}
                 <NextLink href="/order-history" passHref>
                   <ListItem button component="a">
                     <ListItemText primary="Order History"></ListItemText>
@@ -126,16 +123,34 @@ function Reviews() {
                       <Table>
                         <TableHead>
                           <TableRow>
+                            <TableCell>IMAGE</TableCell>
+
                             <TableCell>PRODUCT</TableCell>
                             <TableCell>REVIEW</TableCell>
                             <TableCell>RATING</TableCell>
                             <TableCell align="right">DATE</TableCell>
-                            <TableCell align="right"></TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
                           {reviews.map((review) => (
                             <TableRow key={review._id}>
+                              <TableCell>
+                                <NextLink
+                                  href={`/product/${review.product.slug}`}
+                                  passHref
+                                >
+                                  <Link>
+                                    <Image
+                                      alt={review.product.name}
+                                      src={`/uploads/products/${review.product.images[0]}`}
+                                      width={152.5}
+                                      height={87.5}
+                                      className={Styles.productImg}
+                                      // style={{ backgroundSize }}
+                                    />
+                                  </Link>
+                                </NextLink>
+                              </TableCell>
                               <TableCell>{review.product.name}</TableCell>
                               <TableCell>{review.review}</TableCell>
                               <TableCell>
@@ -145,14 +160,6 @@ function Reviews() {
                                 <Moment format="dddd DD MMM YYYY">
                                   {review.createdAt}
                                 </Moment>
-                              </TableCell>
-                              <TableCell align="right">
-                                <Button
-                                  className={Styles.btn}
-                                  href={`/product/${review.product.slug}`}
-                                >
-                                  Go to Product
-                                </Button>
                               </TableCell>
                             </TableRow>
                           ))}

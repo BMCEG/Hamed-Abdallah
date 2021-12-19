@@ -7,7 +7,7 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Styles from '../../styles/pages/admin/dashboard.module.css';
 import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,10 +17,13 @@ import MaterialTable from 'material-table';
 import tableIcons from './MaterialTableIcons';
 import axios from 'axios';
 import User from '../../models/User';
+import { Store } from '../../utils/Store';
 
 function AdminUsers(props) {
   const [isOpened, setIsOpened] = useState(false);
   const { users } = props;
+  const { state, dispatch } = useContext(Store);
+  const { userInfo } = state;
 
   const columns = [
     {
@@ -50,12 +53,31 @@ function AdminUsers(props) {
       title: 'Actions',
       field: '',
       render: (rowData) => (
-        <Button variant="contained" href={`/product/${rowData.slug}`}>
-          Details
+        <Button variant="contained" onClick={() => adminHandler(rowData._id)}>
+          Make Admin
         </Button>
       ),
     },
   ];
+
+  const adminHandler = async (userID) => {
+    await axios
+      .post(
+        `/api/admin/users/admin`,
+        {
+          userID,
+        },
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      )
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -81,9 +103,9 @@ function AdminUsers(props) {
                 <ListItem>
                   <Image
                     alt="Hamed Abdallah"
-                    src={'/placeholder1.png'}
-                    width={100}
-                    height={100}
+                    src={'/Hamed-logo-Fullcolor.png'}
+                    width={152.5}
+                    height={87.5}
                   />
                 </ListItem>
                 <hr></hr>
@@ -120,16 +142,6 @@ function AdminUsers(props) {
                 <ListItem selected>
                   <Button className={Styles.boxButton} href="/admin/users">
                     USERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/reviews">
-                    REVIEWS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/branches">
-                    BRANCHES
                   </Button>
                 </ListItem>
               </List>

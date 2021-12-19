@@ -48,116 +48,138 @@ function Cart() {
   };
 
   return (
-    <div className={Styles.container}>
-      <HamedAbdallahWhiteSpace />
-      <Typography variant="h3" component="h1">
-        Shopping Cart
-      </Typography>
-      {cartItems.length === 0 ? (
-        <div className={Styles.emptyCartContainer}>
-          <div className={Styles.emptyCart}>
-            <Typography variant="h5" component="h5">
-              Cart is empty
-            </Typography>
-            <br></br>
-            <br></br>
-            <Button variant="contained" className={Styles.btn} href="/shop">
-              Go Shopping
-            </Button>
-          </div>
-        </div>
-      ) : (
-        <div className={Styles.grid__container}>
-          <Grid container>
-            <Grid item md={9} xs={12}>
-              <TableContainer>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Image</TableCell>
-                      <TableCell>Name</TableCell>
-                      <TableCell align="right">Quantity</TableCell>
-                      <TableCell align="right">Price</TableCell>
-                      <TableCell align="right">Action</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {cartItems.map((item) => (
-                      <TableRow key={item.name}>
-                        <TableCell>
-                          <Button variant="text" href={`/product/${item.slug}`}>
-                            <Image
-                              src="/placeholder1.png"
-                              alt={item.name}
-                              width={50}
-                              height={50}
-                            />
-                          </Button>
-                        </TableCell>
-                        <TableCell>
-                          <Button variant="text" href={`/product/${item.slug}`}>
-                            <Typography>{item.name}</Typography>
-                          </Button>
-                        </TableCell>
-                        <TableCell align="right">
-                          <Select
-                            value={item.quantity}
-                            onChange={(e) =>
-                              updateCartHandler(item, e.target.value)
-                            }
-                          >
-                            {[...Array(item.stock).keys()].map((x) => (
-                              <MenuItem key={x + 1} value={x + 1}>
-                                {x + 1}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </TableCell>
-                        <TableCell align="right">L.E. {item.price}</TableCell>
-                        <TableCell align="right">
-                          <Button
-                            variant="contained"
-                            color="secondary"
-                            onClick={() => removeItemHandler(item)}
-                          >
-                            X
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+    <div className={Styles.root}>
+      <div className={Styles.container}>
+        <HamedAbdallahWhiteSpace />
+        <Typography variant="h3" component="h1">
+          Shopping Cart
+        </Typography>
+        {cartItems.length === 0 ? (
+          <div className={Styles.emptyCartContainer}>
+            <div className={Styles.emptyCart}>
+              <Image
+                alt="Hamed Abdallah Cart"
+                src={`/Empty-Cart.png`}
+                width={350}
+                height={350}
+              />
+              <Typography
+                variant="h5"
+                component="h5"
+                className={Styles.emptyCartImg}
+              >
+                Cart is empty
+              </Typography>
               <br></br>
+              <br></br>
+              <Button variant="contained" className={Styles.btn} href="/shop">
+                Go Shopping
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className={Styles.grid__container}>
+            <Grid container>
+              <Grid item md={9} xs={12}>
+                <TableContainer>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>Image</TableCell>
+                        <TableCell>Name</TableCell>
+                        <TableCell align="right">Quantity</TableCell>
+                        <TableCell align="right">Price</TableCell>
+                        <TableCell align="right">Action</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {cartItems.map((item) => (
+                        <TableRow key={item.name}>
+                          <TableCell>
+                            <Button
+                              variant="text"
+                              href={`/product/${item.slug}`}
+                            >
+                              <Image
+                                src="/Hamed-logo-Fullcolor.png"
+                                alt={item.name}
+                                width={50}
+                                height={50}
+                              />
+                            </Button>
+                          </TableCell>
+                          <TableCell>
+                            <Button
+                              variant="text"
+                              href={`/product/${item.slug}`}
+                            >
+                              <Typography>{item.name}</Typography>
+                            </Button>
+                          </TableCell>
+                          <TableCell align="right">
+                            <Select
+                              value={item.quantity}
+                              onChange={(e) =>
+                                updateCartHandler(item, e.target.value)
+                              }
+                            >
+                              {[...Array(item.stock).keys()].map((x) => (
+                                <MenuItem key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </MenuItem>
+                              ))}
+                            </Select>
+                          </TableCell>
+                          <TableCell align="right">L.E. {item.price}</TableCell>
+                          <TableCell align="right">
+                            <Button
+                              variant="contained"
+                              color="secondary"
+                              onClick={() => removeItemHandler(item)}
+                            >
+                              X
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <br></br>
+              </Grid>
+              <Grid item md={3} xs={12}>
+                <Card className={Styles.cart__actions}>
+                  <List>
+                    <ListItem>
+                      <Typography variant="h5">
+                        Subtotal (
+                        {cartItems.reduce((a, c) => a + c.quantity, 0)} items) :
+                        L.E{' '}
+                        {cartItems.reduce(
+                          (a, c) => a + c.quantity * c.price,
+                          0
+                        )}
+                      </Typography>
+                    </ListItem>
+                    <ListItem>
+                      <Button
+                        variant="contained"
+                        // color="primary"
+                        // fullWidth
+                        className={Styles.btn}
+                        onClick={checkoutHandler}
+                      >
+                        Checkout
+                      </Button>
+                    </ListItem>
+                  </List>
+                </Card>
+              </Grid>
             </Grid>
-            <Grid item md={3} xs={12}>
-              <Card className={Styles.cart__actions}>
-                <List>
-                  <ListItem>
-                    <Typography variant="h5">
-                      Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}{' '}
-                      items) : L.E{' '}
-                      {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
-                    </Typography>
-                  </ListItem>
-                  <ListItem>
-                    <Button
-                      variant="contained"
-                      // color="primary"
-                      // fullWidth
-                      className={Styles.btn}
-                      onClick={checkoutHandler}
-                    >
-                      Checkout
-                    </Button>
-                  </ListItem>
-                </List>
-              </Card>
-            </Grid>
-          </Grid>
-        </div>
-      )}
-      <HamedAbdallahWhiteSpace />
+          </div>
+        )}
+        <HamedAbdallahWhiteSpace />
+      </div>
     </div>
   );
 }

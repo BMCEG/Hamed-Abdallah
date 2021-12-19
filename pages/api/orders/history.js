@@ -13,7 +13,14 @@ handler.use(isAuth);
 handler.get(async (req, res) => {
   await db.connect();
 
-  const orders = await Order.find({ user: req.user._id });
+  let orders = await Order.find({ user: req.user._id });
+
+  orders = orders.sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+
   res.send(orders);
 });
 export default handler;

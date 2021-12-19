@@ -1,6 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-import NextLink from 'next/link';
+import { Store } from '../utils/Store';
+
+import { Controller, useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
+import { useRouter } from 'next/router';
+
 import Image from 'next/image';
 import { HamedAbdallahWhiteSpace } from '../components/index.js';
 import {
@@ -19,20 +24,39 @@ import {
 import Styles from '../styles/pages/contact.module.css';
 
 export default function Contact() {
-  const [email, setEmail] = useState('');
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [message, setMessage] = useState('');
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const router = useRouter();
+  const { redirect } = router.query;
+  const { state } = useContext(Store);
+
+  const submitHandler = async ({
+    firstName,
+    lastName,
+    email,
+    mobile,
+    message,
+  }) => {
+    closeSnackbar();
+
     try {
-      const { data } = await axios.post('/api/users/login', {
+      const { data } = await axios.post('/api/contacts/', {
+        firstName,
+        lastName,
         email,
-        password,
+        mobile,
+        message,
       });
-      alert('Login Success');
+
+      enqueueSnackbar(
+        'Thanks for contacting us. Someone will be in touch with you soon.',
+        { variant: 'success' }
+      );
     } catch (err) {
       alert(err.response.data ? err.response.data.message : err.message);
     }
@@ -57,69 +81,164 @@ export default function Contact() {
       <br></br>
       <div className={Styles.container}>
         <HamedAbdallahWhiteSpace />
-        <form onSubmit={submitHandler} className={Styles.form}>
+        <form onSubmit={handleSubmit(submitHandler)} className={Styles.form}>
           <Typography style={{ color: '#ca222a' }} variant="h4" component="h1">
             CONTACT US
           </Typography>
           <br></br>
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
-              {' '}
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="firstName"
-                label="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
-                inputProps={{ type: 'text' }}
-              ></TextField>
+              <Controller
+                name="firstName"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                  // pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    inputProps={{ type: 'text' }}
+                    error={Boolean(errors.firstName)}
+                    helperText={
+                      errors.firstName
+                        ? errors.firstName.type === 'minLength'
+                          ? 'Name has to be more than 1 character'
+                          : 'Name is required'
+                        : ''
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </Grid>
             <Grid item md={6} xs={12}>
               {' '}
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="lastName"
-                label="Last Name"
-                onChange={(e) => setLastName(e.target.value)}
-                inputProps={{ type: 'email' }}
-              ></TextField>
+              <Controller
+                name="lastName"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+                  // pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    inputProps={{ type: 'text' }}
+                    error={Boolean(errors.lastName)}
+                    helperText={
+                      errors.lastName
+                        ? errors.lastName.type === 'minLength'
+                          ? 'Name has to be more than 1 character'
+                          : 'Name is required'
+                        : ''
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </Grid>
           </Grid>{' '}
           <Grid container spacing={3}>
             <Grid item md={6} xs={12}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="E-Mail"
-                onChange={(e) => setEmail(e.target.value)}
-                inputProps={{ type: 'email' }}
-              ></TextField>
+              <Controller
+                name="email"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="email"
+                    label="E-Mail"
+                    inputProps={{ type: 'text' }}
+                    error={Boolean(errors.email)}
+                    helperText={
+                      errors.email
+                        ? errors.email.type === 'pattern'
+                          ? 'Email is not valid'
+                          : 'Email is required'
+                        : ''
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </Grid>
             <Grid item md={6} xs={12}>
-              {' '}
-              <TextField
-                variant="outlined"
-                fullWidth
-                id="email"
-                label="Phone Number"
-                onChange={(e) => setPhone(e.target.value)}
-                inputProps={{ type: 'number' }}
-              ></TextField>
+              <Controller
+                name="mobile"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 10,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="mobile"
+                    label="Mobile Number"
+                    inputProps={{ type: 'number' }}
+                    error={Boolean(errors.mobile)}
+                    helperText={
+                      errors.mobile
+                        ? errors.mobile.type === 'pattern'
+                          ? 'Mobile Number is not valid'
+                          : 'Mobile Number is required'
+                        : ''
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
             </Grid>
           </Grid>
           <br></br>
-          <TextField
-            variant="outlined"
-            fullWidth
-            onChange={(e) => setMessage(e.target.value)}
-            id="message"
-            label="Message"
-            rows={5}
-            multiline
-            inputProps={{ type: 'text' }}
-          ></TextField>
+          <Controller
+            name="message"
+            control={control}
+            defaultValue=""
+            rules={{
+              required: true,
+              minLength: 10,
+            }}
+            render={({ field }) => (
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="message"
+                label="Message"
+                multiline
+                rows={5}
+                inputProps={{ type: 'number' }}
+                error={Boolean(errors.message)}
+                helperText={
+                  errors.message
+                    ? errors.message.type === 'pattern'
+                      ? 'Message is not valid'
+                      : 'Message is required'
+                    : ''
+                }
+                {...field}
+              ></TextField>
+            )}
+          ></Controller>
           <List>
             <ListItem>
               <Button

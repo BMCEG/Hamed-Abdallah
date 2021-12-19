@@ -25,7 +25,17 @@
   padding: 1%;
   margin-top: 2%;
 }
-
+.slider {
+  color: #ca222a !important;
+  /* background-color: aqua; */
+  margin-top: auto !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sliderContainer {
+  /* background-color: yellow; */
+}
 .brands {
   width: 75% !important;
   margin: auto !important;
@@ -52,13 +62,18 @@
   /* background-color: red !important; */
   min-height: 300px;
   object-fit: contain !important;
+  transition: all ease-in-out 0.2s;
+  /* text-decoration: none !important; */
+}
+.card:hover {
+  transform: scale(1.1);
 }
 .button {
   color: white !important;
   /* width: 20vmin !important; */
   margin: auto !important;
-  border-radius: 100px !important;
+  border-radius: 10px !important;
   background-color: #ca222a !important;
   font-size: 16px !important;
-  box-shadow: 1px 1px 10px black !important;
+  /* box-shadow: 1px 1px 10px black !important; */
 }

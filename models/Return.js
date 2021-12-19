@@ -7,10 +7,6 @@ const returnSchema = mongoose.Schema(
       ref: 'User',
       required: true,
     },
-    returnType: {
-      type: String,
-      enum: ['order', 'item'],
-    },
     returnStatus: {
       type: String,
       enum: ['pending', 'returned'],

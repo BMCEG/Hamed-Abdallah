@@ -23,6 +23,7 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
+import Moment from 'react-moment';
 
 function reducer(state, action) {
   switch (action.type) {
@@ -134,7 +135,11 @@ function OrderHistory() {
                           {orders.map((order) => (
                             <TableRow key={order._id}>
                               <TableCell>{order.shortID}</TableCell>
-                              <TableCell>{order.createdAt}</TableCell>
+                              <TableCell>
+                                <Moment format="dddd, DD/MM/yyyy">
+                                  {order.createdAt}
+                                </Moment>
+                              </TableCell>
                               <TableCell>{order.totalPrice}</TableCell>
                               <TableCell>
                                 {order.isPaid

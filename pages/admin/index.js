@@ -44,9 +44,9 @@ export default function Index() {
                 <ListItem>
                   <Image
                     alt="Hamed Abdallah"
-                    src={'/placeholder1.png'}
-                    width={100}
-                    height={100}
+                    src={'/Hamed-logo-Fullcolor.png'}
+                    width={152.5}
+                    height={87.5}
                   />
                 </ListItem>
                 <hr></hr>
@@ -83,16 +83,6 @@ export default function Index() {
                 <ListItem>
                   <Button className={Styles.boxButton} href="/admin/users">
                     USERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/reviews">
-                    REVIEWS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/branches">
-                    BRANCHES
                   </Button>
                 </ListItem>
               </List>

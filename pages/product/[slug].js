@@ -4,11 +4,12 @@ import axios from 'axios';
 import { Store } from '../../utils/Store';
 import db from '../../utils/db';
 import Product from '../../models/Product';
+import User from '../../models/User';
 import { ReactPhotoCollage } from 'react-photo-collage';
 import Carousel from 'react-elastic-carousel';
 import { Rating, RatingView } from 'react-simple-star-rating';
 import { useMediaQuery } from '@mui/material';
-
+import Moment from 'react-moment';
 import {
   Button,
   Card,
@@ -19,43 +20,38 @@ import {
   Typography,
 } from '@material-ui/core';
 import Image from 'next/image';
-import { HamedAbdallahWhiteSpace } from '../../components/index.js';
+import {
+  HamedAbdallahWhiteSpace,
+  HamedAbdallahImageMagnifier,
+} from '../../components/index.js';
 import Styles from '../../styles/pages/product.module.css';
 import { useSnackbar } from 'notistack';
 import Review from '../../models/Reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingBag, faHeart } from '@fortawesome/free-solid-svg-icons';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-const muiTheme = createMuiTheme({
-  overrides: {
-    MuiStepIcon: {
-      root: {
-        objectFit: 'contain', // or 'rgba(0, 0, 0, 1)'
-        // '&$active': {
-        //   color: '#e5e6e7',
-        // },
-        // '&$completed': {
-        //   color: '#ca222a',
-        // },
-      },
-    },
-  },
-});
+import {
+  faShoppingBag,
+  faHeart as faHeartOutlined,
+} from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 export default function ProductScreen(props) {
   const matches = useMediaQuery('(min-width:1024px');
+  const { product, reviews, relatedItems, recentItems, isWishlistedProp } =
+    props;
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [review, setReview] = useState('');
   const [rating, setRating] = useState(0);
+  const [isWishlisted, setIsWishlisted] = useState(isWishlistedProp);
+  const [featuredImage, setFeaturedImage] = useState(
+    `/uploads/${product.featuredImage}`
+  );
 
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
 
   const router = useRouter();
   const { slug } = router.query;
-  const { product, reviews, relatedItems, recentItems } = props;
   if (!product) {
     return (
       <div>
@@ -110,6 +106,7 @@ export default function ProductScreen(props) {
         userInfo,
         data,
       });
+      setIsWishlisted(true);
       enqueueSnackbar(`${data.name} has been added to your wishlist`, {
         variant: 'success',
       });
@@ -120,16 +117,28 @@ export default function ProductScreen(props) {
       );
     }
   };
+  const removeFromWishlistHandler = async (product) => {
+    try {
+      const { data } = await axios.get(`/api/products/${product._id}`);
+      await axios.post('/api/users/wishlist/remove', {
+        product,
+        userInfo,
+      });
+      setIsWishlisted(false);
+      enqueueSnackbar(`${data.name} has been removed to your wishlist`, {
+        variant: 'success',
+      });
+    } catch (err) {
+      enqueueSnackbar(
+        err.response.data ? err.response.data.message : err.message,
+        { variant: 'error' }
+      );
+    }
+  };
 
-  const brands = [
-    { name: 'rayban', image: '/placeholder1.png' },
-    { name: 'stiffany', image: '/placeholder1.png' },
-    { name: 'vogue', image: '/placeholder2.jpg' },
-    { name: 'fossil', image: '/placeholder1.png' },
-    { name: 'vilar', image: '/placeholder1.png' },
-    { name: 'gucci', image: '/placeholder2.jpg' },
-    { name: 'guess', image: '/placeholder1.png' },
-  ];
+  const pickFeaturedImageHandler = async (image) => {
+    setFeaturedImage(image);
+  };
 
   const productImages = [];
   product.images.map((img) => {
@@ -143,31 +152,49 @@ export default function ProductScreen(props) {
         <Grid container spacing={1}>
           <Grid item md={6} xs={12}>
             {matches ? (
-              <MuiThemeProvider theme={muiTheme}>
-                <ReactPhotoCollage
-                  {...{
-                    width: '100%',
-                    height: ['550px', '200px'],
-                    layout: [1, 3],
-                    photos: productImages,
-                    showNumOfRemainingPhotos: true,
-                  }}
-                  className={Styles.collage}
-                />
-              </MuiThemeProvider>
+              <Grid
+                container
+                spacing={2}
+                className={Styles.product_images_base}
+              >
+                <Grid item md={2} className={Styles.product_images}>
+                  <Image
+                    alt="image"
+                    src={`/uploads/${product.featuredImage}`}
+                    height={500}
+                    onClick={() =>
+                      pickFeaturedImageHandler(
+                        `/uploads/${product.featuredImage}`
+                      )
+                    }
+                    width={500}
+                    className={Styles.product_image}
+                  />
+                  {productImages.map((image) => (
+                    <Image
+                      alt="image"
+                      src={`${image.source}`}
+                      height={500}
+                      width={500}
+                      onClick={() =>
+                        pickFeaturedImageHandler(`${image.source}`)
+                      }
+                      className={Styles.product_image}
+                    />
+                  ))}
+                </Grid>
+                <Grid item md={10} className={Styles.product_images}>
+                  <HamedAbdallahImageMagnifier
+                    src={featuredImage}
+                    width={'100%'}
+                  />
+                </Grid>
+              </Grid>
             ) : (
-              <MuiThemeProvider theme={muiTheme}>
-                <ReactPhotoCollage
-                  {...{
-                    width: '100%',
-                    height: ['250px', '200px'],
-                    layout: [1, 4],
-                    photos: productImages,
-                    showNumOfRemainingPhotos: true,
-                  }}
-                  className={Styles.collage}
-                />
-              </MuiThemeProvider>
+              <HamedAbdallahImageMagnifier
+                src={`/uploads/products/${product.images[0]}`}
+                width={'100%'}
+              />
             )}
           </Grid>
           <Grid item md={1} />
@@ -198,7 +225,7 @@ export default function ProductScreen(props) {
               <br></br>
               <ListItem>
                 <Typography variant="h3" component="h3">
-                  {product.price} EGP
+                  <strong>{product.price} EGP</strong>
                 </Typography>
               </ListItem>
               <ListItem>
@@ -226,18 +253,29 @@ export default function ProductScreen(props) {
                     )}
                   </Grid>
                   <Grid item md={1}>
-                    <Button
-                      fullWidth
-                      // variant="contained"
-                      // color="secondary"
-                      onClick={() => addToWishlistHandler(product)}
-                    >
-                      <FontAwesomeIcon
-                        style={{ color: '#ca222a' }}
-                        icon={faHeart}
-                        size="2x"
-                      />
-                    </Button>
+                    {isWishlisted ? (
+                      <Button
+                        fullWidth
+                        onClick={() => removeFromWishlistHandler(product)}
+                      >
+                        <FontAwesomeIcon
+                          style={{ color: '#ca222a' }}
+                          icon={faHeartOutlined}
+                          size="3x"
+                        />
+                      </Button>
+                    ) : (
+                      <Button
+                        fullWidth
+                        onClick={() => addToWishlistHandler(product)}
+                      >
+                        <FontAwesomeIcon
+                          style={{ color: '#ca222a' }}
+                          icon={faHeart}
+                          size="3x"
+                        />
+                      </Button>
+                    )}
                   </Grid>
                 </Grid>
               </ListItem>
@@ -254,10 +292,10 @@ export default function ProductScreen(props) {
         {reviews.length > 0 &&
           reviews.map((review) => (
             <div className={Styles.review}>
-              <Typography variant="h5" component="h5">
+              <Typography variant="body1" component="body1">
                 {review.review}
               </Typography>
-              <hr></hr>
+              <hr className={Styles.hrReview}></hr>
               <RatingView
                 // onClick={ratingHandler}
                 ratingValue={review.rating} /* Rating Props */
@@ -266,7 +304,9 @@ export default function ProductScreen(props) {
               <Typography variant="span" component="h6">
                 Review by: {review.user.name}
                 <br></br>
-                {review.createdAt}
+                <Moment format="dddd DD/MM/YYYY hh:ss">
+                  {review.createdAt}
+                </Moment>
               </Typography>
             </div>
           ))}
@@ -282,7 +322,7 @@ export default function ProductScreen(props) {
                 label="Review"
                 rows={5}
                 multiline
-                inputProps={{ type: 'text' }}
+                inputProps={{ maxLength: 500, type: 'text' }}
               ></TextField>
             </ListItem>
             <ListItem>
@@ -306,16 +346,25 @@ export default function ProductScreen(props) {
         </form>
         <HamedAbdallahWhiteSpace />
       </div>
+      <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" />
+
       <div className={Styles.relatedItems}>
         <HamedAbdallahWhiteSpace />
-
-        <Typography
-          variant="h4"
-          component="h4"
-          style={{ textAlign: 'center', color: 'white' }}
-        >
-          {product.brandName}
-        </Typography>
+        <div className={Styles.ourBrands__header}>
+          <div className={Styles.hr__base}>
+            <hr className={Styles.hor}></hr>
+          </div>
+          <Typography
+            variant="h4"
+            component="h4"
+            style={{ textAlign: 'center', color: 'white' }}
+          >
+            More Products from {product.brandName}
+          </Typography>
+          <div className={Styles.hr__base}>
+            <hr className={Styles.hor}></hr>
+          </div>
+        </div>
         <br></br>
         <br></br>
         <Carousel
@@ -333,7 +382,11 @@ export default function ProductScreen(props) {
           transitionMs={2000}
         >
           {relatedItems.map((prod) => (
-            <Button href={`/product/${prod.slug}`} key={prod._id}>
+            <Button
+              href={`/product/${prod.slug}`}
+              key={prod._id}
+              className={Styles.thumbBtn}
+            >
               <Image
                 key={prod._id}
                 alt="Hamed Abdallah Brand"
@@ -346,13 +399,22 @@ export default function ProductScreen(props) {
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />
-        <Typography
-          variant="h4"
-          component="h4"
-          style={{ textAlign: 'center', color: 'white' }}
-        >
-          Recently Added
-        </Typography>
+        <HamedAbdallahWhiteSpace />
+        <div className={Styles.ourBrands__header}>
+          <div className={Styles.hr__base}>
+            <hr className={Styles.hor}></hr>
+          </div>
+          <Typography
+            variant="h4"
+            component="h4"
+            style={{ textAlign: 'center', color: 'white' }}
+          >
+            Recently Added Products
+          </Typography>
+          <div className={Styles.hr__base}>
+            <hr className={Styles.hor}></hr>
+          </div>
+        </div>
         <br></br>
         <br></br>
         <Carousel
@@ -370,7 +432,11 @@ export default function ProductScreen(props) {
           transitionMs={2000}
         >
           {recentItems.map((prod) => (
-            <Button href={`/product/${prod.slug}`} key={prod._id}>
+            <Button
+              href={`/product/${prod.slug}`}
+              key={prod._id}
+              className={Styles.thumbBtn}
+            >
               <Image
                 key={prod._id}
                 alt="Hamed Abdallah Brand"
@@ -405,16 +471,22 @@ export async function getServerSideProps(context) {
   );
   const recentItems = await Product.find({}).sort({ createdAt: -1 });
   const allRecentItems = JSON.parse(JSON.stringify(recentItems));
-  const reviews = await Review.find({ product: product._id })
-    .lean()
-    .populate('user');
+  const reviews = await Review.find({ product: product._id }).lean();
+  // .populate('user');
   const allReviews = JSON.parse(JSON.stringify(reviews));
+  const cookies = JSON.parse(context.req.cookies['userInfo']);
+
+  const rawUser = await User.findById({ _id: cookies._id }).lean();
+  const user = JSON.parse(JSON.stringify(rawUser));
+
+  const isWishlistedProp = user.wishlist.includes(product._id);
 
   await db.disconnect();
 
   return {
     props: {
       product,
+      isWishlistedProp,
       reviews: allReviews,
       relatedItems: allFilteredProductsByBrand,
       recentItems: allRecentItems,

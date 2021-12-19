@@ -44,8 +44,8 @@ function AdminBrands(props) {
         <Image
           alt={rowData.name}
           src={`/uploads/${rowData.logo}`}
-          width={100}
-          height={100}
+          width={152.5}
+          height={87.5}
         />
       ),
     },
@@ -56,6 +56,15 @@ function AdminBrands(props) {
     {
       title: 'Created On',
       field: 'createdAt',
+    },
+    {
+      title: 'Actions',
+      field: '',
+      render: (rowData) => (
+        <Button variant="contained" href={`/admin/brands/${rowData._id}`}>
+          Details
+        </Button>
+      ),
     },
   ];
 
@@ -115,9 +124,9 @@ function AdminBrands(props) {
                 <ListItem>
                   <Image
                     alt="Hamed Abdallah"
-                    src={'/placeholder1.png'}
-                    width={100}
-                    height={100}
+                    src={'/Hamed-logo-Fullcolor.png'}
+                    width={152.5}
+                    height={87.5}
                   />
                 </ListItem>
                 <hr></hr>
@@ -154,16 +163,6 @@ function AdminBrands(props) {
                 <ListItem>
                   <Button className={Styles.boxButton} href="/admin/users">
                     USERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/reviews">
-                    REVIEWS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/branches">
-                    BRANCHES
                   </Button>
                 </ListItem>
               </List>

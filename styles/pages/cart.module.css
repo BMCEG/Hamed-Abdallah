@@ -3,14 +3,21 @@
   width: 75%;
   margin: auto;
 }
-
+.root {
+  background-color: white;
+}
+.emptyCartImg {
+  opacity: 0.75;
+  /* filter: grayscale(100%); */
+  /* -webkit-filter: grayscale(100%); Safari 6.0 - 9.0 */
+  /* background-color: red !important; */
+}
 .cart__actions {
   /* background-color: aqua !important; */
   margin: 1.5vmin;
 }
 
 .grid__container {
-  /* background-color: red !important; */
 }
 
 .section {
@@ -41,8 +48,8 @@
   /* width: 20vmin !important; */
   text-align: center;
   margin: auto !important;
-  border-radius: 100px !important;
+  border-radius: 10px !important;
   background-color: #ca222a !important;
   font-size: 22px !important;
-  box-shadow: 1px 1px 10px black !important;
+  /* box-shadow: 1px 1px 10px black !important; */
 }

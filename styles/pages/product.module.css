@@ -17,8 +17,9 @@
 }
 
 .relatedItems {
-  background-color: crimson;
+  background-color: #ca222a;
   padding: 3%;
+  margin-top: -2%;
 }
 
 .relatedCarousel {
@@ -27,21 +28,36 @@
 }
 
 .review {
-  background-color: lightgray;
+  background-color: whitesmoke;
   padding: 2vmin;
   margin: 2vmin;
   border-radius: 10px;
 }
 .thumbnail {
-  object-fit: cover !important;
+  background-color: white;
+  /* border-radius: 5%; */
+  transition: all ease-in-out 0.2s;
+  object-fit: contain !important;
+}
+.thumbnail:hover {
+  transform: scale(1.05);
+}
+.thumbBtn {
+  background-color: yellow;
+  border-radius: 10px !important;
+}
+.hrReview {
+  background-color: #ca222a;
+  border: none !important;
+  height: 2px !important;
 }
 .button {
-  background-color: white !important;
+  background-color: #ca222a !important;
   /* width: 20vmin !important; */
-  border-radius: 100px !important;
-  color: #ca222a !important;
+  border-radius: 10px !important;
+  color: white !important;
   font-size: 22px !important;
-  box-shadow: 1px 1px 10px black !important;
+  /* box-shadow: 1px 1px 10px black !important; */
 }
 .root {
   background-color: white !important;
@@ -49,4 +65,56 @@
 .laiAQh {
   background-color: aqua !important;
   object-fit: contain !important;
+}
+.product_image {
+  object-fit: contain !important;
+  /* border: 1px solid black !important; */
+  transition: all ease-in-out 0.2s;
+}
+.product_image:hover {
+  transform: scale(1.1);
+}
+.product_images {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  /* background-color: saddlebrown; */
+  height: 100%;
+}
+.product_images_base {
+  /* background-color: yellow; */
+  height: 100%;
+}
+.featuredImage {
+  /* border: 1px solid black !important; */
+  animation: fadeIn 1s !important;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ourBrands__header {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100% !important;
+  width: 70%;
+  margin: auto;
+}
+.hr__base {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hor {
+  border-top: 3px solid white !important;
+  border-radius: 0px;
+}
+.wishlist_icon {
+  animation: fadeIn 0.5s;
 }

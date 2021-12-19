@@ -9,13 +9,16 @@ const productSchema = mongoose.Schema(
       type: String,
     },
     status: {
-      type: String,
-      enum: ['active', 'inactive'],
+      type: Boolean,
+      default: true,
     },
     description: {
       type: String,
     },
     descriptionAR: {
+      type: String,
+    },
+    sku: {
       type: String,
     },
     brand: {
@@ -65,6 +68,9 @@ const productSchema = mongoose.Schema(
     numOfRatings: {
       type: Number,
       default: 0,
+    },
+    featuredImage: {
+      type: String,
     },
     images: [
       {

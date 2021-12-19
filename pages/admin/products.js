@@ -28,6 +28,7 @@ import axios from 'axios';
 import Moment from 'react-moment';
 import { Controller, useForm } from 'react-hook-form';
 import Brand from '../../models/Brand';
+import { HamedAbdallahAdminDrawer } from '../../components';
 function AdminProducts(props) {
   const [isOpened, setIsOpened] = useState(false);
   const [images, setImages] = useState([]);
@@ -39,12 +40,17 @@ function AdminProducts(props) {
   const [prodType, setProdType] = useState();
   const [prodMaterial, setProdMaterial] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [featuredImage, setfeaturedImage] = useState();
+
   const { products, brands } = props;
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm();
+  const handleFeaturedChange = (event) => {
+    setfeaturedImage(event.target.files[0]);
+  };
 
   const columns = [
     {
@@ -79,7 +85,7 @@ function AdminProducts(props) {
       title: 'Actions',
       field: '',
       render: (rowData) => (
-        <Button variant="contained" href={`/product/${rowData.slug}`}>
+        <Button variant="contained" href={`/admin/products/${rowData.slug}`}>
           Details
         </Button>
       ),
@@ -105,17 +111,25 @@ function AdminProducts(props) {
     slug,
     stock,
     price,
+    sku,
     status,
   }) => {
     const formData = new FormData();
-
     for (var i = 0; i < images.length; i++) {
-      console.log('image', images[i]);
       formData.append('images', images[i]);
     }
     formData.append('productName', 'LMAO');
 
     let imagesArr = [];
+
+    const otherFormData = new FormData();
+    otherFormData.append('image', featuredImage);
+
+    const featuredImg = await axios.post('/api/images', otherFormData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
 
     await axios
       .post('/api/images/multiple', formData, {
@@ -141,12 +155,14 @@ function AdminProducts(props) {
         color: prodColor,
         shape: prodShape,
         slug,
+        sku,
         gender: prodGender,
         material: prodMaterial,
         type: prodType,
         stock,
+        featuredImage: featuredImg.data.filename,
         price,
-        status: prodStatus ? 'active' : 'inactive',
+        status: prodStatus,
         images: imagesArr,
       })
       .then((res) => {
@@ -170,64 +186,7 @@ function AdminProducts(props) {
             <FontAwesomeIcon icon={faArrowAltCircleRight} size="3x" />
           </Button>
           <Drawer anchor={'left'} open={isOpened} onClose={toggleDrawer(false)}>
-            <Box className={Styles.box}>
-              <List>
-                <ListItem>
-                  <Image
-                    alt="Hamed Abdallah"
-                    src={'/placeholder1.png'}
-                    width={100}
-                    height={100}
-                  />
-                </ListItem>
-                <hr></hr>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin">
-                    DASHBOARD
-                  </Button>
-                </ListItem>
-                <ListItem selected>
-                  <Button className={Styles.boxButton} href="/admin/products">
-                    PRODUCTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/brands">
-                    BRANDS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/orders">
-                    ORDERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/returns">
-                    RETURNS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/contacts">
-                    CONTACTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/users">
-                    USERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/reviews">
-                    REVIEWS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/branches">
-                    BRANCHES
-                  </Button>
-                </ListItem>
-              </List>
-            </Box>
+            <HamedAbdallahAdminDrawer />
           </Drawer>
         </Grid>
         <Grid item md={11} className={Styles.layout}>
@@ -316,6 +275,8 @@ function AdminProducts(props) {
                         <TextField
                           variant="outlined"
                           fullWidth
+                          multiline
+                          rows={4}
                           id="description"
                           label="Product Description"
                           inputProps={{ type: 'text' }}
@@ -410,6 +371,23 @@ function AdminProducts(props) {
                   ></Controller>
                 </ListItem>
                 <ListItem>
+                  <Controller
+                    name="sku"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id="slug"
+                        label="Product SKU"
+                        inputProps={{ type: 'text' }}
+                        {...field}
+                      ></TextField>
+                    )}
+                  ></Controller>
+                </ListItem>
+                <ListItem>
                   <TextField
                     id="gender"
                     label="Product Gender"
@@ -476,27 +454,41 @@ function AdminProducts(props) {
                 </ListItem>
                 <ListItem>
                   <Controller
+                    name="featuredImage"
+                    control={control}
+                    defaultValue=""
+                    render={({ field }) => (
+                      <>
+                        <label for="featuredImage">
+                          Product Featured Image:{' '}
+                        </label>{' '}
+                        <input
+                          onChange={handleFeaturedChange}
+                          type="file"
+                        ></input>
+                      </>
+                    )}
+                  ></Controller>
+                </ListItem>
+                <ListItem>
+                  <Controller
                     name="images"
                     control={control}
                     defaultValue=""
                     render={({ field }) => (
-                      <input
-                        onChange={handleChange}
-                        type="file"
-                        id="images"
-                        multiple
-                      ></input>
+                      <>
+                        <label for="images">Product Images: </label>{' '}
+                        <input
+                          // label="IMAGES"
+                          onChange={handleChange}
+                          type="file"
+                          id="images"
+                          multiple
+                        ></input>
+                      </>
                     )}
                   ></Controller>
-
-                  {/* <TextField
-                    variant="outlined"
-                    fullWidth
-                    id="images"
-                    // label="Product Images"
-                    inputProps={{ type: 'file', multiple: true }}
-                  /> */}
-                </ListItem>
+                </ListItem>{' '}
               </Grid>
             </Grid>
             <br></br>

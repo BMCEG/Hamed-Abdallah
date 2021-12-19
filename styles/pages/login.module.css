@@ -14,18 +14,18 @@
   /* width: 20vmin !important; */
   text-align: center;
   margin: auto !important;
-  border-radius: 100px !important;
+  border-radius: 10px !important;
   background-color: #ca222a !important;
   font-size: 18px !important;
-  box-shadow: 1px 1px 10px black !important;
+  /* box-shadow: 1px 1px 10px black !important; */
 }
 .btnBack {
   background-color: white !important;
   /* width: 20vmin !important; */
   text-align: center;
   margin: auto !important;
-  border-radius: 100px !important;
+  border-radius: 10px !important;
   color: #ca222a !important;
   font-size: 18px !important;
-  box-shadow: 1px 1px 10px black !important;
+  /* box-shadow: 1px 1px 10px black !important; */
 }
