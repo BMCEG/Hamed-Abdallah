@@ -17,7 +17,7 @@ import db from '../../utils/db';
 import Order from '../../models/Order';
 // import User from '../../models/User';
 import MaterialTable from 'material-table';
-import tableIcons from './MaterialTableIcons';
+import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Moment from 'react-moment';
 

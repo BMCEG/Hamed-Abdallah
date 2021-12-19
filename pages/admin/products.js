@@ -23,7 +23,7 @@ import DataTable from 'react-data-table-component';
 import db from '../../utils/db';
 import Product from '../../models/Product';
 import MaterialTable from 'material-table';
-import tableIcons from './MaterialTableIcons';
+import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Moment from 'react-moment';
 import { Controller, useForm } from 'react-hook-form';

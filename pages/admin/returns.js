@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import db from '../../utils/db';
 import MaterialTable from 'material-table';
-import tableIcons from './MaterialTableIcons';
+import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Return from '../../models/Return';
 
