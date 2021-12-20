@@ -72,7 +72,7 @@ export default function Payment() {
                 <FormControlLabel
                   label="Cash on Delivery"
                   value="Cash on Delivery"
-                  control={<Radio checked />}
+                  control={<Radio />}
                 ></FormControlLabel>
               </RadioGroup>
             </FormControl>
