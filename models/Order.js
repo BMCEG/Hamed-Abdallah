@@ -12,22 +12,8 @@ const orderSchema = mongoose.Schema(
     },
     orderItems: [
       {
-        name: {
-          type: String,
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-        },
-        // image: {
-        //   type: String,
-        //   required: true,
-        // },
-        price: {
-          type: Number,
-          required: true,
-        },
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
       },
     ],
     shippingAddress: {

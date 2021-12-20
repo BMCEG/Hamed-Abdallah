@@ -8,100 +8,89 @@ const HamedAbdallahCollage = () => {
       <div className={Styles.row}>
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a
-            href="/shop?gender=boys"
-            className={Styles.block__img}
-            style={{
-              backgroundImage: `url('/glasses-1.png')`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
-          ></a>
-          <div className={Styles.block_caption}>
-            <Typography
-              variant="h2"
-              component="h2"
-              className={Styles.block_title}
-            >
-              <strong>Boys</strong>
-              <br></br>
-              Eyewear
-            </Typography>
-          </div>
+          <a href="/shop?gender=boys">
+            <div
+              className={Styles.block__img}
+              style={{
+                backgroundImage: `url('/glasses-1.png')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+              }}
+            ></div>
+
+            <div className={Styles.block_caption}>
+              <Typography className={Styles.block_title}>
+                <strong>Boys</strong>
+                <br></br>
+                Eyewear
+              </Typography>
+            </div>
+          </a>
         </div>
 
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a
-            className={Styles.block__img}
-            style={{
-              backgroundImage: `url('/glasses-2.png')`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
-            href="/shop?gender=male"
-          ></a>
-          <div className={Styles.block_caption}>
-            <Typography
-              variant="h2"
-              component="h2"
-              className={Styles.block_title}
-            >
-              <strong>Men</strong>
-              <br></br>
-              Eyewear
-            </Typography>
-          </div>
+          <a href="/shop?gender=male">
+            <div
+              className={Styles.block__img}
+              style={{
+                backgroundImage: `url('/glasses-2.png')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+              }}
+            ></div>
+            <div className={Styles.block_caption}>
+              <Typography className={Styles.block_title}>
+                <strong>Men</strong>
+                <br></br>
+                Eyewear
+              </Typography>
+            </div>
+          </a>
         </div>
       </div>
       {/* <br></br> */}
       <div className={Styles.row}>
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a
-            className={Styles.block__img}
-            style={{
-              backgroundImage: `url('/glasses-3.png')`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
-            href="/shop?type=sunglasses"
-          ></a>
-          <div className={Styles.block_caption}>
-            <Typography
-              variant="h2"
-              component="h2"
-              className={Styles.block_title}
-            >
-              <strong>Hottest</strong>
-              <br></br>
-              Sunglasses
-            </Typography>
-          </div>
+          <a href="/shop?type=sunglasses">
+            <div
+              className={Styles.block__img}
+              style={{
+                backgroundImage: `url('/glasses-3.png')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+              }}
+            ></div>
+            <div className={Styles.block_caption}>
+              <Typography className={Styles.block_title}>
+                <strong>Hottest</strong>
+                <br></br>
+                Sunglasses
+              </Typography>
+            </div>
+          </a>
         </div>
 
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a
-            className={Styles.block__img}
-            style={{
-              backgroundImage: `url('/glasses-4.png')`,
-              backgroundSize: 'contain',
-              backgroundRepeat: 'no-repeat',
-            }}
-            href="/shop?type=eyeglasses"
-          ></a>
-          <div className={Styles.block_caption}>
-            <Typography
-              variant="h2"
-              component="h2"
-              className={Styles.block_title}
-            >
-              <strong>Hottest</strong>
-              <br></br>
-              eyeglasses
-            </Typography>
-          </div>
+          <a href="/shop?type=eyeglasses">
+            <div
+              className={Styles.block__img}
+              style={{
+                backgroundImage: `url('/glasses-4.png')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+              }}
+            ></div>
+            <div className={Styles.block_caption}>
+              <Typography className={Styles.block_title}>
+                <strong>Hottest</strong>
+                <br></br>
+                eyeglasses
+              </Typography>
+            </div>
+          </a>
         </div>
       </div>
     </div>

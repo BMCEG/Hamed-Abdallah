@@ -15,8 +15,8 @@ const HamedAbdallahFooter = () => {
               <Image
                 alt="Hamed Abdallah Logo"
                 src="/Hamed-logo-Fullcolor.png"
-                width={152.5}
-                height={87.5}
+                width={305}
+                height={175}
               />
             </div>
             <div className={Styles.vertical__line} />

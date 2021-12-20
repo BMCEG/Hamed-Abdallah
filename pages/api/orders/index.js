@@ -25,6 +25,8 @@ handler.post(async (req, res) => {
 
   const order = await newOrder.save();
 
+  console.log(req.body);
+
   req.body.orderItems.map(async (prod) => {
     let product = await Product.findById({ _id: prod._id });
     product.stock = product.stock - prod.quantity;

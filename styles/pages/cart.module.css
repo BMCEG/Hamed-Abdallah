@@ -16,6 +16,9 @@
   /* background-color: aqua !important; */
   margin: 1.5vmin;
 }
+.product_image {
+  object-fit: contain !important;
+}
 
 .grid__container {
 }

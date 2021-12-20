@@ -101,7 +101,8 @@ function Cart() {
                               href={`/product/${item.slug}`}
                             >
                               <Image
-                                src="/Hamed-logo-Fullcolor.png"
+                                className={Styles.product_image}
+                                src={`/uploads/${item.featuredImage}`}
                                 alt={item.name}
                                 width={50}
                                 height={50}
@@ -134,7 +135,7 @@ function Cart() {
                           <TableCell align="right">
                             <Button
                               variant="contained"
-                              color="secondary"
+                              className={Styles.btn}
                               onClick={() => removeItemHandler(item)}
                             >
                               X

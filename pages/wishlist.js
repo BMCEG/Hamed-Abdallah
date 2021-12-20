@@ -182,49 +182,54 @@ function Wishlist() {
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {wishlist.map((item) => (
-                            <TableRow key={item._id}>
-                              <TableCell>
-                                <NextLink
-                                  href={`/product/${item.slug}`}
-                                  passHref
-                                >
-                                  <Link>
-                                    <Image
-                                      alt={item.name}
-                                      src={`/uploads/products/${item.images[0]}`}
-                                      width={152.5}
-                                      height={87.5}
-                                      className={Styles.productImg}
-                                      // style={{ backgroundSize }}
-                                    />
-                                  </Link>
-                                </NextLink>
-                              </TableCell>
-                              <TableCell>{item.name}</TableCell>
-                              <TableCell>{item.brand.name}</TableCell>
-                              <TableCell>{item.price}</TableCell>
-                              <TableCell>
-                                <Button
-                                  className={Styles.btnBack}
-                                  onClick={() => addToCartHandler(item)}
-                                >
-                                  <FontAwesomeIcon
-                                    icon={faShoppingBag}
-                                    size="lg"
-                                  />
-                                </Button>
-                              </TableCell>
-                              <TableCell>
-                                <Button
-                                  className={Styles.btn}
-                                  onClick={() => removeWishlistItem(item)}
-                                >
-                                  X
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                          ))}
+                          {wishlist.map((item) =>
+                            // return;
+                            item && item._id ? (
+                              <>
+                                <TableRow key={item._id}>
+                                  <TableCell>
+                                    <NextLink
+                                      href={`/product/${item.slug}`}
+                                      passHref
+                                    >
+                                      <Link>
+                                        <Image
+                                          alt={item.name}
+                                          src={`/uploads/products/${item.images[0]}`}
+                                          width={152.5}
+                                          height={87.5}
+                                          className={Styles.productImg}
+                                          // style={{ backgroundSize }}
+                                        />
+                                      </Link>
+                                    </NextLink>
+                                  </TableCell>
+                                  <TableCell>{item.name}</TableCell>
+                                  <TableCell>{item.brand.name}</TableCell>
+                                  <TableCell>{item.price}</TableCell>
+                                  <TableCell>
+                                    <Button
+                                      className={Styles.btnBack}
+                                      onClick={() => addToCartHandler(item)}
+                                    >
+                                      <FontAwesomeIcon
+                                        icon={faShoppingBag}
+                                        size="lg"
+                                      />
+                                    </Button>
+                                  </TableCell>
+                                  <TableCell>
+                                    <Button
+                                      className={Styles.btn}
+                                      onClick={() => removeWishlistItem(item)}
+                                    >
+                                      X
+                                    </Button>
+                                  </TableCell>
+                                </TableRow>
+                              </>
+                            ) : null
+                          )}
                         </TableBody>
                       </Table>
                     </TableContainer>

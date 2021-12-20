@@ -7,7 +7,7 @@ const handler = nc();
 handler.use(isAuth);
 handler.get(async (req, res) => {
   await db.connect();
-  const order = await Order.findById(req.query.id);
+  const order = await Order.findById(req.query.id).populate('orderItems');
   await db.disconnect();
   res.send(order);
 });

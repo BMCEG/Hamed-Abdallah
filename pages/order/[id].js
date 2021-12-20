@@ -71,7 +71,7 @@ function Order({ params }) {
     isDelivered,
     deliveredAt,
   } = order;
-
+  console.log('HELLO', orderItems);
   useEffect(() => {
     if (!userInfo) {
       router.push('/login');
@@ -178,7 +178,7 @@ function Order({ params }) {
                                   href={`/product/${item.slug}`}
                                 >
                                   <Image
-                                    src={`/uploads/products/${item.images[0]}"`}
+                                    src={`/uploads/products/${item.featuredImage}"`}
                                     alt={item.name}
                                     width={50}
                                     height={50}
