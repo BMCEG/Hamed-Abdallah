@@ -46,7 +46,7 @@
 }
 .block_title {
   text-align: right;
-  color: #ca222a;
+  color: white;
   z-index: 5;
   font-size: 50px !important;
   padding: 2vmin;
@@ -68,7 +68,7 @@
   /* transform:  !important; */
 }
 .block:hover .block__img {
-  filter: blur(1px);
+  filter: brightness(65%);
 }
 .block:hover .block_caption {
   opacity: 1 !important; /* transform: rotate(-3deg) !important; */
@@ -81,6 +81,6 @@
   display: block;
   transition: all 0.2s ease-in-out;
 
-  filter: blur(0px);
+  filter: brightness(100%);
   /* margin: 1vmin; */
 }

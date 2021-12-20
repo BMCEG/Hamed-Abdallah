@@ -85,9 +85,9 @@ const HamedAbdallahCollage = () => {
             ></div>
             <div className={Styles.block_caption}>
               <Typography className={Styles.block_title}>
-                <strong>Hottest</strong>
+                <strong>Elegant</strong>
                 <br></br>
-                eyeglasses
+                Eyeglasses
               </Typography>
             </div>
           </a>

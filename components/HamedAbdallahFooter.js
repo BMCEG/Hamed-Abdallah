@@ -11,14 +11,15 @@ const HamedAbdallahFooter = () => {
       <div className={Styles.container}>
         {matches ? (
           <>
-            <div className={Styles.footer__links}>
-              <Image
-                alt="Hamed Abdallah Logo"
-                src="/Hamed-logo-Fullcolor.png"
-                width={305}
-                height={175}
-              />
-            </div>
+            {/* <div className={Styles.footer__links}> */}
+            <Image
+              alt="Hamed Abdallah Logo"
+              src="/Hamed-logo-Fullcolor.png"
+              width={200}
+              height={200}
+              className={Styles.footer__logo}
+            />
+            {/* </div> */}
             <div className={Styles.vertical__line} />
             <div className={Styles.footer__links}>
               <Button
@@ -80,7 +81,7 @@ const HamedAbdallahFooter = () => {
                   <Image
                     alt="Hamed Abdallah Facebook"
                     // style={{ color: 'red !important' }}
-                    src="/facebook-icon.png"
+                    src="/facebook.png"
                     width={30}
                     height={30}
                   />
@@ -88,7 +89,7 @@ const HamedAbdallahFooter = () => {
                 <Button className={Styles.footer__links__follow__btn}>
                   <Image
                     alt="Hamed Abdallah Facebook"
-                    src="/facebook-icon.png"
+                    src="/twitter.png"
                     width={30}
                     height={30}
                   />
@@ -96,7 +97,7 @@ const HamedAbdallahFooter = () => {
                 <Button className={Styles.footer__links__follow__btn}>
                   <Image
                     alt="Hamed Abdallah Facebook"
-                    src="/facebook-icon.png"
+                    src="/instagram.png"
                     width={30}
                     height={30}
                   />
@@ -119,7 +120,7 @@ const HamedAbdallahFooter = () => {
               <Button className={Styles.footer__links__follow__btn}>
                 <Image
                   alt="Hamed Abdallah Facebook"
-                  src="/facebook-icon.png"
+                  src="/facebook.png"
                   width={30}
                   height={30}
                 />
@@ -127,7 +128,7 @@ const HamedAbdallahFooter = () => {
               <Button className={Styles.footer__links__follow__btn}>
                 <Image
                   alt="Hamed Abdallah Facebook"
-                  src="/facebook-icon.png"
+                  src="/twitter.png"
                   width={30}
                   height={30}
                 />
@@ -135,7 +136,7 @@ const HamedAbdallahFooter = () => {
               <Button className={Styles.footer__links__follow__btn}>
                 <Image
                   alt="Hamed Abdallah Facebook"
-                  src="/facebook-icon.png"
+                  src="/instagram.png"
                   width={30}
                   height={30}
                 />
@@ -147,8 +148,7 @@ const HamedAbdallahFooter = () => {
       <br></br>
       <div className={Styles.below__footer}>
         <Typography className={Styles.below__footer__text}>
-          ALL RIGHTS RESERVED © 2021
-          <br></br>
+          ALL RIGHTS RESERVED © 2021{' '}
           <a
             style={{ color: '#ca222a' }}
             target="_blank"

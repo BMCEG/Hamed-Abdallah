@@ -8,7 +8,17 @@
   margin: auto;
   padding: 1vmin;
 }
-
+.brands__image {
+  animation: fadeIn 1s !important;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .ourBrands {
   /* background-color: burlywood; */
   width: 70%;

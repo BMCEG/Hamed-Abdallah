@@ -254,6 +254,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'type',
                                   'sunglasses'
@@ -274,6 +275,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'type',
                                   'eyeglasses'
@@ -317,6 +319,7 @@ const shop = (props) => {
                             <FormControlLabel
                               control={
                                 <Checkbox
+                                  style={{ color: '#ca222a' }}
                                   checked={checkboxCheckHandler(
                                     'brand',
                                     brand.name
@@ -426,6 +429,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler('gender', 'male')}
                               />
                             }
@@ -443,6 +447,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'gender',
                                   'female'
@@ -463,6 +468,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler('gender', 'boys')}
                               />
                             }
@@ -480,6 +486,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'gender',
                                   'girls'
@@ -522,6 +529,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'material',
                                   'metal'
@@ -542,6 +550,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'material',
                                   'acetate'
@@ -562,6 +571,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'material',
                                   'injected'
@@ -582,6 +592,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'material',
                                   'titanium'
@@ -602,6 +613,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'material',
                                   'plastic'
@@ -644,6 +656,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'shape',
                                   'square'
@@ -664,6 +677,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'shape',
                                   'rectangle'
@@ -684,6 +698,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler('shape', 'round')}
                               />
                             }
@@ -701,6 +716,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler('shape', 'oval')}
                               />
                             }
@@ -718,6 +734,7 @@ const shop = (props) => {
                           <FormControlLabel
                             control={
                               <Checkbox
+                                style={{ color: '#ca222a' }}
                                 checked={checkboxCheckHandler(
                                   'shape',
                                   'cat-eye'
@@ -757,7 +774,14 @@ const shop = (props) => {
             <Grid item md={3} xs={12}>
               <Accordion style={{ backgroundColor: 'transparent' }}>
                 <AccordionSummary>
-                  <FontAwesomeIcon icon={faFilter} />
+                  <Grid container spacing={4}>
+                    <Grid item md={2}>
+                      <FontAwesomeIcon icon={faFilter} />
+                    </Grid>
+                    <Grid item md={10}>
+                      <h4> Filter</h4>
+                    </Grid>
+                  </Grid>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Grid item md={3} xs={12}>
@@ -784,6 +808,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'type',
                                         'sunglasses'
@@ -804,6 +829,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'type',
                                         'eyeglasses'
@@ -844,14 +870,83 @@ const shop = (props) => {
                             <AccordionDetails>
                               <FormGroup>
                                 <FormControlLabel
-                                  control={<Checkbox />}
+                                  control={
+                                    <Checkbox style={{ color: '#ca222a' }} />
+                                  }
                                   label="Sun Glasses"
                                 />
                                 <FormControlLabel
-                                  control={<Checkbox />}
+                                  control={
+                                    <Checkbox style={{ color: '#ca222a' }} />
+                                  }
                                   label="Eye Glasses"
                                 />
                               </FormGroup>
+                            </AccordionDetails>
+                          </Accordion>
+                        </ListItem>{' '}
+                        <ListItem>
+                          <Accordion className={Styles.filterAccordion}>
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                              className={Styles.filterAccordionName}
+                            >
+                              <Typography
+                                style={{ color: '#ca222a' }}
+                                variant="h6"
+                                component="h6"
+                              >
+                                PRICE
+                              </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <Grid
+                                container
+                                spacing={1}
+                                className={Styles.sliderContainer}
+                              >
+                                <Grid item md={3}>
+                                  <Input
+                                    value={lowPrice}
+                                    size="small"
+                                    onChange={(e) => handleLowPriceChange(e)}
+                                    inputProps={{
+                                      step: 10,
+                                      min: minPrice,
+                                      max: maxPrice,
+                                      type: 'number',
+                                      'aria-labelledby': 'input-slider',
+                                    }}
+                                  />
+                                </Grid>
+                                <Grid item className={Styles.slider} md={6}>
+                                  <Slider
+                                    min={minPrice}
+                                    max={maxPrice}
+                                    step={10}
+                                    style={{ color: '#ca222a' }}
+                                    value={price}
+                                    onChange={handleChange}
+                                  />
+                                </Grid>
+                                <Grid item md={3}>
+                                  <Input
+                                    value={highPrice}
+                                    size="small"
+                                    onChange={(e) => handleHighPriceChange(e)}
+                                    // onBlur={handleBlur}
+                                    inputProps={{
+                                      step: 10,
+                                      min: minPrice,
+                                      max: maxPrice,
+                                      type: 'number',
+                                      'aria-labelledby': 'input-slider',
+                                    }}
+                                  />
+                                </Grid>
+                              </Grid>
                             </AccordionDetails>
                           </Accordion>
                         </ListItem>{' '}
@@ -876,6 +971,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'gender',
                                         'male'
@@ -896,6 +992,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'gender',
                                         'female'
@@ -916,6 +1013,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'gender',
                                         'boys'
@@ -936,6 +1034,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'gender',
                                         'girls'
@@ -978,6 +1077,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'material',
                                         'metal'
@@ -998,6 +1098,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'material',
                                         'acetate'
@@ -1018,6 +1119,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'material',
                                         'injected'
@@ -1038,6 +1140,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'material',
                                         'titanium'
@@ -1058,6 +1161,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'material',
                                         'plastic'
@@ -1100,6 +1204,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'shape',
                                         'square'
@@ -1120,6 +1225,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'shape',
                                         'rectangle'
@@ -1140,6 +1246,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'shape',
                                         'round'
@@ -1160,6 +1267,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'shape',
                                         'oval'
@@ -1180,6 +1288,7 @@ const shop = (props) => {
                                 <FormControlLabel
                                   control={
                                     <Checkbox
+                                      style={{ color: '#ca222a' }}
                                       checked={checkboxCheckHandler(
                                         'shape',
                                         'cat-eye'
@@ -1292,7 +1401,7 @@ const shop = (props) => {
         <br></br>
       </div>
       <HamedAbdallahWhiteSpace />
-      <div className={Styles.brandsCarousel}>
+      {/* <div className={Styles.brandsCarousel}>
         <Carousel
           breakPoints={[
             { width: 1, itemsToShow: 1 },
@@ -1317,7 +1426,7 @@ const shop = (props) => {
             />
           ))}
         </Carousel>
-      </div>
+      </div> */}
       <HamedAbdallahWhiteSpace />
     </>
   );

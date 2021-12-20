@@ -1,5 +1,5 @@
 .root {
-  height: 300px !important;
+  height: 220px !important;
   padding-top: 4vmin;
   width: 75%;
   margin: auto;
@@ -8,6 +8,8 @@
 .container {
   height: 70% !important;
   display: flex;
+  width: 80%;
+  margin: auto !important;
   /* background-color: tomato; */
   justify-content: space-around;
 }
@@ -25,9 +27,12 @@
   flex-direction: column;
   justify-content: space-evenly;
 }
-
+.footer__logo {
+  object-fit: contain;
+}
 .below__footer {
   text-align: center !important;
+  /* background-color: tomato; */
 }
 
 .footer__links__btn {
@@ -53,4 +58,7 @@
 .footer__links__follow__mob {
   /* background-color: yellow !important; */
   text-align: center;
+}
+.below__footer__text {
+  font-size: 13px !important;
 }
