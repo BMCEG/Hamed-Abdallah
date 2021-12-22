@@ -15,11 +15,11 @@ import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import DataTable from 'react-data-table-component';
 import db from '../../utils/db';
 import Order from '../../models/Order';
-import User from '../../models/User';
 import MaterialTable from 'material-table';
 import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Moment from 'react-moment';
+import User from '../../models/User';
 
 function AdminOrders(props) {
   const [isOpened, setIsOpened] = useState(false);
@@ -43,11 +43,21 @@ function AdminOrders(props) {
     { title: 'Shipping Price', field: 'shippingPrice', type: 'numeric' },
     { title: 'Total Price', field: 'totalPrice', type: 'numeric' },
     { title: 'Is Paid', field: 'isPaid', type: 'boolean' },
-    { title: 'Date Created', field: 'createdAt', type: 'numeric' },
+    {
+      title: 'Date Created',
+      field: 'createdAt',
+      type: 'numeric',
+      render: (rowData) => (
+        <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
+      ),
+    },
     {
       title: 'Date Delivered',
       field: 'deliveredAt',
       type: 'numeric',
+      render: (rowData) => (
+        <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.deliveredAt}</Moment>
+      ),
     },
     {
       title: 'Actions',
@@ -160,8 +170,9 @@ function AdminOrders(props) {
 
 export async function getServerSideProps({ query }) {
   await db.connect();
-
-  let orders = await Order.find({}).lean().populate('user');
+  let orders = await Order.find({})
+    .lean()
+    .populate({ path: 'user', Model: User });
   console.log(orders);
   const allOrders = JSON.parse(JSON.stringify(orders));
   await db.disconnect();
