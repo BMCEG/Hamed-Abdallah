@@ -508,7 +508,7 @@ export default function ProductScreen(props) {
 export async function getServerSideProps(context) {
   const { params } = context;
   const { slug } = params;
-
+  let props = {};
   await db.connect();
   const rawProduct = await Product.findOne({ slug }).lean();
   const product = JSON.parse(JSON.stringify(rawProduct));
@@ -522,25 +522,30 @@ export async function getServerSideProps(context) {
   );
   const recentItems = await Product.find({}).sort({ createdAt: -1 });
   const allRecentItems = JSON.parse(JSON.stringify(recentItems));
+
   const reviews = await Review.find({ product: product._id }).lean();
-  // .populate('user');
   const allReviews = JSON.parse(JSON.stringify(reviews));
-  const cookies = JSON.parse(context.req.cookies['userInfo']);
 
-  const rawUser = await User.findById({ _id: cookies._id }).lean();
-  const user = JSON.parse(JSON.stringify(rawUser));
+  props = {
+    product,
+    // isWishlistedProp,
+    reviews: allReviews,
+    relatedItems: allFilteredProductsByBrand,
+    recentItems: allRecentItems,
+  };
 
-  const isWishlistedProp = user.wishlist.includes(product._id);
+  if (context.req.cookies['userInfo']) {
+    const cookies = JSON.parse(context.req.cookies['userInfo']);
 
+    const rawUser = await User.findById({ _id: cookies._id }).lean();
+    const user = JSON.parse(JSON.stringify(rawUser));
+
+    const isWishlistedProp = user.wishlist.includes(product._id);
+    props.isWishlistedProp = isWishlistedProp;
+  }
   await db.disconnect();
 
   return {
-    props: {
-      product,
-      isWishlistedProp,
-      reviews: allReviews,
-      relatedItems: allFilteredProductsByBrand,
-      recentItems: allRecentItems,
-    },
+    props,
   };
 }
