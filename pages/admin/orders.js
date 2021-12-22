@@ -15,7 +15,7 @@ import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import DataTable from 'react-data-table-component';
 import db from '../../utils/db';
 import Order from '../../models/Order';
-// import User from '../../models/User';
+import User from '../../models/User';
 import MaterialTable from 'material-table';
 import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
@@ -95,7 +95,7 @@ function AdminOrders(props) {
                     alt="Hamed Abdallah"
                     src={'/Hamed-logo-Fullcolor.png'}
                     width={152.5}
-                    height={87.5}
+                    height={175}
                   />
                 </ListItem>
                 <hr></hr>
@@ -150,19 +150,6 @@ function AdminOrders(props) {
               icons={tableIcons}
               columns={columns}
               data={orders}
-              actions={[
-                {
-                  icon: tableIcons.Delete,
-                  tooltip: 'Delete User',
-                  onClick: async (event, rowData) => {
-                    await axios.post(`/api/products/delete`, {
-                      _id: rowData._id,
-                    });
-                    alert('Product has been deleted successfully');
-                    window.location.reload();
-                  },
-                },
-              ]}
             />
           </div>
         </Grid>
@@ -175,7 +162,7 @@ export async function getServerSideProps({ query }) {
   await db.connect();
 
   let orders = await Order.find({}).lean().populate('user');
-  // console.log(orders);
+  console.log(orders);
   const allOrders = JSON.parse(JSON.stringify(orders));
   await db.disconnect();
 

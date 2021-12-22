@@ -186,7 +186,7 @@ function AdminBrands(props) {
                   icon: tableIcons.Delete,
                   tooltip: 'Delete Brand',
                   onClick: async (event, rowData) => {
-                    await axios.post(`/api/brands/delete`, {
+                    await axios.post(`/api/admin/brands/delete`, {
                       _id: rowData._id,
                     });
                     alert('Brand has been deleted successfully');

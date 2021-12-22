@@ -34,8 +34,6 @@ const apiRoute = nextConnect({
 apiRoute.use(upload.single('image'));
 
 apiRoute.post((req, res) => {
-  console.log('HEREE');
-  // console.log();
   res.status(200).json({ filename: req.file.filename });
 });
 

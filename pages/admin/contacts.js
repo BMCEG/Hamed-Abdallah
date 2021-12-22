@@ -114,19 +114,6 @@ function AdminUsers(props) {
               icons={tableIcons}
               columns={columns}
               data={contacts}
-              actions={[
-                {
-                  icon: tableIcons.Delete,
-                  tooltip: 'Delete User',
-                  onClick: async (event, rowData) => {
-                    await axios.post(`/api/products/delete`, {
-                      _id: rowData._id,
-                    });
-                    alert('Product has been deleted successfully');
-                    window.location.reload();
-                  },
-                },
-              ]}
             />
           </div>
         </Grid>
