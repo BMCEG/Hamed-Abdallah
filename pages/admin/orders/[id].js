@@ -43,6 +43,8 @@ import {
 import Styles from '../../../styles/pages/admin/order.module.css';
 import MaterialTable from 'material-table';
 import Order from '../../../models/Order';
+import User from '../../../models/User';
+import Product from '../../../models/Product';
 
 export default function BrandScreen(props) {
   const matches = useMediaQuery('(min-width:1024px');
@@ -294,7 +296,7 @@ export default function BrandScreen(props) {
                               href={`/product/${item.slug}`}
                             >
                               <Image
-                                src={`/uploads/products/${item.featuredImage}`}
+                                src={`/uploads/${item.featuredImage}`}
                                 alt={item.name}
                                 width={152.5}
                                 height={87.5}
@@ -330,7 +332,10 @@ export async function getServerSideProps(context) {
   const { id } = params;
 
   await db.connect();
-  const rawOrder = await Order.findById({ _id: id }).lean().populate('user');
+  const rawOrder = await Order.findById({ _id: id })
+    .lean()
+    .populate({ path: 'user', Model: User })
+    .populate({ path: 'orderItems', Model: Product });
   const order = JSON.parse(JSON.stringify(rawOrder));
 
   //   const rawBrandProducts = await Product.find({ brand: id }).lean();
