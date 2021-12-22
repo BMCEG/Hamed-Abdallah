@@ -71,6 +71,12 @@
   /* border: 1px solid black !important; */
   transition: all ease-in-out 0.2s;
 }
+.product_image_mob {
+  object-fit: contain !important;
+  padding: 1vmin !important;
+  /* border: 1px solid black !important; */
+  transition: all ease-in-out 0.2s;
+}
 .product_image:hover {
   transform: scale(1.1);
 }
@@ -117,4 +123,10 @@
 }
 .wishlist_icon {
   animation: fadeIn 0.5s;
+}
+.product_images_inline {
+  /* background-color: tomato; */
+  display: flex;
+  justify-content: space-between;
+  height: 10vh;
 }

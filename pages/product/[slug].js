@@ -191,10 +191,41 @@ export default function ProductScreen(props) {
                 </Grid>
               </Grid>
             ) : (
-              <HamedAbdallahImageMagnifier
-                src={`/uploads/products/${product.images[0]}`}
-                width={'100%'}
-              />
+              <div>
+                <Image
+                  alt="image"
+                  src={featuredImage}
+                  height={500}
+                  width={500}
+                  className={Styles.product_image}
+                />
+                <div className={Styles.product_images_inline}>
+                  <Image
+                    alt="image"
+                    src={`/uploads/${product.featuredImage}`}
+                    height={500}
+                    onClick={() =>
+                      pickFeaturedImageHandler(
+                        `/uploads/${product.featuredImage}`
+                      )
+                    }
+                    width={500}
+                    className={Styles.product_image_mob}
+                  />
+                  {productImages.map((image) => (
+                    <Image
+                      alt="image"
+                      src={`${image.source}`}
+                      height={500}
+                      width={500}
+                      onClick={() =>
+                        pickFeaturedImageHandler(`${image.source}`)
+                      }
+                      className={Styles.product_image_mob}
+                    />
+                  ))}
+                </div>
+              </div>
             )}
           </Grid>
           <Grid item md={1} />
@@ -354,13 +385,23 @@ export default function ProductScreen(props) {
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
-          <Typography
-            variant="h4"
-            component="h4"
-            style={{ textAlign: 'center', color: 'white' }}
-          >
-            More Products from {product.brandName}
-          </Typography>
+          {matches ? (
+            <Typography
+              variant="h4"
+              component="h4"
+              style={{ textAlign: 'center', color: 'white' }}
+            >
+              More Products from {product.brandName}
+            </Typography>
+          ) : (
+            <Typography
+              variant="body1"
+              component="body1"
+              style={{ textAlign: 'center', color: 'white' }}
+            >
+              More Products from {product.brandName}
+            </Typography>
+          )}
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
@@ -404,13 +445,23 @@ export default function ProductScreen(props) {
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
-          <Typography
-            variant="h4"
-            component="h4"
-            style={{ textAlign: 'center', color: 'white' }}
-          >
-            Recently Added Products
-          </Typography>
+          {matches ? (
+            <Typography
+              variant="h4"
+              component="h4"
+              style={{ textAlign: 'center', color: 'white' }}
+            >
+              Recently Added Products
+            </Typography>
+          ) : (
+            <Typography
+              variant="body1"
+              component="body1"
+              style={{ textAlign: 'center', color: 'white' }}
+            >
+              Recently Added Products
+            </Typography>
+          )}
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
