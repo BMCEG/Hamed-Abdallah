@@ -180,6 +180,7 @@ const shop = (props) => {
       queryParams = queryParams.concat(`price=${price}&`);
     }
     queryParams = queryParams.substring(0, queryParams.length - 1);
+    queryParams = queryParams.concat(`#eyewear`);
     router.push(`/shop${queryParams}`);
   };
 
@@ -1328,7 +1329,7 @@ const shop = (props) => {
               </Accordion>
             </Grid>
           )}
-          <Grid item md={9} xs={12}>
+          <Grid item md={9} xs={12} id="eyewear">
             <Grid container spacing={3}>
               {products.map((product) => (
                 <Grid item md={4} sm={6} xs={12} key={product.name}>
