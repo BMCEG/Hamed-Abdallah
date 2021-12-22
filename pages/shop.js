@@ -1339,7 +1339,7 @@ const shop = (props) => {
                           <CardMedia
                             className={Styles.card}
                             component="img"
-                            image={`/uploads/products/${product.images[0]}`}
+                            image={`/uploads/${product.featuredImage}`}
                             title={product.name}
                           ></CardMedia>
                           <CardContent>
