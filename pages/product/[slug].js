@@ -44,7 +44,7 @@ export default function ProductScreen(props) {
   const [rating, setRating] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(isWishlistedProp);
   const [featuredImage, setFeaturedImage] = useState(
-    `/uploads/${product.featuredImage}`
+    `${product.featuredImage}`
   );
 
   const { state, dispatch } = useContext(Store);
@@ -142,7 +142,7 @@ export default function ProductScreen(props) {
 
   const productImages = [];
   product.images.map((img) => {
-    productImages.push({ source: `/uploads/products/${img}` });
+    productImages.push({ source: img });
   });
 
   return (
@@ -160,12 +160,10 @@ export default function ProductScreen(props) {
                 <Grid item md={2} className={Styles.product_images}>
                   <Image
                     alt="image"
-                    src={`/uploads/${product.featuredImage}`}
+                    src={product.featuredImage}
                     height={500}
                     onClick={() =>
-                      pickFeaturedImageHandler(
-                        `/uploads/${product.featuredImage}`
-                      )
+                      pickFeaturedImageHandler(`${product.featuredImage}`)
                     }
                     width={500}
                     className={Styles.product_image}
@@ -202,12 +200,10 @@ export default function ProductScreen(props) {
                 <div className={Styles.product_images_inline}>
                   <Image
                     alt="image"
-                    src={`/uploads/${product.featuredImage}`}
+                    src={`${product.featuredImage}`}
                     height={500}
                     onClick={() =>
-                      pickFeaturedImageHandler(
-                        `/uploads/${product.featuredImage}`
-                      )
+                      pickFeaturedImageHandler(`${product.featuredImage}`)
                     }
                     width={500}
                     className={Styles.product_image_mob}
@@ -238,9 +234,9 @@ export default function ProductScreen(props) {
               </ListItem>
               <ListItem>
                 <RatingView ratingValue={product.avgRating} />
+                <br></br>
                 <Typography variant="body2" component="body2">
-                  Number of Reviews
-                  <br></br>({product.numOfRatings})
+                  Number of Reviews ({product.numOfRatings})
                 </Typography>
               </ListItem>
               <ListItem>
@@ -313,74 +309,13 @@ export default function ProductScreen(props) {
             </List>
           </Grid>
         </Grid>
-        <HamedAbdallahWhiteSpace />
+        {/* <HamedAbdallahWhiteSpace /> */}
       </div>
-      <div className={Styles.reviews}>
-        <Typography variant="h4" component="h4">
-          User Reviews
-        </Typography>
-        <br></br>
-        {reviews.length > 0 &&
-          reviews.map((review) => (
-            <div className={Styles.review}>
-              <Typography variant="body1" component="body1">
-                {review.review}
-              </Typography>
-              <hr className={Styles.hrReview}></hr>
-              <RatingView
-                // onClick={ratingHandler}
-                ratingValue={review.rating} /* Rating Props */
-              />
 
-              <Typography variant="span" component="h6">
-                Review by: {review.user.name}
-                <br></br>
-                <Moment format="dddd DD/MM/YYYY hh:ss">
-                  {review.createdAt}
-                </Moment>
-              </Typography>
-            </div>
-          ))}
-        <hr></hr>
-        <form>
-          <List>
-            <ListItem>
-              <TextField
-                variant="outlined"
-                fullWidth
-                onChange={(e) => setReview(e.target.value)}
-                id="review"
-                label="Review"
-                rows={5}
-                multiline
-                inputProps={{ maxLength: 500, type: 'text' }}
-              ></TextField>
-            </ListItem>
-            <ListItem>
-              <Rating
-                onClick={ratingHandler}
-                ratingValue={rating} /* Rating Props */
-              />
-            </ListItem>
-            <ListItem>
-              {/* Add your own review */}
-              {/* <br></br> */}
-              <Button
-                variant="contained"
-                className={Styles.button}
-                onClick={submitReviewHandler}
-              >
-                Add Review
-              </Button>
-            </ListItem>
-          </List>
-        </form>
-        <HamedAbdallahWhiteSpace />
-      </div>
-      <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" />
+      {/* <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" /> */}
 
       <div className={Styles.relatedItems}>
-        <HamedAbdallahWhiteSpace />
+        {/* <HamedAbdallahWhiteSpace /> */}
         <div className={Styles.ourBrands__header}>
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
@@ -389,7 +324,7 @@ export default function ProductScreen(props) {
             <Typography
               variant="h4"
               component="h4"
-              style={{ textAlign: 'center', color: 'white' }}
+              style={{ textAlign: 'center', color: '#ca222a' }}
             >
               More Products from {product.brandName}
             </Typography>
@@ -397,7 +332,7 @@ export default function ProductScreen(props) {
             <Typography
               variant="body1"
               component="body1"
-              style={{ textAlign: 'center', color: 'white' }}
+              style={{ textAlign: 'center', color: '#ca222a' }}
             >
               More Products from {product.brandName}
             </Typography>
@@ -431,16 +366,16 @@ export default function ProductScreen(props) {
               <Image
                 key={prod._id}
                 alt="Hamed Abdallah Brand"
-                src={`/uploads/products/${prod.images[0]}`}
-                width={300}
-                height={300}
+                src={prod.featuredImage}
+                width={200}
+                height={200}
                 className={Styles.thumbnail}
               />
             </Button>
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />
-        <HamedAbdallahWhiteSpace />
+        {/* <HamedAbdallahWhiteSpace /> */}
         <div className={Styles.ourBrands__header}>
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
@@ -449,7 +384,7 @@ export default function ProductScreen(props) {
             <Typography
               variant="h4"
               component="h4"
-              style={{ textAlign: 'center', color: 'white' }}
+              style={{ textAlign: 'center', color: '#ca222a' }}
             >
               Recently Added Products
             </Typography>
@@ -457,7 +392,7 @@ export default function ProductScreen(props) {
             <Typography
               variant="body1"
               component="body1"
-              style={{ textAlign: 'center', color: 'white' }}
+              style={{ textAlign: 'center', color: '#ca222a' }}
             >
               Recently Added Products
             </Typography>
@@ -491,15 +426,81 @@ export default function ProductScreen(props) {
               <Image
                 key={prod._id}
                 alt="Hamed Abdallah Brand"
-                src={`/uploads/products/${prod.images[0]}`}
-                width={300}
-                height={300}
+                src={prod.featuredImage}
+                width={200}
+                height={200}
                 className={Styles.thumbnail}
               />
             </Button>
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />
+      </div>
+      <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" />
+      <div className={Styles.reviews_base}>
+        <div className={Styles.reviews}>
+          <HamedAbdallahWhiteSpace />
+          <Typography variant="h4" component="h4">
+            User Reviews
+          </Typography>
+          <br></br>
+          {reviews.length > 0 &&
+            reviews.map((review) => (
+              <div className={Styles.review}>
+                <Typography variant="body1" component="body1">
+                  {review.review}
+                </Typography>
+                <hr className={Styles.hrReview}></hr>
+                <RatingView
+                  // onClick={ratingHandler}
+                  ratingValue={review.rating} /* Rating Props */
+                />
+
+                <Typography variant="span" component="h6">
+                  Review by: {review.user.name}
+                  <br></br>
+                  <Moment format="dddd DD/MM/YYYY hh:ss">
+                    {review.createdAt}
+                  </Moment>
+                </Typography>
+              </div>
+            ))}
+          <hr></hr>
+          <form>
+            <List>
+              <ListItem>
+                <TextField
+                  variant="filled"
+                  fullWidth
+                  onChange={(e) => setReview(e.target.value)}
+                  id="review"
+                  label="Review"
+                  rows={5}
+                  multiline
+                  inputProps={{ maxLength: 500, type: 'text' }}
+                ></TextField>
+              </ListItem>
+              <ListItem>
+                <Rating
+                  onClick={ratingHandler}
+                  ratingValue={rating} /* Rating Props */
+                />
+              </ListItem>
+              <ListItem>
+                {/* Add your own review */}
+                {/* <br></br> */}
+                <Button
+                  variant="contained"
+                  className={Styles.reviewBtn}
+                  onClick={submitReviewHandler}
+                >
+                  Add Review
+                </Button>
+              </ListItem>
+            </List>
+          </form>
+          <HamedAbdallahWhiteSpace />
+        </div>
       </div>
     </div>
   );

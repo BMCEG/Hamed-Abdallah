@@ -81,7 +81,7 @@ export default function BrandScreen(props) {
       field: '_id',
       render: (rowData) => (
         <img
-          src={`/uploads/products/${rowData.images[0]}`}
+          src={rowData.featuredImage}
           style={{ width: 250, borderRadius: '10%' }}
         />
       ),
@@ -163,7 +163,7 @@ export default function BrandScreen(props) {
                 <Image
                   className={Styles.featuredImage}
                   alt={brand.name}
-                  src={`/uploads/${brand.logo}`}
+                  src={brand.logo}
                   width={350}
                   height={350}
                 />

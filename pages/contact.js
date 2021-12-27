@@ -254,243 +254,250 @@ export default function Contact() {
           </List>
         </form>
         <HamedAbdallahWhiteSpace />
-        <div className={Styles.locationImgBase} id="branches">
-          <Image
-            alt="Hamed Abdallah Stores"
-            src="/locations.png"
-            width={1000}
-            height={1000}
-            className={Styles.locationImg}
-          />
-        </div>
-        <HamedAbdallahWhiteSpace />
-        <div className={Styles.branches}>
-          <Accordion className={Styles.accordion}>
-            <AccordionSummary
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              className={Styles.accordionSummary}
-            >
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.accordionTitle}
-                style={{ color: 'white' }}
-              >
-                Cairo
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails className={Styles.accordionDetails}>
-              <Grid container spacing={1}>
-                <Grid className={Styles.storeInfo} item md={4} xs={12}>
-                  <Typography variant="h4" component="h4">
-                    NEW CAIRO
+        <Grid container spacing={4}>
+          <Grid item md={5} sm={12}>
+            {' '}
+            <div className={Styles.locationImgBase} id="branches">
+              <Image
+                alt="Hamed Abdallah Stores"
+                src="/locations.png"
+                width={1000}
+                height={1000}
+                className={Styles.locationImg}
+              />
+            </div>
+          </Grid>
+          <Grid item md={7} sm={12}>
+            <div className={Styles.branches}>
+              <Accordion className={Styles.accordion}>
+                <AccordionSummary
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  className={Styles.accordionSummary}
+                >
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.accordionTitle}
+                    style={{ color: 'white' }}
+                  >
+                    Cairo
                   </Typography>
-                  <Typography variant="h5" component="h5">
-                    Cairo Festival City
+                </AccordionSummary>
+                <AccordionDetails className={Styles.accordionDetails}>
+                  <Grid container spacing={1}>
+                    <Grid className={Styles.storeInfo} item md={4} xs={12}>
+                      <Typography variant="h4" component="h4">
+                        NEW CAIRO
+                      </Typography>
+                      <Typography variant="h5" component="h5">
+                        Cairo Festival City
+                      </Typography>
+                      <Typography variant="h6" component="h6">
+                        011-2629-4516
+                      </Typography>
+                    </Grid>
+                    <Grid item md={8} xs={12}>
+                      <div>
+                        <iframe
+                          width="100%"
+                          height="300"
+                          frameBorder="0"
+                          scrolling="no"
+                          marginHeight="0"
+                          marginWidth="0"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                        ></iframe>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+              <br></br>{' '}
+              <Accordion className={Styles.accordion}>
+                <AccordionSummary
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  className={Styles.accordionSummary}
+                >
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.accordionTitle}
+                    style={{ color: 'white' }}
+                  >
+                    Cairo
                   </Typography>
-                  <Typography variant="h6" component="h6">
-                    011-2629-4516
+                </AccordionSummary>
+                <AccordionDetails className={Styles.accordionDetails}>
+                  <Grid container spacing={1}>
+                    <Grid className={Styles.storeInfo} item md={4} xs={12}>
+                      <Typography variant="h4" component="h4">
+                        NEW CAIRO
+                      </Typography>
+                      <Typography variant="h5" component="h5">
+                        Cairo Festival City
+                      </Typography>
+                      <Typography variant="h6" component="h6">
+                        011-2629-4516
+                      </Typography>
+                    </Grid>
+                    <Grid item md={8} xs={12}>
+                      <div>
+                        <iframe
+                          width="100%"
+                          height="300"
+                          frameBorder="0"
+                          scrolling="no"
+                          marginHeight="0"
+                          marginWidth="0"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                        ></iframe>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+              <br></br>{' '}
+              <Accordion className={Styles.accordion}>
+                <AccordionSummary
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  className={Styles.accordionSummary}
+                >
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.accordionTitle}
+                    style={{ color: 'white' }}
+                  >
+                    Cairo
                   </Typography>
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <div>
-                    <iframe
-                      width="100%"
-                      height="300"
-                      frameBorder="0"
-                      scrolling="no"
-                      marginHeight="0"
-                      marginWidth="0"
-                      src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
-                  </div>
-                </Grid>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-          <br></br>{' '}
-          <Accordion className={Styles.accordion}>
-            <AccordionSummary
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              className={Styles.accordionSummary}
-            >
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.accordionTitle}
-                style={{ color: 'white' }}
-              >
-                Cairo
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails className={Styles.accordionDetails}>
-              <Grid container spacing={1}>
-                <Grid className={Styles.storeInfo} item md={4} xs={12}>
-                  <Typography variant="h4" component="h4">
-                    NEW CAIRO
+                </AccordionSummary>
+                <AccordionDetails className={Styles.accordionDetails}>
+                  <Grid container spacing={1}>
+                    <Grid className={Styles.storeInfo} item md={4} xs={12}>
+                      <Typography variant="h4" component="h4">
+                        NEW CAIRO
+                      </Typography>
+                      <Typography variant="h5" component="h5">
+                        Cairo Festival City
+                      </Typography>
+                      <Typography variant="h6" component="h6">
+                        011-2629-4516
+                      </Typography>
+                    </Grid>
+                    <Grid item md={8} xs={12}>
+                      <div>
+                        <iframe
+                          width="100%"
+                          height="300"
+                          frameBorder="0"
+                          scrolling="no"
+                          marginHeight="0"
+                          marginWidth="0"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                        ></iframe>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+              <br></br>{' '}
+              <Accordion className={Styles.accordion}>
+                <AccordionSummary
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  className={Styles.accordionSummary}
+                >
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.accordionTitle}
+                    style={{ color: 'white' }}
+                  >
+                    Cairo
                   </Typography>
-                  <Typography variant="h5" component="h5">
-                    Cairo Festival City
+                </AccordionSummary>
+                <AccordionDetails className={Styles.accordionDetails}>
+                  <Grid container spacing={1}>
+                    <Grid className={Styles.storeInfo} item md={4} xs={12}>
+                      <Typography variant="h4" component="h4">
+                        NEW CAIRO
+                      </Typography>
+                      <Typography variant="h5" component="h5">
+                        Cairo Festival City
+                      </Typography>
+                      <Typography variant="h6" component="h6">
+                        011-2629-4516
+                      </Typography>
+                    </Grid>
+                    <Grid item md={8} xs={12}>
+                      <div>
+                        <iframe
+                          width="100%"
+                          height="300"
+                          frameBorder="0"
+                          scrolling="no"
+                          marginHeight="0"
+                          marginWidth="0"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                        ></iframe>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+              <br></br>{' '}
+              <Accordion className={Styles.accordion}>
+                <AccordionSummary
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                  className={Styles.accordionSummary}
+                >
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.accordionTitle}
+                    style={{ color: 'white' }}
+                  >
+                    Cairo
                   </Typography>
-                  <Typography variant="h6" component="h6">
-                    011-2629-4516
-                  </Typography>
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <div>
-                    <iframe
-                      width="100%"
-                      height="300"
-                      frameBorder="0"
-                      scrolling="no"
-                      marginHeight="0"
-                      marginWidth="0"
-                      src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
-                  </div>
-                </Grid>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-          <br></br>{' '}
-          <Accordion className={Styles.accordion}>
-            <AccordionSummary
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              className={Styles.accordionSummary}
-            >
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.accordionTitle}
-                style={{ color: 'white' }}
-              >
-                Cairo
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails className={Styles.accordionDetails}>
-              <Grid container spacing={1}>
-                <Grid className={Styles.storeInfo} item md={4} xs={12}>
-                  <Typography variant="h4" component="h4">
-                    NEW CAIRO
-                  </Typography>
-                  <Typography variant="h5" component="h5">
-                    Cairo Festival City
-                  </Typography>
-                  <Typography variant="h6" component="h6">
-                    011-2629-4516
-                  </Typography>
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <div>
-                    <iframe
-                      width="100%"
-                      height="300"
-                      frameBorder="0"
-                      scrolling="no"
-                      marginHeight="0"
-                      marginWidth="0"
-                      src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
-                  </div>
-                </Grid>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-          <br></br>{' '}
-          <Accordion className={Styles.accordion}>
-            <AccordionSummary
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              className={Styles.accordionSummary}
-            >
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.accordionTitle}
-                style={{ color: 'white' }}
-              >
-                Cairo
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails className={Styles.accordionDetails}>
-              <Grid container spacing={1}>
-                <Grid className={Styles.storeInfo} item md={4} xs={12}>
-                  <Typography variant="h4" component="h4">
-                    NEW CAIRO
-                  </Typography>
-                  <Typography variant="h5" component="h5">
-                    Cairo Festival City
-                  </Typography>
-                  <Typography variant="h6" component="h6">
-                    011-2629-4516
-                  </Typography>
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <div>
-                    <iframe
-                      width="100%"
-                      height="300"
-                      frameBorder="0"
-                      scrolling="no"
-                      marginHeight="0"
-                      marginWidth="0"
-                      src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
-                  </div>
-                </Grid>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-          <br></br>{' '}
-          <Accordion className={Styles.accordion}>
-            <AccordionSummary
-              aria-controls="panel1a-content"
-              id="panel1a-header"
-              className={Styles.accordionSummary}
-            >
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.accordionTitle}
-                style={{ color: 'white' }}
-              >
-                Cairo
-              </Typography>
-            </AccordionSummary>
-            <AccordionDetails className={Styles.accordionDetails}>
-              <Grid container spacing={1}>
-                <Grid className={Styles.storeInfo} item md={4} xs={12}>
-                  <Typography variant="h4" component="h4">
-                    NEW CAIRO
-                  </Typography>
-                  <Typography variant="h5" component="h5">
-                    Cairo Festival City
-                  </Typography>
-                  <Typography variant="h6" component="h6">
-                    011-2629-4516
-                  </Typography>
-                </Grid>
-                <Grid item md={8} xs={12}>
-                  <div>
-                    <iframe
-                      width="100%"
-                      height="300"
-                      frameBorder="0"
-                      scrolling="no"
-                      marginHeight="0"
-                      marginWidth="0"
-                      src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
-                  </div>
-                </Grid>
-              </Grid>
-            </AccordionDetails>
-          </Accordion>
-          <br></br>
-        </div>
+                </AccordionSummary>
+                <AccordionDetails className={Styles.accordionDetails}>
+                  <Grid container spacing={1}>
+                    <Grid className={Styles.storeInfo} item md={4} xs={12}>
+                      <Typography variant="h4" component="h4">
+                        NEW CAIRO
+                      </Typography>
+                      <Typography variant="h5" component="h5">
+                        Cairo Festival City
+                      </Typography>
+                      <Typography variant="h6" component="h6">
+                        011-2629-4516
+                      </Typography>
+                    </Grid>
+                    <Grid item md={8} xs={12}>
+                      <div>
+                        <iframe
+                          width="100%"
+                          height="300"
+                          frameBorder="0"
+                          scrolling="no"
+                          marginHeight="0"
+                          marginWidth="0"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                        ></iframe>
+                      </div>
+                    </Grid>
+                  </Grid>
+                </AccordionDetails>
+              </Accordion>
+              <br></br>
+            </div>
+          </Grid>
+        </Grid>
+
         <HamedAbdallahWhiteSpace />
       </div>
     </div>

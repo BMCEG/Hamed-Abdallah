@@ -123,7 +123,7 @@ function PlaceOrder() {
                               >
                                 <Image
                                   className={Styles.product_image}
-                                  src={`/uploads/${item.featuredImage}`}
+                                  src={`${item.featuredImage}`}
                                   alt={item.name}
                                   width={50}
                                   height={50}
@@ -160,9 +160,14 @@ function PlaceOrder() {
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  {shippingAddress.fullName}, {shippingAddress.address},{' '}
-                  {shippingAddress.city}, {shippingAddress.postalCode},{' '}
-                  {shippingAddress.phone}{' '}
+                  {shippingAddress.fullName},<br></br>
+                  {shippingAddress.phone}
+                  <br></br>
+                  {shippingAddress.address1}, {shippingAddress.address2},
+                  <br></br>
+                  {shippingAddress.landmark}, <br></br>
+                  {shippingAddress.city}, <br></br>
+                  {shippingAddress.postalCode}
                 </ListItem>
               </List>
             </Card>

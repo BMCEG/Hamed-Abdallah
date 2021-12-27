@@ -129,8 +129,9 @@ export default function ProductScreen(props) {
 
   const productImages = [];
   product.images.map((img) => {
-    productImages.push({ source: `/uploads/products/${img}` });
+    productImages.push({ source: `${img}` });
   });
+  console.log(productImages);
 
   return (
     <div className={Styles.root}>
@@ -142,10 +143,11 @@ export default function ProductScreen(props) {
               Featured Image:
             </Typography>
             <div className={Styles.featuredImageTile}>
+              {/* <h2>{product.featuredImage}</h2> */}
               <Image
                 className={Styles.featuredImage}
                 alt={product.name}
-                src={`/uploads/${product.featuredImage}`}
+                src={product.featuredImage}
                 width={'1000'}
                 height={'1000'}
               />
@@ -157,10 +159,11 @@ export default function ProductScreen(props) {
             <div className={Styles.otherImages}>
               {productImages.map((img) => (
                 <div className={Styles.otherImageTile}>
+                  {/* <h2>{img.source}</h2> */}
                   <Image
                     className={Styles.featuredImage}
-                    alt={img.source}
-                    src={`${img.source}`}
+                    alt={img}
+                    src={img.source}
                     width="500"
                     height="300"
                   />

@@ -3,8 +3,14 @@
   width: 75%;
   margin: auto;
 }
+.reviews_base {
+  background-color: #ca222a;
+  padding: 3%;
+  margin-top: -2%;
+}
 .reviews {
   margin: auto;
+  color: white !important;
   width: 75%;
 }
 .productInfo {
@@ -17,7 +23,8 @@
 }
 
 .relatedItems {
-  background-color: #ca222a;
+  background-color: white;
+  /* background-color: #ca222a; */
   padding: 3%;
   margin-top: -2%;
 }
@@ -31,10 +38,12 @@
   background-color: whitesmoke;
   padding: 2vmin;
   margin: 2vmin;
+  color: black !important;
   border-radius: 10px;
 }
 .thumbnail {
   background-color: white;
+  border: 1px solid black !important;
   /* border-radius: 5%; */
   transition: all ease-in-out 0.2s;
   object-fit: contain !important;
@@ -56,6 +65,14 @@
   /* width: 20vmin !important; */
   border-radius: 10px !important;
   color: white !important;
+  font-size: 22px !important;
+  /* box-shadow: 1px 1px 10px black !important; */
+}
+.reviewBtn {
+  background-color: white !important;
+  /* width: 20vmin !important; */
+  border-radius: 10px !important;
+  color: #ca222a !important;
   font-size: 22px !important;
   /* box-shadow: 1px 1px 10px black !important; */
 }
@@ -118,7 +135,7 @@
   justify-content: center;
 }
 .hor {
-  border-top: 3px solid white !important;
+  border-top: 3px solid #ca222a !important;
   border-radius: 0px;
 }
 .wishlist_icon {

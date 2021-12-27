@@ -268,13 +268,6 @@ export default function BrandScreen(props) {
                     </Card>
                   </ListItem>
                 </List>
-                {/* <Image
-                  className={Styles.featuredImage}
-                  alt={brand.name}
-                  src={`/uploads/${brand.logo}`}
-                  width={350}
-                  height={350}
-                /> */}
               </Grid>
               <Grid item md={8} xs={12}>
                 <TableContainer>
@@ -296,7 +289,7 @@ export default function BrandScreen(props) {
                               href={`/product/${item.slug}`}
                             >
                               <Image
-                                src={`/uploads/${item.featuredImage}`}
+                                src={`${item.featuredImage}`}
                                 alt={item.name}
                                 width={152.5}
                                 height={87.5}

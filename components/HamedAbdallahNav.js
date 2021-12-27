@@ -71,7 +71,7 @@ const HamedAbdallahNav = () => {
           <Button color="inherit" href="/about">
             About
           </Button>
-          <Button color="inherit" href="/shop">
+          <Button className={Styles.shopBtn} color="inherit" href="/shop">
             Shop
           </Button>
           <Button color="inherit" href="/contact">

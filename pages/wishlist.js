@@ -195,7 +195,7 @@ function Wishlist() {
                                       <Link>
                                         <Image
                                           alt={item.name}
-                                          src={`/uploads/products/${item.images[0]}`}
+                                          src={item.featuredImage}
                                           width={152.5}
                                           height={87.5}
                                           className={Styles.productImg}

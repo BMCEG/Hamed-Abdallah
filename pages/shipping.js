@@ -36,16 +36,34 @@ export default function Shipping() {
       router.push('/login?redirect=/shipping');
     }
     setValue('fullName', shippingAddress.fullName);
-    setValue('address', shippingAddress.address);
+    setValue('address1', shippingAddress.address1);
+    setValue('address2', shippingAddress.address2);
+    setValue('landmark', shippingAddress.landmark);
     setValue('city', shippingAddress.city);
     setValue('postalCode', shippingAddress.postalCode);
     setValue('phone', shippingAddress.phone);
   }, []);
 
-  const submitHandler = ({ fullName, address, city, postalCode, phone }) => {
+  const submitHandler = ({
+    fullName,
+    address1,
+    address2,
+    landmark,
+    city,
+    postalCode,
+    phone,
+  }) => {
     dispatch({
       type: 'SAVE_SHIPPING_ADDRESS',
-      payload: { fullName, address, city, postalCode, phone },
+      payload: {
+        fullName,
+        address1,
+        address2,
+        landmark,
+        city,
+        postalCode,
+        phone,
+      },
     });
     router.push('/payment');
   };
@@ -94,7 +112,7 @@ export default function Shipping() {
 
           <ListItem>
             <Controller
-              name="address"
+              name="address1"
               control={control}
               defaultValue=""
               rules={{
@@ -106,13 +124,75 @@ export default function Shipping() {
                 <TextField
                   variant="outlined"
                   fullWidth
-                  id="address"
-                  label="Address"
+                  id="address1"
+                  label="Address Line 1"
                   inputProps={{ type: 'text' }}
-                  error={Boolean(errors.address)}
+                  error={Boolean(errors.address1)}
                   helperText={
-                    errors.address
-                      ? errors.address.type === 'minLength'
+                    errors.address1
+                      ? errors.address1.type === 'minLength'
+                        ? 'Address has to be more than 1 character'
+                        : 'Address is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+          <ListItem>
+            <Controller
+              name="address2"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: true,
+                minLength: 2,
+                // pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="address2"
+                  label="Address Line 2"
+                  inputProps={{ type: 'text' }}
+                  error={Boolean(errors.address2)}
+                  helperText={
+                    errors.address2
+                      ? errors.address2.type === 'minLength'
+                        ? 'Address has to be more than 1 character'
+                        : 'Address is required'
+                      : ''
+                  }
+                  {...field}
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+          <ListItem>
+            <Controller
+              name="landmark"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: true,
+                minLength: 2,
+                // pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              }}
+              render={({ field }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  multiline
+                  rows={3}
+                  id="landmark"
+                  label="Nearby Landmark"
+                  inputProps={{ type: 'text' }}
+                  error={Boolean(errors.landmark)}
+                  helperText={
+                    errors.landmark
+                      ? errors.landmark.type === 'minLength'
                         ? 'Address has to be more than 1 character'
                         : 'Address is required'
                       : ''

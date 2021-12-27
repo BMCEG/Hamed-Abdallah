@@ -142,7 +142,7 @@ function Reviews() {
                                   <Link>
                                     <Image
                                       alt={review.product.name}
-                                      src={`/uploads/products/${review.product.images[0]}`}
+                                      src={review.product.featuredImage}
                                       width={152.5}
                                       height={87.5}
                                       className={Styles.productImg}

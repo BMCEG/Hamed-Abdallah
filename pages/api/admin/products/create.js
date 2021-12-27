@@ -14,6 +14,7 @@ const handler = nc({
 // handler.use(isAuth);
 
 handler.post(async (req, res) => {
+  console.log(req.body);
   const {
     name,
     description,

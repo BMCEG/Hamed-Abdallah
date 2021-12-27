@@ -35,3 +35,6 @@
 .createModalTitle {
   text-align: center !important;
 }
+.logo_image {
+  object-fit: contain;
+}

@@ -32,7 +32,6 @@ const apiRoute = nextConnect({
     res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
   },
 });
-
 apiRoute.use(upload.any('images'));
 
 apiRoute.post((req, res) => {

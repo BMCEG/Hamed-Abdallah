@@ -28,7 +28,7 @@ export default function Payment() {
     cart: { shippingAddress },
   } = state;
   useEffect(() => {
-    if (!shippingAddress.address) {
+    if (!shippingAddress.address1) {
       router.push('/shipping');
     } else {
       setPaymentMethod(Cookies.get('paymentMethod') || '');

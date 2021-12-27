@@ -42,7 +42,7 @@
   display: flex;
   flex-direction: column;
   justify-content: end;
-  opacity: 0 !important;
+  opacity: 1 !important;
 }
 .block_title {
   text-align: right;
@@ -50,6 +50,7 @@
   z-index: 5;
   font-size: 50px !important;
   padding: 2vmin;
+  text-decoration: none !important;
   text-shadow: 1px 1px 1px black;
 }
 
@@ -70,8 +71,11 @@
 .block:hover .block__img {
   filter: brightness(65%);
 }
-.block:hover .block_caption {
-  opacity: 1 !important; /* transform: rotate(-3deg) !important; */
+.block:hover .block_title {
+  text-decoration: underline !important;
+
+  /* opacity: 1 !important; */
+  /* transform: rotate(-3deg) !important; */
 }
 .block__img {
   /* background-color: coral; */

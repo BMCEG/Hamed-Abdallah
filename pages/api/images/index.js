@@ -1,5 +1,12 @@
 import nextConnect from 'next-connect';
 import multer from 'multer';
+import aws from 'aws-sdk';
+
+const s3 = new aws.S3({
+  endpoint: 'fra1.digitaloceanspaces.com',
+  accessKeyId: process.env.SPACES_ACCESS_KEY,
+  secretAccessKey: process.env.SPACES_SECRET_KEY,
+});
 
 export const config = {
   api: {
@@ -7,18 +14,18 @@ export const config = {
   },
 };
 
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: `./public/uploads`,
-    filename: (req, file, cb) => {
-      const newFileName = `${Date.now()}_${file.originalname.replace(
-        /\s+/g,
-        '-'
-      )}`;
-      cb(null, newFileName);
-    },
-  }),
-});
+const upload = s3.upload(
+  {
+    Bucket: 'images-upload',
+    ACL: 'public-read', // Specify whether anyone with link can access the file
+    Key: `${fields.id}/${files.file.name}`, // Specify folder and file name
+    Body: file,
+  },
+  {
+    partSize: 10 * 1024 * 1024,
+    queueSize: 10,
+  }
+);
 
 const apiRoute = nextConnect({
   onError(error, req, res) {

@@ -71,8 +71,8 @@ export default function Home() {
           src="/Our-Stores.png"
           className={styles.ourStores__img}
           alt="Hamed Abdallah Stores"
-          width={850}
-          height={850}
+          width={650}
+          height={650}
         />
         <br></br>
         <HamedAbdallahButton text="Branches" href="/contact#branches" />

@@ -21,7 +21,15 @@ const orderSchema = mongoose.Schema(
         type: String,
         required: true,
       },
-      address: {
+      address1: {
+        type: String,
+        required: true,
+      },
+      address2: {
+        type: String,
+        required: true,
+      },
+      landmark: {
         type: String,
         required: true,
       },
@@ -47,6 +55,14 @@ const orderSchema = mongoose.Schema(
       required: true,
     },
     shippingPrice: {
+      type: Number,
+      required: true,
+    },
+    vat: {
+      type: Number,
+      required: true,
+    },
+    discountedPrice: {
       type: Number,
       required: true,
     },

@@ -36,6 +36,12 @@
 .sliderContainer {
   /* background-color: yellow; */
 }
+.productPane {
+  padding-left: 3vmin !important;
+  padding-right: 3vmin !important;
+  height: 100vh;
+  overflow-y: scroll;
+}
 .brands {
   width: 75% !important;
   margin: auto !important;

@@ -23,11 +23,14 @@ import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Brand from '../../models/Brand';
 import { Controller, useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 
 function AdminBrands(props) {
   const [isOpened, setIsOpened] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [logoImage, setLogoImage] = useState();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
   const {
     handleSubmit,
     control,
@@ -42,8 +45,9 @@ function AdminBrands(props) {
       field: 'logo',
       render: (rowData) => (
         <Image
+          className={Styles.logo_image}
           alt={rowData.name}
-          src={`/uploads/${rowData.logo}`}
+          src={rowData.logo}
           width={152.5}
           height={87.5}
         />
@@ -82,28 +86,35 @@ function AdminBrands(props) {
     setIsModalOpen(false);
   };
   const submitHandler = async ({ name, image }) => {
-    const formData = new FormData();
-    formData.append('name', name);
-    formData.append('image', logoImage);
+    closeSnackbar();
 
-    const img = await axios.post('/api/images', formData, {
+    const formData = new FormData();
+    formData.append('id', 'brands');
+    formData.append('file', logoImage);
+
+    const img = await axios.post('/api/images/index2', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
 
-    console.log('IMAGE', img.data.filename);
+    // console.log('IMAGE', img.data.filename);
     const brand = await axios
       .post(`/api/admin/brands/create`, {
         name,
-        logo: img.data.filename,
+        logo: img.data.url,
       })
       .then((res) => {
-        alert('SUCCESS');
+        enqueueSnackbar(`${name} has been uploaded successfully`, {
+          variant: 'success',
+        });
+
         window.location.reload();
       })
       .catch((err) => {
-        alert(err);
+        enqueueSnackbar(err, {
+          variant: 'error',
+        });
       });
   };
 

@@ -1329,7 +1329,7 @@ const shop = (props) => {
               </Accordion>
             </Grid>
           )}
-          <Grid item md={9} xs={12} id="eyewear">
+          <Grid item md={9} xs={12} id="eyewear" className={Styles.productPane}>
             <Grid container spacing={3}>
               {products.map((product) => (
                 <Grid item md={4} sm={6} xs={12} key={product.name}>
@@ -1340,7 +1340,7 @@ const shop = (props) => {
                           <CardMedia
                             className={Styles.card}
                             component="img"
-                            image={`/uploads/${product.featuredImage}`}
+                            image={product.featuredImage}
                             title={product.name}
                           ></CardMedia>
                           <CardContent>
@@ -1402,33 +1402,7 @@ const shop = (props) => {
         <br></br>
       </div>
       <HamedAbdallahWhiteSpace />
-      {/* <div className={Styles.brandsCarousel}>
-        <Carousel
-          breakPoints={[
-            { width: 1, itemsToShow: 1 },
-            { width: 500, itemsToShow: 2 },
-            { width: 768, itemsToShow: 3 },
-            { width: 1200, itemsToShow: 4 },
-          ]}
-          enableMouseSwipe={true}
-          enableAutoPlay={true}
-          disableArrowsOnEnd={true}
-          className={Styles.brands}
-          pagination={false}
-          transitionMs={2000}
-        >
-          {brands.map((brand) => (
-            <Image
-              key={brand.name}
-              alt="Hamed Abdallah Brand"
-              src={`/uploads/${brand.logo}`}
-              width={75}
-              height={75}
-            />
-          ))}
-        </Carousel>
-      </div> */}
-      <HamedAbdallahWhiteSpace />
+      {/* <HamedAbdallahWhiteSpace /> */}
     </>
   );
 };

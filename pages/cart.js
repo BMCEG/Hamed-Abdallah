@@ -102,7 +102,7 @@ function Cart() {
                             >
                               <Image
                                 className={Styles.product_image}
-                                src={`/uploads/${item.featuredImage}`}
+                                src={`${item.featuredImage}`}
                                 alt={item.name}
                                 width={50}
                                 height={50}

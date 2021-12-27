@@ -178,7 +178,7 @@ function Order({ params }) {
                                   href={`/product/${item.slug}`}
                                 >
                                   <Image
-                                    src={`/uploads/${item.featuredImage}"`}
+                                    src={item.featuredImage}
                                     alt={item.name}
                                     width={50}
                                     height={50}

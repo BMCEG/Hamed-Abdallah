@@ -1,22 +1,14 @@
-.container {
-  background-color: darkred !important;
-  width: 100%;
-  padding: 1rem;
-}
-
 .nav {
   box-shadow: none !important;
   background-color: #ca222a !important;
   width: 100%;
   padding: 1rem;
 }
-
-.nav Button {
-  /* text-decoration: wavy !important; */
-  /* background-color: royalblue !important; */
-  /* width: 10% !important; */
+.container {
+  background-color: darkred !important;
+  width: 100%;
+  padding: 1rem;
 }
-
 .toolbar {
   width: 85%;
   margin: auto;
@@ -31,6 +23,13 @@
   color: white !important;
   justify-content: space-between !important;
 }
-.mobNavRight {
-  /* background-color: tomato; */
+.shopBtn {
+  background-color: #ca222a !important;
+  height: 70px;
+  width: 70px;
+  font-size: 10px !important;
+  border-radius: 100% !important;
+  transform: scale(2.5);
+  border: 1px white solid !important;
+  z-index: 10;
 }

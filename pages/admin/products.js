@@ -13,6 +13,7 @@ import {
   FormControlLabel,
   Switch,
   InputLabel,
+  CircularProgress,
 } from '@material-ui/core';
 import React, { useState } from 'react';
 import Styles from '../../styles/pages/admin/dashboard.module.css';
@@ -27,6 +28,7 @@ import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Moment from 'react-moment';
 import { Controller, useForm } from 'react-hook-form';
+import { useSnackbar } from 'notistack';
 import Brand from '../../models/Brand';
 import { HamedAbdallahAdminDrawer } from '../../components';
 function AdminProducts(props) {
@@ -41,6 +43,8 @@ function AdminProducts(props) {
   const [prodMaterial, setProdMaterial] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [featuredImage, setfeaturedImage] = useState();
+  const [loadingState, setLoadingState] = useState(false);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const { products, brands } = props;
   const {
@@ -58,7 +62,7 @@ function AdminProducts(props) {
       field: '_id',
       render: (rowData) => (
         <img
-          src={`/uploads/products/${rowData.images[0]}`}
+          src={rowData.featuredImage}
           style={{ width: 250, borderRadius: '10%' }}
         />
       ),
@@ -114,37 +118,36 @@ function AdminProducts(props) {
     sku,
     status,
   }) => {
+    closeSnackbar();
+    setLoadingState(true);
+
     const formData = new FormData();
     for (var i = 0; i < images.length; i++) {
-      formData.append('images', images[i]);
+      formData.append('files', images[i]);
+      formData.append('id', slug);
     }
     formData.append('productName', 'LMAO');
 
-    let imagesArr = [];
-
     const otherFormData = new FormData();
-    otherFormData.append('image', featuredImage);
+    otherFormData.append('file', featuredImage);
+    otherFormData.append('id', slug);
 
-    const featuredImg = await axios.post('/api/images', otherFormData, {
+    const featuredImg = await axios.post('/api/images/index2', otherFormData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
     });
 
-    await axios
-      .post('/api/images/multiple', formData, {
+    let otherImagesUrls = [];
+    const imagesArr = await axios
+      .post('/api/images/multiple2', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       })
       .then((res) => {
-        for (let i = 0; i < res.data.filename.length; i++) {
-          let x = res.data.filename[i].filename;
-          imagesArr.push(x);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+        otherImagesUrls = res.data;
+        console.log('res.data', res.data);
       });
 
     const product = await axios
@@ -160,13 +163,16 @@ function AdminProducts(props) {
         material: prodMaterial,
         type: prodType,
         stock,
-        featuredImage: featuredImg.data.filename,
+        featuredImage: featuredImg.data.url,
         price,
         status: prodStatus,
-        images: imagesArr,
+        images: otherImagesUrls.imagesArr,
       })
       .then((res) => {
-        alert('SUCCESS');
+        enqueueSnackbar(`${name} has been uploaded successfully`, {
+          variant: 'success',
+        });
+        setLoadingState(false);
         window.location.reload();
       })
       .catch((err) => {
@@ -494,7 +500,7 @@ function AdminProducts(props) {
             <br></br>
             <div className={Styles.createModalTitle}>
               <Button variant="contained" type="submit">
-                Add Product
+                {loadingState ? <CircularProgress /> : `Add Product`}{' '}
               </Button>
             </div>
           </form>
