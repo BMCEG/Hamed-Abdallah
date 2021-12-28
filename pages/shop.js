@@ -216,12 +216,14 @@ const shop = (props) => {
           src="/shop-hero.png"
           alt="placeholder"
           width={1980}
+          priority={true}
           height={800}
         />
         <Image
           src="/wave-red-top.png"
           alt="placeholder"
           width={1980}
+          priority={true}
           height={250}
         />
       </div>

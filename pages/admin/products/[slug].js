@@ -47,7 +47,6 @@ export default function ProductScreen(props) {
     );
   }
   const fileInput = React.useRef();
-  console.log('HF', fileInput);
   const filesInput = React.useRef();
 
   const [editedName, setEditedName] = useState(product.name);
@@ -149,6 +148,7 @@ export default function ProductScreen(props) {
                 alt={product.name}
                 src={product.featuredImage}
                 width={'1000'}
+                priority={true}
                 height={'1000'}
               />
             </div>
@@ -166,6 +166,7 @@ export default function ProductScreen(props) {
                     src={img.source}
                     width="500"
                     height="300"
+                    priority={true}
                   />
                 </div>
               ))}

@@ -5,7 +5,10 @@ const withCSS = require('@zeit/next-css');
 
 module.exports = {
   webpack5: false,
-  images: { domains: ['images-uploads.fra1.digitaloceanspaces.com'] },
+  images: {
+    minimumCacheTTL: 31536000,
+    domains: ['images-uploads.fra1.digitaloceanspaces.com'],
+  },
   env: {
     SPACES_ACCESS_KEY: 'I64WKTBWCDOCRZJ4E2LV',
     SPACES_SECRET_KEY: 'PPMIlXcD0iwPnSYnQBWA+yNTUOSe0JfnRdAf0fgygFk',

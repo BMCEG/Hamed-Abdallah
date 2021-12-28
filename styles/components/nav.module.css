@@ -29,7 +29,22 @@
   width: 70px;
   font-size: 10px !important;
   border-radius: 100% !important;
-  transform: scale(2.5);
+  transform: scale(2);
   border: 1px white solid !important;
   z-index: 10;
+  transition: all ease-in-out 0.2s;
+}
+.shopBtn:hover {
+  background-color: white !important;
+  color: #ca222a !important;
+}
+@media (min-width: 1300px) {
+  .shopBtn {
+    transform: scale(3.5);
+  }
+}
+@media (min-width: 1150px) {
+  .shopBtn {
+    transform: scale(2.5);
+  }
 }

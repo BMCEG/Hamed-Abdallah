@@ -147,3 +147,15 @@
   justify-content: space-between;
   height: 10vh;
 }
+.authHeader {
+  color: #ca222a;
+  text-transform: capitalize;
+  font-weight: bolder !important;
+  margin-left: 1.5vmin !important;
+  /* font-size: sm; */
+  font-size: 20px !important;
+}
+.inlineList {
+  color: #ca222a;
+  display: flex;
+}

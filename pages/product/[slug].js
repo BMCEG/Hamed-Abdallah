@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Store } from '../../utils/Store';
 import db from '../../utils/db';
 import Product from '../../models/Product';
+import Brand from '../../models/Brand';
 import User from '../../models/User';
 import { ReactPhotoCollage } from 'react-photo-collage';
 import Carousel from 'react-elastic-carousel';
@@ -30,7 +31,10 @@ import Review from '../../models/Reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faShoppingBag,
+  faCertificate,
   faHeart as faHeartOutlined,
+  faWrench,
+  faHandshake,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
@@ -162,6 +166,7 @@ export default function ProductScreen(props) {
                     alt="image"
                     src={product.featuredImage}
                     height={500}
+                    priority={true}
                     onClick={() =>
                       pickFeaturedImageHandler(`${product.featuredImage}`)
                     }
@@ -170,6 +175,7 @@ export default function ProductScreen(props) {
                   />
                   {productImages.map((image) => (
                     <Image
+                      priority={true}
                       alt="image"
                       src={`${image.source}`}
                       height={500}
@@ -194,6 +200,7 @@ export default function ProductScreen(props) {
                   alt="image"
                   src={featuredImage}
                   height={500}
+                  priority={true}
                   width={500}
                   className={Styles.product_image}
                 />
@@ -202,6 +209,7 @@ export default function ProductScreen(props) {
                     alt="image"
                     src={`${product.featuredImage}`}
                     height={500}
+                    priority={true}
                     onClick={() =>
                       pickFeaturedImageHandler(`${product.featuredImage}`)
                     }
@@ -212,6 +220,7 @@ export default function ProductScreen(props) {
                     <Image
                       alt="image"
                       src={`${image.source}`}
+                      priority={true}
                       height={500}
                       width={500}
                       onClick={() =>
@@ -248,7 +257,26 @@ export default function ProductScreen(props) {
               <ListItem>
                 <Typography>{product.description}</Typography>
               </ListItem>
-              <br></br>
+              <hr></hr>
+              <ListItem className={Styles.inlineList}>
+                <FontAwesomeIcon size="2x" icon={faCertificate} />
+                <Typography className={Styles.authHeader}>
+                  100% AUTHENTIC
+                </Typography>
+              </ListItem>
+              <ListItem className={Styles.inlineList}>
+                <FontAwesomeIcon size="2x" icon={faWrench} />
+                <Typography className={Styles.authHeader}>
+                  One Year Warranty
+                </Typography>
+              </ListItem>
+              <ListItem className={Styles.inlineList}>
+                <FontAwesomeIcon size="2x" icon={faHandshake} />
+                <Typography className={Styles.authHeader}>
+                  Trusted Since 1911
+                </Typography>
+              </ListItem>
+              {/* <br></br> */}
               <br></br>
               <ListItem>
                 <Typography variant="h3" component="h3">
@@ -366,6 +394,7 @@ export default function ProductScreen(props) {
               <Image
                 key={prod._id}
                 alt="Hamed Abdallah Brand"
+                priority={true}
                 src={prod.featuredImage}
                 width={200}
                 height={200}
@@ -428,6 +457,7 @@ export default function ProductScreen(props) {
                 alt="Hamed Abdallah Brand"
                 src={prod.featuredImage}
                 width={200}
+                priority={true}
                 height={200}
                 className={Styles.thumbnail}
               />
@@ -436,7 +466,13 @@ export default function ProductScreen(props) {
         </Carousel>
         <HamedAbdallahWhiteSpace />
       </div>
-      <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" />
+      <Image
+        src="/wave-red-bottom.png"
+        alt="ds"
+        priority={true}
+        width="1980"
+        height="250"
+      />
       <div className={Styles.reviews_base}>
         <div className={Styles.reviews}>
           <HamedAbdallahWhiteSpace />
@@ -511,7 +547,9 @@ export async function getServerSideProps(context) {
   const { slug } = params;
   let props = {};
   await db.connect();
-  const rawProduct = await Product.findOne({ slug }).lean();
+  const rawProduct = await Product.findOne({ slug })
+    .lean()
+    .populate({ path: 'brand', Model: Brand });
   const product = JSON.parse(JSON.stringify(rawProduct));
   const productsByBrand = await Product.find({ brand: rawProduct.brand._id });
   const rawFilteredProductsByBrand = productsByBrand.filter((prod) => {
@@ -540,7 +578,6 @@ export async function getServerSideProps(context) {
 
     const rawUser = await User.findById({ _id: cookies._id }).lean();
     const user = JSON.parse(JSON.stringify(rawUser));
-
     const isWishlistedProp = user.wishlist.includes(product._id);
     props.isWishlistedProp = isWishlistedProp;
   }

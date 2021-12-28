@@ -25,16 +25,25 @@
 }
 .createModal {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60%;
+  /* top: 100%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  width: 90%;
   padding: 2vmin !important;
   background-color: white;
+  overflow-y: scroll !important;
 }
 .createModalTitle {
   text-align: center !important;
 }
 .logo_image {
   object-fit: contain;
+}
+.modal {
+  max-height: 90vh;
+  /* max-width: 90vw; */
+  overflow-y: scroll;
+  margin: auto;
+  display: flex;
+  justify-content: center;
 }
