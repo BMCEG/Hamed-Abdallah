@@ -436,7 +436,7 @@ export default function ProductScreen(props) {
               component="h4"
               style={{ textAlign: 'center', color: '#ca222a' }}
             >
-              Recently Added Products
+              You May Also Like
             </Typography>
           ) : (
             <Typography
@@ -444,7 +444,7 @@ export default function ProductScreen(props) {
               component="body1"
               style={{ textAlign: 'center', color: '#ca222a' }}
             >
-              Recently Added Products
+              You May Also Like
             </Typography>
           )}
           <div className={Styles.hr__base}>
