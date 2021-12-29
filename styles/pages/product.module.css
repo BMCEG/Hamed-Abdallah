@@ -139,3 +139,6 @@
   color: #ca222a;
   display: flex;
 }
+.lineThrough {
+  text-decoration: line-through #ca222a;
+}

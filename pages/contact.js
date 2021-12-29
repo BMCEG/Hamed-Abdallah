@@ -69,11 +69,13 @@ export default function Contact() {
           src="/contact-hero.png"
           alt="placeholder"
           width={1980}
+          priority={true}
           height={800}
         />
         <Image
           src="/wave-red-top.png"
           alt="placeholder"
+          priority={true}
           width={1980}
           height={250}
         />
@@ -262,6 +264,7 @@ export default function Contact() {
                 alt="Hamed Abdallah Stores"
                 src="/locations.png"
                 width={1000}
+                priority={true}
                 height={1000}
                 className={Styles.locationImg}
               />

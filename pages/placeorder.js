@@ -41,8 +41,18 @@ function PlaceOrder() {
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
   );
+  const netPrice = round2(
+    cartItems.reduce(
+      (a, c) => a + (c.price - c.discountedPrice) * c.quantity,
+      0
+    )
+  );
+  const discountedPrice = round2(
+    cartItems.reduce((a, c) => a + c.discountedPrice * c.quantity, 0)
+  );
+  const vat = round2(itemsPrice * 0.14);
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
-  const totalPrice = round2(itemsPrice + shippingPrice);
+  const totalPrice = round2(netPrice + shippingPrice + vat);
 
   useEffect(() => {
     if (!paymentMethod) {
@@ -65,7 +75,9 @@ function PlaceOrder() {
           shippingAddress,
           paymentMethod,
           itemsPrice,
+          discountValue: discountedPrice,
           shippingPrice,
+          vat,
           totalPrice,
         },
         {
@@ -141,9 +153,16 @@ function PlaceOrder() {
                             <TableCell align="right">
                               <Typography>{item.quantity}</Typography>
                             </TableCell>
-                            <TableCell align="right">
-                              <Typography>L.E. {item.price}</Typography>
-                            </TableCell>
+                            {item.discountedPrice === 0 ? (
+                              <TableCell align="right">{item.price}</TableCell>
+                            ) : (
+                              <TableCell align="right">
+                                <div className={Styles.lineThrough}>
+                                  {item.price}
+                                </div>{' '}
+                                {item.price - item.discountedPrice} EGP
+                              </TableCell>
+                            )}
                           </TableRow>
                         ))}
                       </TableBody>
@@ -188,6 +207,7 @@ function PlaceOrder() {
                 <ListItem>
                   <Typography variant="h5">Order Summary</Typography>
                 </ListItem>
+                <hr></hr>
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
@@ -201,10 +221,34 @@ function PlaceOrder() {
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
+                      <Typography>Discoutned:</Typography>
+                    </Grid>{' '}
+                    <Grid item xs={6}>
+                      <Typography align="right">
+                        <strong style={{ color: '#ca222a' }}>
+                          -{discountedPrice} EGP
+                        </strong>
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>{' '}
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
                       <Typography>Shipping:</Typography>
                     </Grid>{' '}
                     <Grid item xs={6}>
                       <Typography align="right">{shippingPrice} EGP</Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>{' '}
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={6}>
+                      <Typography>VAT:</Typography>
+                    </Grid>{' '}
+                    <Grid item xs={6}>
+                      <Typography align="right">{vat} EGP</Typography>
                     </Grid>
                   </Grid>
                 </ListItem>

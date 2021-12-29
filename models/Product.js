@@ -74,6 +74,7 @@ const productSchema = mongoose.Schema(
     },
     discountedPrice: {
       type: Number,
+      default: 0,
     },
     avgRating: {
       type: Number,

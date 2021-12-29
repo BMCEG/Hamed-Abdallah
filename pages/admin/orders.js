@@ -40,7 +40,9 @@ function AdminOrders(props) {
     { title: 'Shipping Address', field: 'shippingAddress.address' },
     { title: 'Shipping Phone', field: 'shippingAddress.phone' },
     { title: 'Items Price', field: 'itemsPrice', type: 'numeric' },
+    { title: 'Discount Value', field: 'discountValue', type: 'numeric' },
     { title: 'Shipping Price', field: 'shippingPrice', type: 'numeric' },
+    { title: 'VAT', field: 'vat', type: 'numeric' },
     { title: 'Total Price', field: 'totalPrice', type: 'numeric' },
     { title: 'Is Paid', field: 'isPaid', type: 'boolean' },
     {

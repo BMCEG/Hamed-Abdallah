@@ -19,6 +19,7 @@ export default function About() {
               alt="Hamed Abdallah Optics"
               src="/about-us-penguin.png"
               width={650}
+              priority={true}
               height={740}
             />
           </Grid>

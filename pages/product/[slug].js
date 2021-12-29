@@ -35,6 +35,7 @@ import {
   faHeart as faHeartOutlined,
   faWrench,
   faHandshake,
+  faGlasses,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
@@ -261,13 +262,20 @@ export default function ProductScreen(props) {
               <ListItem className={Styles.inlineList}>
                 <FontAwesomeIcon size="2x" icon={faCertificate} />
                 <Typography className={Styles.authHeader}>
-                  100% AUTHENTIC
+                  100% Authentic
                 </Typography>
               </ListItem>
               <ListItem className={Styles.inlineList}>
                 <FontAwesomeIcon size="2x" icon={faWrench} />
                 <Typography className={Styles.authHeader}>
                   One Year Warranty
+                </Typography>
+              </ListItem>{' '}
+              <ListItem className={Styles.inlineList}>
+                <FontAwesomeIcon size="2x" icon={faGlasses} />
+                <Typography className={Styles.authHeader}>
+                  The specialized technical team will contact you to complete
+                  the lens test procedure
                 </Typography>
               </ListItem>
               <ListItem className={Styles.inlineList}>
@@ -279,9 +287,22 @@ export default function ProductScreen(props) {
               {/* <br></br> */}
               <br></br>
               <ListItem>
-                <Typography variant="h3" component="h3">
-                  <strong>{product.price} EGP</strong>
-                </Typography>
+                {product.discountedPrice === 0 ? (
+                  <Typography variant="h3" component="h3">
+                    <strong>{product.price} EGP</strong>
+                  </Typography>
+                ) : (
+                  <div style={{ display: 'flex' }}>
+                    <Typography variant="h4" component="h4">
+                      <div className={Styles.lineThrough}>{product.price}</div>
+                    </Typography>
+                    <Typography variant="h4" component="h4">
+                      <strong>
+                        {product.price - product.discountedPrice} EGP
+                      </strong>
+                    </Typography>
+                  </div>
+                )}
               </ListItem>
               <ListItem>
                 <Grid container>

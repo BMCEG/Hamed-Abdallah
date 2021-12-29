@@ -305,7 +305,16 @@ export default function BrandScreen(props) {
                             </Button>
                           </TableCell>
                           <TableCell align="right">{item.quantity}</TableCell>
-                          <TableCell align="right">{item.price} EGP</TableCell>
+                          {item.discountedPrice === 0 ? (
+                            <TableCell align="right">{item.price}</TableCell>
+                          ) : (
+                            <TableCell align="right">
+                              <div className={Styles.lineThrough}>
+                                {item.price}
+                              </div>{' '}
+                              {item.price - item.discountedPrice} EGP
+                            </TableCell>
+                          )}
                         </TableRow>
                       ))}
                     </TableBody>

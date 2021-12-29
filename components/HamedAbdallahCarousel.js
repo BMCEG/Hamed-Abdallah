@@ -11,17 +11,16 @@ const HamedAbdallahCarousel = () => {
           backgroundImage: `url('/top-Slide-Background.png')`,
           backgroundSize: '100%',
           backgroundRepeat: 'no-repeat',
-          // backgroundColor: 'red',
         }}
         className={Styles.container}
         touch={true}
-        // wrap={false}s
         indicators={false}
       >
         <Carousel.Item>
           <Image
             alt="Hamed Abdallah Optics"
             src="/Stone1.png"
+            priority={true}
             width={1920}
             height={800}
           />
@@ -30,6 +29,7 @@ const HamedAbdallahCarousel = () => {
           <Image
             alt="Hamed Abdallah Optics"
             src="/Stone2.png"
+            priority={true}
             width={1920}
             height={800}
           />
@@ -38,6 +38,7 @@ const HamedAbdallahCarousel = () => {
           <Image
             alt="Hamed Abdallah Optics"
             src="/Stone3.png"
+            priority={true}
             width={1920}
             height={800}
           />

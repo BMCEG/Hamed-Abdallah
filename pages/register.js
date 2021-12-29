@@ -38,7 +38,9 @@ export default function Register() {
     closeSnackbar();
 
     if (password !== passwordConfirm) {
-      alert('Please make sure both passwords match');
+      enqueueSnackbar(`Please make sure both passwords match`, {
+        variant: 'error',
+      });
       return;
     }
     try {

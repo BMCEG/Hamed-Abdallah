@@ -61,6 +61,7 @@ function Cart() {
                 alt="Hamed Abdallah Cart"
                 src={`/Empty-Cart.png`}
                 width={350}
+                priority={true}
                 height={350}
               />
               <Typography
@@ -131,7 +132,16 @@ function Cart() {
                               ))}
                             </Select>
                           </TableCell>
-                          <TableCell align="right">L.E. {item.price}</TableCell>
+                          {item.discountedPrice === 0 ? (
+                            <TableCell align="right">{item.price}</TableCell>
+                          ) : (
+                            <TableCell align="right">
+                              <div className={Styles.lineThrough}>
+                                {item.price}
+                              </div>{' '}
+                              {item.price - item.discountedPrice} EGP
+                            </TableCell>
+                          )}
                           <TableCell align="right">
                             <Button
                               variant="contained"
@@ -155,11 +165,47 @@ function Cart() {
                       <Typography variant="h5">
                         Subtotal (
                         {cartItems.reduce((a, c) => a + c.quantity, 0)} items) :
-                        L.E{' '}
-                        {cartItems.reduce(
-                          (a, c) => a + c.quantity * c.price,
-                          0
-                        )}
+                        <hr></hr>
+                        {/* <br></br> */}
+                        <Typography variant="body1" component="body1">
+                          <span style={{ display: 'flex' }}>
+                            Original Price:
+                            <div className={Styles.lineThrough}>
+                              {cartItems.reduce(
+                                (a, c) => a + c.quantity * c.price,
+                                0
+                              )}{' '}
+                              EGP
+                            </div>
+                          </span>
+                        </Typography>
+                        <Typography variant="body1" component="body1">
+                          <span style={{ display: 'flex' }}>
+                            Discounted Price:
+                            {/* <strong> */}
+                            {cartItems.reduce(
+                              (a, c) => a + c.quantity * c.discountedPrice,
+                              0
+                            )}{' '}
+                            EGP
+                            {/* </strong> */}
+                          </span>
+                        </Typography>
+                        <hr></hr>
+                        <Typography variant="h6" component="h6">
+                          <span style={{ display: 'flex' }}>
+                            Net Price:
+                            <strong>
+                              {cartItems.reduce(
+                                (a, c) =>
+                                  a +
+                                  c.quantity * (c.price - c.discountedPrice),
+                                0
+                              )}{' '}
+                              EGP
+                            </strong>
+                          </span>
+                        </Typography>
                       </Typography>
                     </ListItem>
                     <ListItem>

@@ -14,7 +14,6 @@ const handler = nc({
 // handler.use(isAuth);
 
 handler.post(async (req, res) => {
-  console.log(req.body);
   const {
     name,
     description,
@@ -29,6 +28,7 @@ handler.post(async (req, res) => {
     type,
     stock,
     price,
+    discountedPrice,
     status,
     images,
   } = req.body;
@@ -53,6 +53,7 @@ handler.post(async (req, res) => {
       type,
       stock,
       price,
+      discountedPrice,
       status,
       images,
     });

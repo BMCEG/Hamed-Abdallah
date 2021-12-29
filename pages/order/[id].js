@@ -63,6 +63,8 @@ function Order({ params }) {
     paymentMethod,
     orderItems,
     itemsPrice,
+    discountValue,
+    vat,
     shippingPrice,
     totalPrice,
     isPaid,
@@ -71,7 +73,7 @@ function Order({ params }) {
     isDelivered,
     deliveredAt,
   } = order;
-  console.log('HELLO', orderItems);
+
   useEffect(() => {
     if (!userInfo) {
       router.push('/login');
@@ -196,9 +198,18 @@ function Order({ params }) {
                               <TableCell align="right">
                                 <Typography>{item.quantity}</Typography>
                               </TableCell>
-                              <TableCell align="right">
-                                <Typography>L.E. {item.price}</Typography>
-                              </TableCell>
+                              {item.discountedPrice === 0 ? (
+                                <TableCell align="right">
+                                  {item.price}
+                                </TableCell>
+                              ) : (
+                                <TableCell align="right">
+                                  <div className={Styles.lineThrough}>
+                                    {item.price}
+                                  </div>{' '}
+                                  {item.price - item.discountedPrice} EGP
+                                </TableCell>
+                              )}{' '}
                             </TableRow>
                           ))}
                         </TableBody>
@@ -247,6 +258,7 @@ function Order({ params }) {
                   <ListItem>
                     <Typography variant="h5">Order Summary</Typography>
                   </ListItem>
+                  <hr></hr>
                   <ListItem>
                     <Grid container>
                       <Grid item xs={6}>
@@ -260,12 +272,36 @@ function Order({ params }) {
                   <ListItem>
                     <Grid container>
                       <Grid item xs={6}>
+                        <Typography>Discoutned:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">
+                          <strong style={{ color: '#ca222a' }}>
+                            -{discountValue} EGP
+                          </strong>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
                         <Typography>Shipping:</Typography>
                       </Grid>{' '}
                       <Grid item xs={6}>
                         <Typography align="right">
                           {shippingPrice} EGP
                         </Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <Typography>VAT:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">{vat} EGP</Typography>
                       </Grid>
                     </Grid>
                   </ListItem>

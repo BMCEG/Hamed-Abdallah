@@ -234,20 +234,86 @@ const shop = (props) => {
           alt="placeholder"
           width={1980}
           priority={true}
-          height={800}
+          height={350}
+          objectFit="cover"
         />
         <Image
           src="/wave-red-top.png"
           alt="placeholder"
           width={1980}
           priority={true}
-          height={250}
+          height={100}
         />
       </div>
       <div className={Styles.container}>
         <HamedAbdallahWhiteSpace />
-        <br></br>
-
+        <div className={Styles.genderBalls}>
+          <div className={Styles.ballBlock}>
+            <a href="/shop?gender=female#eyewear">
+              <div
+                className={Styles.genderBall}
+                style={{
+                  backgroundImage: `url('/female-eyewear.jpg')`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                }}
+              ></div>
+            </a>
+            <br></br>
+            <Typography
+              variant="h3"
+              component="h3"
+              className={Styles.ballTitle}
+            >
+              For <strong>Her</strong>
+            </Typography>
+          </div>
+          <div className={Styles.ballBlock}>
+            <a href="/shop?gender=male#eyewear">
+              <div
+                className={Styles.genderBall}
+                style={{
+                  backgroundImage: `url('/male-eyewear.jpg')`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                }}
+              ></div>
+            </a>
+            <br></br>
+            <Typography
+              variant="h3"
+              component="h3"
+              className={Styles.ballTitle}
+            >
+              For <strong>Him</strong>
+            </Typography>
+          </div>
+          <div className={Styles.ballBlock}>
+            <a href={`/shop?gender=boys&gender=girls#eyewear`}>
+              <div
+                className={Styles.genderBall}
+                style={{
+                  backgroundImage: `url('/kids_eyewear.jpeg')`,
+                  backgroundSize: 'contain',
+                  backgroundRepeat: 'no-repeat',
+                  backgroundPosition: 'center',
+                }}
+              ></div>
+            </a>
+            <br></br>
+            <Typography
+              variant="h3"
+              component="h3"
+              className={Styles.ballTitle}
+            >
+              For <strong>Kids</strong>
+            </Typography>
+          </div>
+        </div>
+        <HamedAbdallahWhiteSpace />
+        <HamedAbdallahWhiteSpace />
         <Grid container spacing={2}>
           {matches ? (
             <Grid item md={3} xs={12}>
@@ -1322,9 +1388,21 @@ const shop = (props) => {
                     </NextLink>
                     <br></br>
                     <CardActions className={Styles.cardAction}>
-                      <Typography>
-                        <strong>L.E {product.price}</strong>
-                      </Typography>
+                      {product.discountedPrice === 0 ||
+                      !product.discountedPrice ? (
+                        <Typography>
+                          <strong>{product.price} EGP</strong>
+                        </Typography>
+                      ) : (
+                        <Typography style={{ display: 'flex' }}>
+                          <div className={Styles.lineThrough}>
+                            {product.price}
+                          </div>
+                          <strong>
+                            {product.price - product.discountedPrice} EGP
+                          </strong>
+                        </Typography>
+                      )}
                       <Button
                         size="small"
                         onClick={() => addToCartHandler(product)}
@@ -1370,14 +1448,14 @@ export async function getServerSideProps({ query }) {
   let maxPrice = Math.max.apply(
     Math,
     products.map(function (o) {
-      return o.price;
+      return o.price - o.discountedPrice;
     })
   );
 
   let minPrice = Math.min.apply(
     Math,
     products.map(function (o) {
-      return o.price;
+      return o.price - o.discountedPrice;
     })
   );
 
@@ -1392,7 +1470,10 @@ export async function getServerSideProps({ query }) {
     const priceArr = price.split(',');
 
     products = products.filter((product) => {
-      return product.price >= priceArr[0] && product.price <= priceArr[1];
+      return (
+        product.price - product.discountedPrice >= priceArr[0] &&
+        product.price - product.discountedPrice <= priceArr[1]
+      );
     });
   }
   if (type) {
@@ -1430,6 +1511,12 @@ export async function getServerSideProps({ query }) {
       }
     });
   }
+
+  products = products.sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
 
   const allProducts = JSON.parse(JSON.stringify(products));
 

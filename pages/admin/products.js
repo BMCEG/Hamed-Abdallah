@@ -72,6 +72,7 @@ function AdminProducts(props) {
     { title: 'Type', field: 'type' },
     { title: 'Stock', field: 'stock', type: 'numeric' },
     { title: 'Price', field: 'price', type: 'numeric' },
+    { title: 'Discoutned Price', field: 'discountedPrice', type: 'numeric' },
     {
       title: 'Date Added',
       field: 'createdAt',
@@ -115,11 +116,23 @@ function AdminProducts(props) {
     slug,
     stock,
     price,
+    discountedPrice,
     sku,
     status,
   }) => {
     closeSnackbar();
     setLoadingState(true);
+    console.log(discountedPrice);
+    console.log(price);
+    if (discountedPrice > price) {
+      enqueueSnackbar(
+        `Discoutned Price can't be larger than price (${discountedPrice} > ${price})`,
+        {
+          variant: 'error',
+        }
+      );
+      return;
+    }
 
     const formData = new FormData();
     for (var i = 0; i < images.length; i++) {
@@ -165,6 +178,7 @@ function AdminProducts(props) {
         stock,
         featuredImage: featuredImg.data.url,
         price,
+        discountedPrice,
         status: prodStatus,
         images: otherImagesUrls.imagesArr,
       })
@@ -468,6 +482,24 @@ function AdminProducts(props) {
                       ></TextField>
                     )}
                   ></Controller>
+                </ListItem>{' '}
+                <ListItem>
+                  <Controller
+                    name="discountedPrice"
+                    control={control}
+                    defaultValue={0}
+                    render={({ field }) => (
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id="discountedPrice"
+                        placeholder="Leave empty for no discount on this product"
+                        label="Discount Value"
+                        inputProps={{ type: 'number' }}
+                        {...field}
+                      ></TextField>
+                    )}
+                  ></Controller>
                 </ListItem>
                 <ListItem>
                   <Controller
@@ -527,6 +559,11 @@ export async function getServerSideProps({ query }) {
   let products = await Product.find({}).lean();
   let brands = await Brand.find({}).lean();
 
+  products = products.sort(function (a, b) {
+    // Turn your strings into dates, and then subtract them
+    // to get a value that is either negative, positive, or zero.
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
   const allProducts = JSON.parse(JSON.stringify(products));
   const allBrands = JSON.parse(JSON.stringify(brands));
   await db.disconnect();

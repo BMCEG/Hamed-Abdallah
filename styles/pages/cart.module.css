@@ -22,6 +22,9 @@
 
 .grid__container {
 }
+.lineThrough {
+  text-decoration: line-through #ca222a;
+}
 
 .section {
   margin: 1rem;

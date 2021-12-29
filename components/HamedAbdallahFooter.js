@@ -17,6 +17,7 @@ const HamedAbdallahFooter = () => {
               src="/Hamed-logo-Fullcolor.png"
               width={200}
               height={200}
+              priority={true}
               className={Styles.footer__logo}
             />
             {/* </div> */}
@@ -113,6 +114,7 @@ const HamedAbdallahFooter = () => {
                 src="/Hamed-logo-Fullcolor.png"
                 width={152.5}
                 height={87.5}
+                priority={true}
               />
             </div>
             <br></br>

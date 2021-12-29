@@ -206,7 +206,18 @@ function Wishlist() {
                                   </TableCell>
                                   <TableCell>{item.name}</TableCell>
                                   <TableCell>{item.brand.name}</TableCell>
-                                  <TableCell>{item.price}</TableCell>
+                                  {item.discountedPrice === 0 ? (
+                                    <TableCell align="right">
+                                      {item.price}
+                                    </TableCell>
+                                  ) : (
+                                    <TableCell align="right">
+                                      <div className={Styles.lineThrough}>
+                                        {item.price}
+                                      </div>{' '}
+                                      {item.price - item.discountedPrice} EGP
+                                    </TableCell>
+                                  )}{' '}
                                   <TableCell>
                                     <Button
                                       className={Styles.btnBack}
