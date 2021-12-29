@@ -53,9 +53,6 @@ const shop = (props) => {
   const { userInfo } = state;
 
   const { products, queryFilterProp, brands, maxPrice, minPrice } = props;
-  console.log('=================================');
-  console.log(products);
-  console.log('=================================');
   const [queryFilter, setQueryFilter] = useState({
     type: queryFilterProp.type || [],
     gender: queryFilterProp.gender || [],
@@ -142,23 +139,16 @@ const shop = (props) => {
         ...queryFilter,
         [queryName]: [...queryFilter[queryName], queryValue],
       });
-      console.log('QUERYFILTER', queryFilter);
     } else {
-      console.log('queryFilter', queryFilter);
       let updated;
 
       if (Array.isArray(queryFilter[queryName])) {
-        console.log('queryFilter[queryName]', queryFilter[queryName]);
         updated = queryFilter[queryName].filter((element) => {
-          console.log(element);
           return element !== queryValue;
         });
-        console.log('updated', updated);
       } else {
         updated = '';
       }
-
-      console.log('queryFilter 2', queryFilter);
 
       setQueryFilter({ ...queryFilter, [queryName]: updated });
     }
@@ -347,6 +337,7 @@ const shop = (props) => {
                         <FormGroup>
                           {brands.map((brand) => (
                             <FormControlLabel
+                              key={brand.name}
                               control={
                                 <Checkbox
                                   style={{ color: '#ca222a' }}
@@ -392,6 +383,7 @@ const shop = (props) => {
                         <FormGroup>
                           {colors.map((color) => (
                             <FormControlLabel
+                              key={color}
                               control={
                                 <Checkbox
                                   style={{ color: '#ca222a' }}
@@ -728,6 +720,7 @@ const shop = (props) => {
                         <FormGroup>
                           {shapes.map((shape) => (
                             <FormControlLabel
+                              key={shape}
                               control={
                                 <Checkbox
                                   style={{ color: '#ca222a' }}
@@ -900,6 +893,7 @@ const shop = (props) => {
                               <FormGroup>
                                 {colors.map((color) => (
                                   <FormControlLabel
+                                    key={color}
                                     control={
                                       <Checkbox
                                         style={{ color: '#ca222a' }}
@@ -1244,6 +1238,7 @@ const shop = (props) => {
                               <FormGroup>
                                 {shapes.map((shape) => (
                                   <FormControlLabel
+                                    key={shape}
                                     control={
                                       <Checkbox
                                         style={{ color: '#ca222a' }}
@@ -1291,7 +1286,7 @@ const shop = (props) => {
           <Grid item md={9} xs={12} id="eyewear" className={Styles.productPane}>
             <Grid container spacing={3}>
               {products.map((product) => (
-                <Grid item md={4} sm={6} xs={12} key={product.name}>
+                <Grid item md={4} sm={6} xs={12} key={product.sku}>
                   <Card>
                     <NextLink href={`/product/${product.slug}`} passHref>
                       <Link>
@@ -1369,7 +1364,6 @@ export async function getServerSideProps({ query }) {
   await db.connect();
 
   const { type, gender, material, shape, brand, price, color } = query;
-  console.log(query);
 
   let products = await Product.find({}).lean();
 
@@ -1389,7 +1383,6 @@ export async function getServerSideProps({ query }) {
 
   if (brand) {
     products = products.filter((product) => {
-      console.log(product.brandName);
       {
         return product.brandName === brand;
       }
@@ -1439,7 +1432,6 @@ export async function getServerSideProps({ query }) {
   }
 
   const allProducts = JSON.parse(JSON.stringify(products));
-  console.log(allProducts);
 
   let brands = await Brand.find({}).lean();
   const allBrands = JSON.parse(JSON.stringify(brands));

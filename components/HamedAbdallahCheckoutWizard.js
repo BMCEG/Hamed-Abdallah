@@ -1,9 +1,9 @@
 import { Stepper, Step, StepLabel } from '@material-ui/core';
 import React from 'react';
 import Styles from '../styles/components/checkoutWizard.module.css';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 
-const muiTheme = createMuiTheme({
+const muiTheme = createTheme({
   overrides: {
     MuiStepIcon: {
       root: {
