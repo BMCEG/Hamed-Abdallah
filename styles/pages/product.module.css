@@ -14,26 +14,19 @@
   width: 75%;
 }
 .productInfo {
-  /* padding: 1% !important; */
-  /* background-color: lightpink; */
-
   display: flex;
   flex-direction: column;
   justify-content: space-around;
 }
-
 .relatedItems {
   background-color: white;
-  /* background-color: #ca222a; */
   padding: 3%;
   margin-top: -2%;
 }
-
 .relatedCarousel {
   width: 85% !important;
   margin: auto !important;
 }
-
 .review {
   background-color: whitesmoke;
   padding: 2vmin;
@@ -44,7 +37,6 @@
 .thumbnail {
   background-color: white;
   border: 1px solid black !important;
-  /* border-radius: 5%; */
   transition: all ease-in-out 0.2s;
   object-fit: contain !important;
 }
@@ -62,19 +54,15 @@
 }
 .button {
   background-color: #ca222a !important;
-  /* width: 20vmin !important; */
   border-radius: 10px !important;
   color: white !important;
   font-size: 22px !important;
-  /* box-shadow: 1px 1px 10px black !important; */
 }
 .reviewBtn {
   background-color: white !important;
-  /* width: 20vmin !important; */
   border-radius: 10px !important;
   color: #ca222a !important;
   font-size: 22px !important;
-  /* box-shadow: 1px 1px 10px black !important; */
 }
 .root {
   background-color: white !important;
@@ -85,13 +73,11 @@
 }
 .product_image {
   object-fit: contain !important;
-  /* border: 1px solid black !important; */
   transition: all ease-in-out 0.2s;
 }
 .product_image_mob {
   object-fit: contain !important;
   padding: 1vmin !important;
-  /* border: 1px solid black !important; */
   transition: all ease-in-out 0.2s;
 }
 .product_image:hover {
@@ -101,15 +87,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  /* background-color: saddlebrown; */
   height: 100%;
 }
 .product_images_base {
-  /* background-color: yellow; */
   height: 100%;
 }
 .featuredImage {
-  /* border: 1px solid black !important; */
   animation: fadeIn 1s !important;
 }
 @keyframes fadeIn {
@@ -120,7 +103,6 @@
     opacity: 1;
   }
 }
-
 .ourBrands__header {
   display: flex;
   justify-content: space-evenly;
@@ -142,7 +124,6 @@
   animation: fadeIn 0.5s;
 }
 .product_images_inline {
-  /* background-color: tomato; */
   display: flex;
   justify-content: space-between;
   height: 10vh;
@@ -152,7 +133,6 @@
   text-transform: capitalize;
   font-weight: bolder !important;
   margin-left: 1.5vmin !important;
-  /* font-size: sm; */
   font-size: 20px !important;
 }
 .inlineList {

@@ -65,13 +65,20 @@ export default function Home() {
         </p>
       </div>
       <HamedAbdallahWhiteSpace />
-      <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" />
+      <Image
+        src="/wave-red-bottom.png"
+        priority={true}
+        alt="ds"
+        width="1980"
+        height="250"
+      />
       <div className={styles.ourStores}>
         <Image
           src="/Our-Stores.png"
           className={styles.ourStores__img}
           alt="Hamed Abdallah Stores"
           width={650}
+          priority={true}
           height={650}
         />
         <br></br>
@@ -99,6 +106,7 @@ export default function Home() {
             alt="Hamed Abdallah Brands"
             width={1000}
             height={500}
+            priority={true}
           />
         </div>
         <HamedAbdallahWhiteSpace />

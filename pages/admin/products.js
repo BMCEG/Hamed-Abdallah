@@ -328,8 +328,17 @@ function AdminProducts(props) {
                       select
                       onChange={(e) => setProdColor(e.target.value)}
                     >
+                      <MenuItem value="beige">Beige</MenuItem>
                       <MenuItem value="black">Black</MenuItem>
+                      <MenuItem value="blue">Blue</MenuItem>
+                      <MenuItem value="gold">Gold</MenuItem>
                       <MenuItem value="grey">Grey</MenuItem>
+                      <MenuItem value="light-blue">Light Blue</MenuItem>
+                      <MenuItem value="pink">Pink</MenuItem>
+                      <MenuItem value="purple">Purple</MenuItem>
+                      <MenuItem value="red">Red</MenuItem>
+                      <MenuItem value="silver">Silver</MenuItem>
+                      <MenuItem value="white">White</MenuItem>
                       <MenuItem value="yellow">Yellow</MenuItem>
                       <MenuItem value="other">Other</MenuItem>
                     </TextField>
@@ -343,10 +352,11 @@ function AdminProducts(props) {
                       select
                       onChange={(e) => setProdShape(e.target.value)}
                     >
+                      <MenuItem value="cat-eye">Cat-Eye</MenuItem>
+                      <MenuItem value="oval">Oval</MenuItem>
+                      <MenuItem value="rectangle">Rectangle</MenuItem>
                       <MenuItem value="round">Round</MenuItem>
                       <MenuItem value="square">Square</MenuItem>
-                      <MenuItem value="cat-eye">Cat-Eye</MenuItem>
-                      <MenuItem value="rectangle">Rectangle</MenuItem>
                       <MenuItem value="other">Other</MenuItem>
                     </TextField>
                   </ListItem>

@@ -53,12 +53,16 @@ const shop = (props) => {
   const { userInfo } = state;
 
   const { products, queryFilterProp, brands, maxPrice, minPrice } = props;
+  console.log('=================================');
+  console.log(products);
+  console.log('=================================');
   const [queryFilter, setQueryFilter] = useState({
     type: queryFilterProp.type || [],
     gender: queryFilterProp.gender || [],
     material: queryFilterProp.material || [],
     shape: queryFilterProp.shape || [],
     brand: queryFilterProp.brand || [],
+    color: queryFilterProp.color || [],
   });
   const [price, setPrice] = useState([minPrice, maxPrice]);
   const [lowPrice, setLowPrice] = useState(minPrice);
@@ -66,6 +70,24 @@ const shop = (props) => {
 
   const [filterAnchor, setFilterAnchor] = useState(false);
   const router = useRouter();
+
+  const colors = [
+    'beige',
+    'black',
+    'blue',
+    'gold',
+    'grey',
+    'light-blue',
+    'pink',
+    'purple',
+    'red',
+    'silver',
+    'white',
+    'yellow',
+    'other',
+  ];
+
+  const shapes = ['cat-eye', 'oval', 'rectangle', 'round', 'square', 'other'];
 
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
@@ -173,6 +195,11 @@ const shop = (props) => {
     if (queryFilter.shape && queryFilter.shape.length > 0) {
       queryFilter.shape.map((param) => {
         queryParams = queryParams.concat(`shape=${param}&`);
+      });
+    }
+    if (queryFilter.color && queryFilter.color.length > 0) {
+      queryFilter.color.map((param) => {
+        queryParams = queryParams.concat(`color=${param}&`);
       });
     }
 
@@ -332,6 +359,49 @@ const shop = (props) => {
                               label={brand.name}
                               name="brand"
                               value={brand.name}
+                              onChange={(e) =>
+                                updateFilterQueryHandler(
+                                  e.target.name,
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                          ))}
+                        </FormGroup>
+                      </AccordionDetails>
+                    </Accordion>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Accordion className={Styles.filterAccordion}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                        className={Styles.filterAccordionName}
+                      >
+                        <Typography
+                          style={{ color: '#ca222a' }}
+                          variant="h6"
+                          component="h6"
+                        >
+                          COLOR
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <FormGroup>
+                          {colors.map((color) => (
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  style={{ color: '#ca222a' }}
+                                  checked={checkboxCheckHandler('color', color)}
+                                />
+                              }
+                              style={{ textTransform: 'capitalize' }}
+                              label={color}
+                              name="color"
+                              value={color}
                               onChange={(e) =>
                                 updateFilterQueryHandler(
                                   e.target.name,
@@ -656,105 +726,27 @@ const shop = (props) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <FormGroup>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'shape',
-                                  'square'
-                                )}
-                              />
-                            }
-                            label="Square"
-                            name="shape"
-                            value="square"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'shape',
-                                  'rectangle'
-                                )}
-                              />
-                            }
-                            label="Rectangle"
-                            name="shape"
-                            value="rectangle"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />{' '}
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler('shape', 'round')}
-                              />
-                            }
-                            label="Round"
-                            name="shape"
-                            value="round"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />{' '}
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler('shape', 'oval')}
-                              />
-                            }
-                            label="Oval"
-                            name="shape"
-                            value="oval"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'shape',
-                                  'cat-eye'
-                                )}
-                              />
-                            }
-                            label="Cat-Eye"
-                            name="shape"
-                            value="cat-eye"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
+                          {shapes.map((shape) => (
+                            <FormControlLabel
+                              control={
+                                <Checkbox
+                                  style={{ color: '#ca222a' }}
+                                  checked={checkboxCheckHandler('shape', shape)}
+                                />
+                              }
+                              style={{ textTransform: 'capitalize' }}
+                              label={shape}
+                              name="shape"
+                              value={shape}
+                              onChange={(e) =>
+                                updateFilterQueryHandler(
+                                  e.target.name,
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                          ))}
                         </FormGroup>
                       </AccordionDetails>
                     </Accordion>
@@ -884,6 +876,52 @@ const shop = (props) => {
                                   }
                                   label="Eye Glasses"
                                 />
+                              </FormGroup>
+                            </AccordionDetails>
+                          </Accordion>
+                        </ListItem>{' '}
+                        <ListItem>
+                          <Accordion className={Styles.filterAccordion}>
+                            <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls="panel1a-content"
+                              id="panel1a-header"
+                              className={Styles.filterAccordionName}
+                            >
+                              <Typography
+                                style={{ color: '#ca222a' }}
+                                variant="h6"
+                                component="h6"
+                              >
+                                COLOR
+                              </Typography>
+                            </AccordionSummary>
+                            <AccordionDetails>
+                              <FormGroup>
+                                {colors.map((color) => (
+                                  <FormControlLabel
+                                    control={
+                                      <Checkbox
+                                        style={{ color: '#ca222a' }}
+                                        checked={checkboxCheckHandler(
+                                          'color',
+                                          color
+                                        )}
+                                      />
+                                    }
+                                    style={{ textTransform: 'capitalize' }}
+                                    label={color}
+                                    name="color"
+                                    value={color}
+                                    onChange={(e) =>
+                                      updateFilterQueryHandler(
+                                        e.target.name,
+                                        e.target.value,
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                ))}
                               </FormGroup>
                             </AccordionDetails>
                           </Accordion>
@@ -1204,111 +1242,30 @@ const shop = (props) => {
                             </AccordionSummary>
                             <AccordionDetails>
                               <FormGroup>
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'shape',
-                                        'square'
-                                      )}
-                                    />
-                                  }
-                                  label="Square"
-                                  name="shape"
-                                  value="square"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'shape',
-                                        'rectangle'
-                                      )}
-                                    />
-                                  }
-                                  label="Rectangle"
-                                  name="shape"
-                                  value="rectangle"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />{' '}
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'shape',
-                                        'round'
-                                      )}
-                                    />
-                                  }
-                                  label="Round"
-                                  name="shape"
-                                  value="round"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />{' '}
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'shape',
-                                        'oval'
-                                      )}
-                                    />
-                                  }
-                                  label="Oval"
-                                  name="shape"
-                                  value="oval"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'shape',
-                                        'cat-eye'
-                                      )}
-                                    />
-                                  }
-                                  label="Cat-Eye"
-                                  name="shape"
-                                  value="cat-eye"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
+                                {shapes.map((shape) => (
+                                  <FormControlLabel
+                                    control={
+                                      <Checkbox
+                                        style={{ color: '#ca222a' }}
+                                        checked={checkboxCheckHandler(
+                                          'shape',
+                                          shape
+                                        )}
+                                      />
+                                    }
+                                    style={{ textTransform: 'capitalize' }}
+                                    label={shape}
+                                    name="shape"
+                                    value={shape}
+                                    onChange={(e) =>
+                                      updateFilterQueryHandler(
+                                        e.target.name,
+                                        e.target.value,
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                ))}
                               </FormGroup>
                             </AccordionDetails>
                           </Accordion>
@@ -1404,7 +1361,6 @@ const shop = (props) => {
         <br></br>
       </div>
       <HamedAbdallahWhiteSpace />
-      {/* <HamedAbdallahWhiteSpace /> */}
     </>
   );
 };
@@ -1412,8 +1368,8 @@ const shop = (props) => {
 export async function getServerSideProps({ query }) {
   await db.connect();
 
-  const { type, gender, material, shape, brand, price } = query;
-  // console.log(price);/
+  const { type, gender, material, shape, brand, price, color } = query;
+  console.log(query);
 
   let products = await Product.find({}).lean();
 
@@ -1433,6 +1389,7 @@ export async function getServerSideProps({ query }) {
 
   if (brand) {
     products = products.filter((product) => {
+      console.log(product.brandName);
       {
         return product.brandName === brand;
       }
@@ -1473,8 +1430,16 @@ export async function getServerSideProps({ query }) {
       }
     });
   }
+  if (color) {
+    products = products.filter((product) => {
+      {
+        return product.color === color;
+      }
+    });
+  }
 
   const allProducts = JSON.parse(JSON.stringify(products));
+  console.log(allProducts);
 
   let brands = await Brand.find({}).lean();
   const allBrands = JSON.parse(JSON.stringify(brands));
