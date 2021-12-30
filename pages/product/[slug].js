@@ -243,7 +243,11 @@ export default function ProductScreen(props) {
                 </Typography>
               </ListItem>
               <ListItem>
-                <RatingView ratingValue={product.avgRating} />
+                {product.avgRating === 0 ? (
+                  <RatingView ratingValue={3} />
+                ) : (
+                  <RatingView ratingValue={product.avgRating} />
+                )}
                 <br></br>
                 <Typography variant="body2" component="body2">
                   Number of Reviews ({product.numOfRatings})
