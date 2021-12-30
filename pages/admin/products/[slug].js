@@ -59,6 +59,9 @@ export default function ProductScreen(props) {
   const [editedGender, setEditedGender] = useState(product.gender);
   const [editedType, setEditedType] = useState(product.type);
   const [editedPrice, setEditedPrice] = useState(product.price);
+  const [editedDiscountedPrice, setEditedDiscountedPrice] = useState(
+    product.discountedPrice
+  );
   const [editedStock, setEditedStock] = useState(product.stock);
   const [editedStatus, setEditedStatus] = useState(product.status);
   const [editedFeaturedImage, setEditedFeaturedImage] = useState();
@@ -90,12 +93,14 @@ export default function ProductScreen(props) {
         return setEditedType(e.target.value);
       case 'editedPrice':
         return setEditedPrice(e.target.value);
+      case 'editedDiscountedPrice':
+        return setEditedDiscountedPrice(e.target.value);
       case 'editedStock':
         return setEditedStock(e.target.value);
       case 'editedStatus':
         return setEditedStatus(e.target.checked);
       case 'editedFeaturedImage':
-        return setEditedStatus(e.target.files[0]);
+        return setEditedFeaturedImage(e.target.files[0]);
     }
   };
 
@@ -114,6 +119,7 @@ export default function ProductScreen(props) {
         editedGender,
         editedType,
         editedPrice,
+        editedDiscountedPrice,
         editedStock,
         editedStatus,
       })
@@ -253,21 +259,20 @@ export default function ProductScreen(props) {
                     fullWidth
                     onChange={changeHandler}
                   >
-                    <MenuItem key="red" value="red">
-                      Red
-                    </MenuItem>
-                    <MenuItem key="black" value="black">
-                      Black
-                    </MenuItem>
-                    <MenuItem key="grey" value="grey">
-                      Grey
-                    </MenuItem>
-                    <MenuItem key="yellow" value="yellow">
-                      Yellow
-                    </MenuItem>
-                    <MenuItem key="other" value="other">
-                      Other
-                    </MenuItem>
+                    <MenuItem value="beige">Beige</MenuItem>
+                    <MenuItem value="black">Black</MenuItem>
+                    <MenuItem value="blue">Blue</MenuItem>
+                    <MenuItem value="brown">Brown</MenuItem>
+                    <MenuItem value="gold">Gold</MenuItem>
+                    <MenuItem value="grey">Grey</MenuItem>
+                    <MenuItem value="light-blue">Light Blue</MenuItem>
+                    <MenuItem value="pink">Pink</MenuItem>
+                    <MenuItem value="purple">Purple</MenuItem>
+                    <MenuItem value="red">Red</MenuItem>
+                    <MenuItem value="silver">Silver</MenuItem>
+                    <MenuItem value="white">White</MenuItem>
+                    <MenuItem value="yellow">Yellow</MenuItem>
+                    <MenuItem value="other">Other</MenuItem>
                   </Select>
                 </Typography>{' '}
                 <Typography
@@ -279,23 +284,14 @@ export default function ProductScreen(props) {
                   <Select
                     value={editedMaterial}
                     variant="filled"
-                    name="editedColor"
+                    name="editedMaterial"
                     fullWidth
                     style={{ width: '90%' }}
                     onChange={changeHandler}
                   >
-                    <MenuItem key="plastic" value="plastic">
-                      Plastic
-                    </MenuItem>
-                    <MenuItem key="Metal" value="metal">
-                      Metal
-                    </MenuItem>
-                    <MenuItem key="titanium" value="titanium">
-                      Titanium
-                    </MenuItem>
-                    <MenuItem key="other" value="other">
-                      Other
-                    </MenuItem>
+                    <MenuItem value="plastic">Plastic</MenuItem>
+                    <MenuItem value="metal">Metal</MenuItem>
+                    <MenuItem value="plastic/metal">Plastic/Metal</MenuItem>
                   </Select>
                 </Typography>{' '}
                 <Typography
@@ -308,28 +304,18 @@ export default function ProductScreen(props) {
                     style={{ width: '90%' }}
                     value={editedShape}
                     variant="filled"
-                    name="editedColor"
+                    name="editedShape"
                     fullWidth
                     onChange={changeHandler}
                   >
-                    <MenuItem key="round" value="round">
-                      Round
-                    </MenuItem>
-                    <MenuItem key="square" value="square">
-                      Square
-                    </MenuItem>
-                    <MenuItem key="cat-eye" value="cat-eye">
-                      Cat-Eye
-                    </MenuItem>
-                    <MenuItem key="square" value="square">
-                      Sqaure
-                    </MenuItem>
-                    <MenuItem key="rectangle" value="rectangle">
-                      Rectangle
-                    </MenuItem>
-                    <MenuItem key="other" value="other">
-                      Other
-                    </MenuItem>
+                    <MenuItem value="cat-eye">Cat-Eye</MenuItem>
+                    <MenuItem value="mask">Mask</MenuItem>
+                    <MenuItem value="oval">Oval</MenuItem>
+                    <MenuItem value="rectangle">Rectangle</MenuItem>
+                    <MenuItem value="round">Round</MenuItem>
+                    <MenuItem value="sport">Sport</MenuItem>
+                    <MenuItem value="square">Square</MenuItem>
+                    <MenuItem value="other">Other</MenuItem>
                   </Select>
                 </Typography>
               </ListItem>
@@ -348,18 +334,10 @@ export default function ProductScreen(props) {
                     fullWidth
                     onChange={changeHandler}
                   >
-                    <MenuItem key="red" value="male">
-                      Male
-                    </MenuItem>
-                    <MenuItem key="black" value="female">
-                      Female
-                    </MenuItem>
-                    <MenuItem key="grey" value="boys">
-                      Boys
-                    </MenuItem>
-                    <MenuItem key="yellow" value="girls">
-                      Girls
-                    </MenuItem>
+                    <MenuItem value="male">Male</MenuItem>
+                    <MenuItem value="female">Female</MenuItem>
+                    <MenuItem value="kids">Kids</MenuItem>
+                    <MenuItem value="unisex">Unisex</MenuItem>
                   </Select>
                 </Typography>{' '}
                 <Typography
@@ -396,7 +374,20 @@ export default function ProductScreen(props) {
                     type="number"
                     onChange={changeHandler}
                   ></TextField>{' '}
+                </Typography>{' '}
+                <Typography variant="h6" component="h6">
+                  Discount Value
+                  <TextField
+                    value={editedDiscountedPrice}
+                    variant="filled"
+                    name="editedDiscountedPrice"
+                    fullWidth
+                    type="number"
+                    onChange={changeHandler}
+                  ></TextField>{' '}
                 </Typography>
+              </ListItem>
+              <ListItem className={Styles.inlineList}>
                 <Typography variant="h6" component="h6">
                   Stock
                   <TextField
@@ -413,7 +404,7 @@ export default function ProductScreen(props) {
                   <br></br>
                   <Switch
                     name="editedStatus"
-                    value={editedStatus}
+                    checked={editedStatus}
                     onChange={changeHandler}
                   />
                 </Typography>
@@ -422,10 +413,10 @@ export default function ProductScreen(props) {
               <ListItem className={Styles.inlineList}>
                 <Button
                   variant="contained"
+                  disabled
                   color="primary"
                   name="editedFeaturedImage"
                   onClick={() => fileInput.current.click()}
-                  //   onClick={changeHandler}
                 >
                   Upload New Featured Image
                 </Button>
@@ -436,6 +427,7 @@ export default function ProductScreen(props) {
                 />{' '}
                 <Button
                   variant="contained"
+                  disabled
                   color="primary"
                   onClick={() => filesInput.current.click()}
                 >

@@ -72,6 +72,7 @@ const shop = (props) => {
     'beige',
     'black',
     'blue',
+    'brown',
     'gold',
     'grey',
     'light-blue',
@@ -84,7 +85,20 @@ const shop = (props) => {
     'other',
   ];
 
-  const shapes = ['cat-eye', 'oval', 'rectangle', 'round', 'square', 'other'];
+  const shapes = [
+    'cat-eye',
+    'oval',
+    'rectangle',
+    'round',
+    'sport',
+    'mask',
+    'square',
+    'other',
+  ];
+
+  const materials = ['plastic', 'metal', 'plastic/metal'];
+
+  const genders = ['unisex', 'male', 'female', 'kids'];
 
   const addToCartHandler = async (product) => {
     console.log(state.cart.cartItems);
@@ -558,84 +572,31 @@ const shop = (props) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <FormGroup>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler('gender', 'male')}
-                              />
-                            }
-                            label="Men"
-                            name="gender"
-                            value="male"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'gender',
-                                  'female'
-                                )}
-                              />
-                            }
-                            label="Women"
-                            name="gender"
-                            value="female"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler('gender', 'boys')}
-                              />
-                            }
-                            label="Boys"
-                            name="gender"
-                            value="boys"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'gender',
-                                  'girls'
-                                )}
-                              />
-                            }
-                            label="Girls"
-                            name="gender"
-                            value="girls"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
+                          {genders.map((gender) => (
+                            <FormControlLabel
+                              key={gender}
+                              control={
+                                <Checkbox
+                                  style={{ color: '#ca222a' }}
+                                  checked={checkboxCheckHandler(
+                                    'gender',
+                                    gender
+                                  )}
+                                />
+                              }
+                              style={{ textTransform: 'capitalize' }}
+                              label={gender}
+                              name="gender"
+                              value={gender}
+                              onChange={(e) =>
+                                updateFilterQueryHandler(
+                                  e.target.name,
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                          ))}
                         </FormGroup>
                       </AccordionDetails>
                     </Accordion>
@@ -658,111 +619,31 @@ const shop = (props) => {
                       </AccordionSummary>
                       <AccordionDetails>
                         <FormGroup>
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'material',
-                                  'metal'
-                                )}
-                              />
-                            }
-                            label="Metal"
-                            name="material"
-                            value="metal"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'material',
-                                  'acetate'
-                                )}
-                              />
-                            }
-                            label="Acetate"
-                            name="material"
-                            value="acetate"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />{' '}
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'material',
-                                  'injected'
-                                )}
-                              />
-                            }
-                            label="Injected"
-                            name="material"
-                            value="injected"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'material',
-                                  'titanium'
-                                )}
-                              />
-                            }
-                            label="Titanium"
-                            name="material"
-                            value="titanium"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
-                          <FormControlLabel
-                            control={
-                              <Checkbox
-                                style={{ color: '#ca222a' }}
-                                checked={checkboxCheckHandler(
-                                  'material',
-                                  'plastic'
-                                )}
-                              />
-                            }
-                            label="Plastic"
-                            name="material"
-                            value="plastic"
-                            onChange={(e) =>
-                              updateFilterQueryHandler(
-                                e.target.name,
-                                e.target.value,
-                                e.target.checked
-                              )
-                            }
-                          />
+                          {materials.map((material) => (
+                            <FormControlLabel
+                              key={material}
+                              control={
+                                <Checkbox
+                                  style={{ color: '#ca222a' }}
+                                  checked={checkboxCheckHandler(
+                                    'material',
+                                    material
+                                  )}
+                                />
+                              }
+                              style={{ textTransform: 'capitalize' }}
+                              label={material}
+                              name="material"
+                              value={material}
+                              onChange={(e) =>
+                                updateFilterQueryHandler(
+                                  e.target.name,
+                                  e.target.value,
+                                  e.target.checked
+                                )
+                              }
+                            />
+                          ))}
                         </FormGroup>
                       </AccordionDetails>
                     </Accordion>
@@ -1070,90 +951,31 @@ const shop = (props) => {
                             </AccordionSummary>
                             <AccordionDetails>
                               <FormGroup>
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'gender',
-                                        'male'
-                                      )}
-                                    />
-                                  }
-                                  label="Men"
-                                  name="gender"
-                                  value="male"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'gender',
-                                        'female'
-                                      )}
-                                    />
-                                  }
-                                  label="Women"
-                                  name="gender"
-                                  value="female"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'gender',
-                                        'boys'
-                                      )}
-                                    />
-                                  }
-                                  label="Boys"
-                                  name="gender"
-                                  value="boys"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'gender',
-                                        'girls'
-                                      )}
-                                    />
-                                  }
-                                  label="Girls"
-                                  name="gender"
-                                  value="girls"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
+                                {genders.map((gender) => (
+                                  <FormControlLabel
+                                    key={gender}
+                                    control={
+                                      <Checkbox
+                                        style={{ color: '#ca222a' }}
+                                        checked={checkboxCheckHandler(
+                                          'gender',
+                                          gender
+                                        )}
+                                      />
+                                    }
+                                    style={{ textTransform: 'capitalize' }}
+                                    label={gender}
+                                    name="gender"
+                                    value={gender}
+                                    onChange={(e) =>
+                                      updateFilterQueryHandler(
+                                        e.target.name,
+                                        e.target.value,
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                ))}
                               </FormGroup>
                             </AccordionDetails>
                           </Accordion>
@@ -1176,111 +998,31 @@ const shop = (props) => {
                             </AccordionSummary>
                             <AccordionDetails>
                               <FormGroup>
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'material',
-                                        'metal'
-                                      )}
-                                    />
-                                  }
-                                  label="Metal"
-                                  name="material"
-                                  value="metal"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'material',
-                                        'acetate'
-                                      )}
-                                    />
-                                  }
-                                  label="Acetate"
-                                  name="material"
-                                  value="acetate"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />{' '}
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'material',
-                                        'injected'
-                                      )}
-                                    />
-                                  }
-                                  label="Injected"
-                                  name="material"
-                                  value="injected"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'material',
-                                        'titanium'
-                                      )}
-                                    />
-                                  }
-                                  label="Titanium"
-                                  name="material"
-                                  value="titanium"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      style={{ color: '#ca222a' }}
-                                      checked={checkboxCheckHandler(
-                                        'material',
-                                        'plastic'
-                                      )}
-                                    />
-                                  }
-                                  label="Plastic"
-                                  name="material"
-                                  value="plastic"
-                                  onChange={(e) =>
-                                    updateFilterQueryHandler(
-                                      e.target.name,
-                                      e.target.value,
-                                      e.target.checked
-                                    )
-                                  }
-                                />
+                                {materials.map((material) => (
+                                  <FormControlLabel
+                                    key={material}
+                                    control={
+                                      <Checkbox
+                                        style={{ color: '#ca222a' }}
+                                        checked={checkboxCheckHandler(
+                                          'material',
+                                          material
+                                        )}
+                                      />
+                                    }
+                                    style={{ textTransform: 'capitalize' }}
+                                    label={material}
+                                    name="material"
+                                    value={material}
+                                    onChange={(e) =>
+                                      updateFilterQueryHandler(
+                                        e.target.name,
+                                        e.target.value,
+                                        e.target.checked
+                                      )
+                                    }
+                                  />
+                                ))}
                               </FormGroup>
                             </AccordionDetails>
                           </Accordion>

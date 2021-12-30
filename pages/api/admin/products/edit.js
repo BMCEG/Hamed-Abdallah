@@ -27,14 +27,16 @@ handler.post(async (req, res) => {
     editedGender,
     editedType,
     editedPrice,
+    editedDiscountedPrice,
     editedStock,
     editedStatus,
   } = req.body;
-
   try {
     await db.connect();
     const product = await Product.findById({ _id: productID });
     const brand = await Brand.findOne({ name: editedBrand });
+
+    const discountedPrice = editedDiscountedPrice ? editedDiscountedPrice : 0;
 
     product.name = editedName;
     product.sku = editedSku;
@@ -48,12 +50,11 @@ handler.post(async (req, res) => {
     product.gender = editedGender;
     product.type = editedType;
     product.price = editedPrice;
+    product.discountedPrice = discountedPrice;
     product.stock = editedStock;
     product.status = editedStatus;
 
     await product.save();
-
-    console.log('product 3', product);
 
     await db.disconnect();
 

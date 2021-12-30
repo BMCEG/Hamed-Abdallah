@@ -345,6 +345,7 @@ function AdminProducts(props) {
                       <MenuItem value="beige">Beige</MenuItem>
                       <MenuItem value="black">Black</MenuItem>
                       <MenuItem value="blue">Blue</MenuItem>
+                      <MenuItem value="brown">Brown</MenuItem>
                       <MenuItem value="gold">Gold</MenuItem>
                       <MenuItem value="grey">Grey</MenuItem>
                       <MenuItem value="light-blue">Light Blue</MenuItem>
@@ -367,9 +368,11 @@ function AdminProducts(props) {
                       onChange={(e) => setProdShape(e.target.value)}
                     >
                       <MenuItem value="cat-eye">Cat-Eye</MenuItem>
+                      <MenuItem value="mask">Mask</MenuItem>
                       <MenuItem value="oval">Oval</MenuItem>
                       <MenuItem value="rectangle">Rectangle</MenuItem>
                       <MenuItem value="round">Round</MenuItem>
+                      <MenuItem value="sport">Sport</MenuItem>
                       <MenuItem value="square">Square</MenuItem>
                       <MenuItem value="other">Other</MenuItem>
                     </TextField>
@@ -429,8 +432,8 @@ function AdminProducts(props) {
                   >
                     <MenuItem value="male">Male</MenuItem>
                     <MenuItem value="female">Female</MenuItem>
-                    <MenuItem value="boys">Boys</MenuItem>
-                    <MenuItem value="girls">Girls</MenuItem>
+                    <MenuItem value="kids">Kids</MenuItem>
+                    <MenuItem value="unisex">Unisex</MenuItem>
                   </TextField>
                 </ListItem>{' '}
                 <ListItem>
@@ -444,8 +447,7 @@ function AdminProducts(props) {
                   >
                     <MenuItem value="plastic">Plastic</MenuItem>
                     <MenuItem value="metal">Metal</MenuItem>
-                    <MenuItem value="titanium">Titanium</MenuItem>
-                    <MenuItem value="other">Other</MenuItem>
+                    <MenuItem value="plastic/metal">Plastic/Metal</MenuItem>
                     {/* {...field} */}
                   </TextField>
                 </ListItem>{' '}

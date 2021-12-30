@@ -37,6 +37,7 @@ const productSchema = mongoose.Schema(
       enum: [
         'beige',
         'black',
+        'brown',
         'blue',
         'gold',
         'grey',
@@ -52,15 +53,24 @@ const productSchema = mongoose.Schema(
     },
     material: {
       type: String,
-      enum: ['plastic', 'metal', 'titanium', 'other'],
+      enum: ['plastic', 'metal', 'plastic/metal'],
     },
     shape: {
       type: String,
-      enum: ['cat-eye', 'oval', 'rectangle', 'round', 'square', 'other'],
+      enum: [
+        'cat-eye',
+        'oval',
+        'rectangle',
+        'round',
+        'sport',
+        'mask',
+        'square',
+        'other',
+      ],
     },
     gender: {
       type: String,
-      enum: ['girls', 'male', 'female', 'boys'],
+      enum: ['unisex', 'male', 'female', 'kids'],
     },
     type: {
       type: String,
