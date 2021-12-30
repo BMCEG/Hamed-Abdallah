@@ -1104,7 +1104,9 @@ const shop = (props) => {
                             className={Styles.card}
                             component="img"
                             image={product.featuredImage}
-                            title={product.name}
+                            title={`${product.brandName} ${
+                              product.type
+                            } ${``} - ${``} ${product.sku}`}
                           ></CardMedia>
                           <CardContent>
                             <Typography
@@ -1113,9 +1115,12 @@ const shop = (props) => {
                               style={{
                                 color: 'black',
                                 textDecoration: 'none !important',
+                                textTransform: 'capitalize !important',
                               }}
                             >
-                              {product.name}
+                              {`${product.brandName} ${
+                                product.type
+                              } ${``} - ${``} ${product.sku}`}{' '}
                             </Typography>
                             {/* <br></br> */}
                             <Typography

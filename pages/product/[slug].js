@@ -238,8 +238,18 @@ export default function ProductScreen(props) {
           <Grid item md={5} xs={12} className={Styles.productInfo}>
             <List>
               <ListItem>
-                <Typography variant="h3" component="h3">
-                  {product.name}
+                <Typography
+                  variant="h3"
+                  component="h3"
+                  style={{
+                    color: 'black',
+                    textDecoration: 'none !important',
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  {`${product.brandName} ${product.type} ${``} - ${``} ${
+                    product.sku
+                  }`}
                 </Typography>
               </ListItem>
               <ListItem>

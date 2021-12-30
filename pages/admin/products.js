@@ -67,9 +67,26 @@ function AdminProducts(props) {
         />
       ),
     },
-    { title: 'Name', field: 'name' },
-    { title: 'Brand', field: 'brandName' },
-    { title: 'Type', field: 'type' },
+    {
+      title: 'Name',
+      field: 'name',
+      render: (rowData) => (
+        <Typography
+          // variant="h3"
+          // component="h3"//
+          style={{
+            color: 'black',
+            textDecoration: 'none !important',
+            textTransform: 'capitalize',
+          }}
+        >
+          {`${rowData.brandName} ${rowData.type} ${``} - ${``} ${rowData.sku}`}
+        </Typography>
+      ),
+    },
+    { title: 'Color', field: 'color' },
+    { title: 'Material', field: 'material' },
+    { title: 'Gender', field: 'gender' },
     { title: 'Stock', field: 'stock', type: 'numeric' },
     { title: 'Price', field: 'price', type: 'numeric' },
     { title: 'Discoutned Price', field: 'discountedPrice', type: 'numeric' },
@@ -224,7 +241,7 @@ function AdminProducts(props) {
               actions={[
                 {
                   icon: tableIcons.Delete,
-                  tooltip: 'Delete User',
+                  tooltip: 'Delete Product',
                   onClick: async (event, rowData) => {
                     await axios.post(`/api/products/delete`, {
                       _id: rowData._id,
@@ -235,7 +252,7 @@ function AdminProducts(props) {
                 },
                 {
                   icon: tableIcons.Add,
-                  tooltip: 'Add User',
+                  tooltip: 'Add Product',
                   isFreeAction: true,
                   onClick: (event, rowData) => {
                     setIsModalOpen(true);
