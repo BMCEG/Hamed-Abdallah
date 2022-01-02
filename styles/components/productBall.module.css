@@ -1,0 +1,44 @@
+.ball {
+  /* background-color: red; */
+  width: 65px;
+  height: 65px;
+  border-radius: 100%;
+  padding: -1px !important;
+  border: 2px solid #ca222a !important;
+  transition: all ease-in-out 0.2s;
+}
+.ball:hover {
+  transform: rotate(20deg);
+}
+.captionBase {
+  width: 65px;
+  background-color: #ca222a;
+  text-align: center;
+  border-radius: 5px;
+}
+.caption {
+  text-transform: capitalize !important;
+  color: white;
+}
+.burnBase {
+  display: flex;
+  /* justify-content: space-between; */
+
+  /* background-color: wheat; */
+  /* width: fit-content; */
+  /* text-align: center; */
+  /* max-width: 25%; */
+}
+.burnIcon {
+  /* background-color: turquoise; */
+  color: #ca222a !important;
+  margin: 2vmin !important;
+}
+.burnCaption {
+  /* background-color: blue; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 16px !important;
+  /* text-transform: uppercase !important; */
+}

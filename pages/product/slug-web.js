@@ -23,9 +23,7 @@ import {
 import Image from 'next/image';
 import {
   HamedAbdallahWhiteSpace,
-  HamedAbdallahProductBurn,
   HamedAbdallahImageMagnifier,
-  HamedAbdallahProductBall,
 } from '../../components/index.js';
 import Styles from '../../styles/pages/product.module.css';
 import { useSnackbar } from 'notistack';
@@ -42,7 +40,6 @@ import {
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 export default function ProductScreen(props) {
-  const matches = useMediaQuery('(min-width:1024px');
   const { product, reviews, relatedItems, recentItems, isWishlistedProp } =
     props;
 
@@ -154,126 +151,100 @@ export default function ProductScreen(props) {
 
   return (
     <div className={Styles.root}>
-      <HamedAbdallahWhiteSpace />
-      <div className={Styles.infoDiv}>
-        <Grid container spacing={1} className={Styles.infoBase}>
-          <Grid item md={6} xs={12} className={Styles.infoLeft}>
-            {matches ? (
-              <Grid
-                container
-                spacing={1}
-                className={Styles.product_images_base}
-              >
-                <Grid item md={2} className={Styles.product_images}>
-                  <Image
-                    alt="image"
-                    src={product.featuredImage}
-                    height={500}
-                    priority={true}
-                    onClick={() =>
-                      pickFeaturedImageHandler(`${product.featuredImage}`)
-                    }
-                    width={500}
-                    className={Styles.product_image}
-                  />
-                  {productImages.map((image) => (
-                    <Image
-                      priority={true}
-                      alt="image"
-                      src={`${image.source}`}
-                      height={500}
-                      width={500}
-                      onClick={() =>
-                        pickFeaturedImageHandler(`${image.source}`)
-                      }
-                      className={Styles.product_image}
-                    />
-                  ))}
-                </Grid>
-                <Grid item md={10} className={Styles.product_images}>
-                  <HamedAbdallahImageMagnifier
-                    src={featuredImage}
-                    otherImages={productImages}
-                    width={'95%'}
-                  />
-                </Grid>
-              </Grid>
-            ) : (
-              <div>
+      <div className={Styles.container}>
+        <HamedAbdallahWhiteSpace />
+        <Grid container spacing={1}>
+          <Grid item md={4} xs={12}>
+            <Grid container spacing={2} className={Styles.product_images_base}>
+              <Grid item md={2} className={Styles.product_images}>
                 <Image
                   alt="image"
-                  src={featuredImage}
+                  src={product.featuredImage}
                   height={500}
                   priority={true}
+                  onClick={() =>
+                    pickFeaturedImageHandler(`${product.featuredImage}`)
+                  }
                   width={500}
                   className={Styles.product_image}
                 />
-                <div className={Styles.product_images_inline}>
+                {productImages.map((image) => (
                   <Image
-                    alt="image"
-                    src={`${product.featuredImage}`}
-                    height={500}
                     priority={true}
-                    onClick={() =>
-                      pickFeaturedImageHandler(`${product.featuredImage}`)
-                    }
+                    alt="image"
+                    src={`${image.source}`}
+                    height={500}
                     width={500}
-                    className={Styles.product_image_mob}
+                    onClick={() => pickFeaturedImageHandler(`${image.source}`)}
+                    className={Styles.product_image}
                   />
-                  {productImages.map((image) => (
-                    <Image
-                      alt="image"
-                      src={`${image.source}`}
-                      priority={true}
-                      height={500}
-                      width={500}
-                      onClick={() =>
-                        pickFeaturedImageHandler(`${image.source}`)
-                      }
-                      className={Styles.product_image_mob}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+                ))}
+              </Grid>
+              <Grid item md={10} className={Styles.product_images}>
+                <HamedAbdallahImageMagnifier
+                  src={featuredImage}
+                  width={'100%'}
+                />
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item md={6} xs={12} className={Styles.infoRight}>
-            <div className={Styles.nameBrandBar}>
-              <Typography className={Styles.infoName}>
-                {`${product.brandName} ${product.type} ${``} - ${``} ${
-                  product.sku
-                }`}
-              </Typography>
-              {matches ? (
-                <Image
-                  alt={product.brand.name}
-                  src={product.brand.logo}
-                  priority={true}
-                  className={Styles.brandLogo}
-                  width={50}
-                  height={50}
-                />
-              ) : (
-                <Image
-                  alt={product.brand.name}
-                  src={product.brand.logo}
-                  priority={true}
-                  className={Styles.brandLogo}
-                  width={150}
-                  height={150}
-                />
-              )}
-            </div>
+          <Grid item md={8} xs={12}>
+            <Typography
+              variant="h3"
+              component="h3"
+              style={{
+                color: 'black',
+                textDecoration: 'none !important',
+                textTransform: 'capitalize',
+              }}
+            >
+              {`${product.brandName} ${product.type} ${``} - ${``} ${
+                product.sku
+              }`}
+            </Typography>
             <br></br>
-            <Grid container spacing={1} className={Styles.prodInfoBase}>
+            <Grid container spacing={1}>
               <Grid item md={7} xs={12} className={Styles.productInfo}>
                 <List>
+                  <ListItem className={Styles.infoBalls}>
+                    <Typography
+                      className={Styles.infoBall}
+                      variant="h5"
+                      component="h5"
+                    >
+                      Brand: {product.brandName}
+                    </Typography>
+                    <Typography
+                      variant="h5"
+                      className={Styles.infoBall}
+                      component="h5"
+                    >
+                      Color: {product.color}
+                    </Typography>
+                  </ListItem>
+                  {/* <br></br> */}
+                  <ListItem className={Styles.infoBalls}>
+                    <Typography
+                      variant="h5"
+                      component="h5"
+                      className={Styles.infoBall}
+                    >
+                      Material: {product.material}
+                    </Typography>{' '}
+                    <Typography
+                      variant="h5"
+                      component="h5"
+                      className={Styles.infoBall}
+                    >
+                      Shape: {product.shape}
+                    </Typography>
+                  </ListItem>
+                  <br></br>
                   <ListItem>
                     <Typography className={Styles.description}>
                       {product.description}
                     </Typography>
                   </ListItem>
-                  {/* <hr></hr> */}
                   <ListItem>
                     {product.avgRating === 0 ? (
                       <RatingView ratingValue={3} />
@@ -285,25 +256,11 @@ export default function ProductScreen(props) {
                       Number of Reviews ({product.numOfRatings})
                     </Typography>
                   </ListItem>
-                  <ListItem>
-                    <Typography>
-                      SKU: <strong>{product.sku}</strong>
-                    </Typography>
-                  </ListItem>
-                  <ListItem>
-                    <Typography style={{ textTransform: 'capitalize' }}>
-                      Color: <strong>{product.color}</strong>
-                    </Typography>
-                  </ListItem>
-                  <ListItem>
-                    <Typography style={{ textTransform: 'capitalize' }}>
-                      Material: <strong>{product.material}</strong>
-                    </Typography>
-                  </ListItem>
+                  <hr></hr>
                 </List>
               </Grid>
-              <Grid item md={5} xs={12} className={Styles.prodDetails}>
-                <List>
+              <Grid item md={5} xs={12}>
+                <div className={Styles.burnedInfo}>
                   <ListItem className={Styles.inlineList}>
                     <FontAwesomeIcon size="2x" icon={faCertificate} />
                     <Typography className={Styles.authHeader}>
@@ -329,91 +286,86 @@ export default function ProductScreen(props) {
                       Trusted Since 1911
                     </Typography>
                   </ListItem>
-                  {/* <br></br> */}
-                </List>
-                <List className={Styles.priceInfo}>
-                  <ListItem>
-                    {product.discountedPrice === 0 ? (
-                      <Typography variant="h4" component="h4">
-                        <strong>{product.price} EGP</strong>
-                      </Typography>
-                    ) : (
-                      <div style={{ display: 'flex' }}>
-                        <Typography variant="h4" component="h4">
-                          <div className={Styles.lineThrough}>
-                            {product.price}
-                          </div>
-                        </Typography>
-                        <Typography variant="h4" component="h4">
-                          <strong>
-                            {product.price - product.discountedPrice} EGP
-                          </strong>
-                        </Typography>
-                      </div>
-                    )}
-                  </ListItem>
-                  <ListItem>
-                    <Grid container>
-                      <Grid item md={10}>
-                        {product.stock > 0 ? (
-                          <Button
-                            fullWidth
-                            variant="contained"
-                            onClick={() => addToCartHandler(product)}
-                            className={Styles.button}
-                          >
-                            Add to Cart
-                          </Button>
-                        ) : (
-                          <Button
-                            className={Styles.button}
-                            variant="contained"
-                            color="primary"
-                            disabled
-                            fullWidth
-                          >
-                            Out of Stock
-                          </Button>
-                        )}
-                      </Grid>
-                      <Grid item md={1}>
-                        {isWishlisted ? (
-                          <Button
-                            fullWidth
-                            onClick={() => removeFromWishlistHandler(product)}
-                          >
-                            <FontAwesomeIcon
-                              style={{ color: '#ca222a' }}
-                              icon={faHeartOutlined}
-                              size="3x"
-                            />
-                          </Button>
-                        ) : (
-                          <Button
-                            fullWidth
-                            onClick={() => addToWishlistHandler(product)}
-                          >
-                            <FontAwesomeIcon
-                              style={{ color: '#ca222a' }}
-                              icon={faHeart}
-                              size="3x"
-                            />
-                          </Button>
-                        )}
-                      </Grid>
-                    </Grid>
-                  </ListItem>
-                </List>{' '}
+                </div>
+                {/* <br></br> */}
+                <br></br>
               </Grid>
             </Grid>
+            <List className={Styles.priceInfo}>
+              <ListItem>
+                {product.discountedPrice === 0 ? (
+                  <Typography variant="h3" component="h3">
+                    <strong>{product.price} EGP</strong>
+                  </Typography>
+                ) : (
+                  <div style={{ display: 'flex' }}>
+                    <Typography variant="h4" component="h4">
+                      <div className={Styles.lineThrough}>{product.price}</div>
+                    </Typography>
+                    <Typography variant="h4" component="h4">
+                      <strong>
+                        {product.price - product.discountedPrice} EGP
+                      </strong>
+                    </Typography>
+                  </div>
+                )}
+              </ListItem>
+              <ListItem>
+                <Grid container>
+                  <Grid item md={10}>
+                    {product.stock > 0 ? (
+                      <Button
+                        fullWidth
+                        variant="contained"
+                        onClick={() => addToCartHandler(product)}
+                        className={Styles.button}
+                      >
+                        Add to Cart
+                      </Button>
+                    ) : (
+                      <Button
+                        className={Styles.button}
+                        variant="contained"
+                        color="primary"
+                        disabled
+                        fullWidth
+                      >
+                        Out of Stock
+                      </Button>
+                    )}
+                  </Grid>
+                  <Grid item md={1}>
+                    {isWishlisted ? (
+                      <Button
+                        fullWidth
+                        onClick={() => removeFromWishlistHandler(product)}
+                      >
+                        <FontAwesomeIcon
+                          style={{ color: '#ca222a' }}
+                          icon={faHeartOutlined}
+                          size="3x"
+                        />
+                      </Button>
+                    ) : (
+                      <Button
+                        fullWidth
+                        onClick={() => addToWishlistHandler(product)}
+                      >
+                        <FontAwesomeIcon
+                          style={{ color: '#ca222a' }}
+                          icon={faHeart}
+                          size="3x"
+                        />
+                      </Button>
+                    )}
+                  </Grid>
+                </Grid>
+              </ListItem>
+            </List>{' '}
           </Grid>
         </Grid>
+        {/* <HamedAbdallahWhiteSpace /> */}
       </div>
-
-      {/* <div className={Styles.container}>
-        <br></br>
-        <hr></hr>
-      </div> */}
 
       {/* <Image src="/wave-red-bottom.png" alt="ds" width="1980" height="250" /> */}
 
@@ -423,23 +375,13 @@ export default function ProductScreen(props) {
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
-          {matches ? (
-            <Typography
-              variant="h4"
-              component="h4"
-              style={{ textAlign: 'center', color: '#ca222a' }}
-            >
-              More Products from {product.brandName}
-            </Typography>
-          ) : (
-            <Typography
-              variant="body1"
-              component="body1"
-              style={{ textAlign: 'center', color: '#ca222a' }}
-            >
-              More Products from {product.brandName}
-            </Typography>
-          )}
+          <Typography
+            variant="h4"
+            component="h4"
+            style={{ textAlign: 'center', color: '#ca222a' }}
+          >
+            More Products from {product.brandName}
+          </Typography>
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
@@ -484,23 +426,13 @@ export default function ProductScreen(props) {
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
-          {matches ? (
-            <Typography
-              variant="h4"
-              component="h4"
-              style={{ textAlign: 'center', color: '#ca222a' }}
-            >
-              You May Also Like
-            </Typography>
-          ) : (
-            <Typography
-              variant="body1"
-              component="body1"
-              style={{ textAlign: 'center', color: '#ca222a' }}
-            >
-              You May Also Like
-            </Typography>
-          )}
+          <Typography
+            variant="h4"
+            component="h4"
+            style={{ textAlign: 'center', color: '#ca222a' }}
+          >
+            You May Also Like
+          </Typography>
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
           </div>
@@ -618,47 +550,5 @@ export default function ProductScreen(props) {
 }
 
 export async function getServerSideProps(context) {
-  const { params } = context;
-  const { slug } = params;
-  let props = {};
-  await db.connect();
-  const rawProduct = await Product.findOne({ slug })
-    .lean()
-    .populate({ path: 'brand', Model: Brand });
-  const product = JSON.parse(JSON.stringify(rawProduct));
-  const productsByBrand = await Product.find({ brand: rawProduct.brand._id });
-  const rawFilteredProductsByBrand = productsByBrand.filter((prod) => {
-    return prod._id.toString() !== rawProduct._id.toString();
-  });
-
-  const allFilteredProductsByBrand = JSON.parse(
-    JSON.stringify(rawFilteredProductsByBrand)
-  );
-  const recentItems = await Product.find({}).sort({ createdAt: -1 });
-  const allRecentItems = JSON.parse(JSON.stringify(recentItems));
-
-  const reviews = await Review.find({ product: product._id }).lean();
-  const allReviews = JSON.parse(JSON.stringify(reviews));
-
-  props = {
-    product,
-    // isWishlistedProp,
-    reviews: allReviews,
-    relatedItems: allFilteredProductsByBrand,
-    recentItems: allRecentItems,
-  };
-
-  if (context.req.cookies['userInfo']) {
-    const cookies = JSON.parse(context.req.cookies['userInfo']);
-
-    const rawUser = await User.findById({ _id: cookies._id }).lean();
-    const user = JSON.parse(JSON.stringify(rawUser));
-    const isWishlistedProp = user.wishlist.includes(product._id);
-    props.isWishlistedProp = isWishlistedProp;
-  }
-  await db.disconnect();
-
-  return {
-    props,
-  };
+  console.log(context);
 }

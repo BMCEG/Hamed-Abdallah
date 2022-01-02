@@ -15,8 +15,21 @@
   justify-content: space-evenly;
   height: 35vh !important;
 }
+.genderBallsMob {
+  /* display: flex; */
+  text-align: center !important;
+  /* justify-content: space-evenly; */
+  /* height: 35vh !important; */
+}
 .ballBlock {
   transition: all ease-in-out 0.2s;
+}
+.ballBlockMob {
+  display: flex;
+  justify-content: space-evenly;
+  transition: all ease-in-out 0.2s;
+  margin: 2vmin !important;
+  height: 9vh;
 }
 .ballBlock:hover {
   transform: scale(1.1);
@@ -26,6 +39,15 @@
   background-color: white;
   width: 35vh;
   height: 100%;
+  border-radius: 50%;
+  box-shadow: none;
+  transition: ease-in-out all 0.2s;
+  box-shadow: 0px 0px 1px 2px #ca222a !important;
+}
+.genderBallMob {
+  background-color: white;
+  width: 8vh;
+  height: 8vh;
   border-radius: 50%;
   box-shadow: none;
   transition: ease-in-out all 0.2s;
@@ -46,8 +68,14 @@
   flex-direction: column;
   justify-content: center;
 }
+.ballTitleMob {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ca222a;
+  text-align: center;
+}
 .ballTitle {
-  /* background-color: aqua; */
   color: #ca222a;
   z-index: 50 !important;
   filter: brightness(100%) !important;

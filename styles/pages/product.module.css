@@ -1,5 +1,5 @@
 .container {
-  min-height: 80vh;
+  /* min-height: 80vh; */
   width: 75%;
   margin: auto;
 }
@@ -15,13 +15,17 @@
 }
 .productInfo {
   display: flex;
+  /* background-color: azure; */
   flex-direction: column;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 .relatedItems {
   background-color: white;
   padding: 3%;
   margin-top: -2%;
+}
+.description {
+  white-space: pre-line !important;
 }
 .relatedCarousel {
   width: 85% !important;
@@ -56,7 +60,7 @@
   background-color: #ca222a !important;
   border-radius: 10px !important;
   color: white !important;
-  font-size: 22px !important;
+  font-size: 18px !important;
 }
 .reviewBtn {
   background-color: white !important;
@@ -68,7 +72,7 @@
   background-color: white !important;
 }
 .laiAQh {
-  background-color: aqua !important;
+  /* background-color: aqua !important; */
   object-fit: contain !important;
 }
 .product_image {
@@ -91,8 +95,12 @@
 }
 .product_images_base {
   height: 100%;
+  /* background-color: chartreuse; */
 }
 .featuredImage {
+  /* background-color: aqua !important; */
+  /* height: 100%; */
+  padding: 1vmax !important;
   animation: fadeIn 1s !important;
 }
 @keyframes fadeIn {
@@ -129,11 +137,11 @@
   height: 10vh;
 }
 .authHeader {
-  color: #ca222a;
+  color: black;
   text-transform: capitalize;
-  font-weight: bolder !important;
+  font-weight: bold !important;
   margin-left: 1.5vmin !important;
-  font-size: 20px !important;
+  font-size: 15px !important;
 }
 .inlineList {
   color: #ca222a;
@@ -141,4 +149,121 @@
 }
 .lineThrough {
   text-decoration: line-through #ca222a;
+}
+.infoDiv {
+  /* background-color: blue; */
+}
+.burnedInfo {
+  /* border-left: 2px solid #ca222a !important; */
+  padding: 1vmin !important;
+  /* background-color: violet; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.priceInfo {
+  /* background-color: antiquewhite; */
+  /* display: flex; */
+  /* width: 40%; */
+  margin-left: auto !important;
+  /* justify-content: right; */
+}
+.infoBalls {
+  display: flex;
+  justify-content: flex-start !important;
+}
+.infoBall {
+  /* background-color: aqua; */
+  width: 50%;
+  text-transform: capitalize !important;
+}
+.infoBase {
+  /* background-color: aqua; */
+  width: 85% !important;
+  margin: auto !important;
+  /* max-height: 55vh !important; */
+}
+.infoLeft {
+  display: flex;
+  padding: 2vmin !important;
+  /* background-color: blueviolet; */
+  /* height: 100% !important; */
+}
+.infoRight {
+  /* background-color: burlywood; */
+  padding: 1vmin !important;
+  /* height: 55vh !important; */
+  /* height: 100% !important; */
+}
+.nameBrandBar {
+  /* background-color: aqua; */
+  width: 100%;
+  padding: 1vmin;
+  display: flex;
+  justify-content: space-between;
+}
+.brandLogo {
+  object-fit: contain;
+}
+.infoName {
+  /* background-color: cornsilk; */
+  color: #ca222a !important;
+  text-transform: capitalize;
+  text-decoration: none !important;
+  font-size: 33px !important;
+}
+@media (max-width: 600px) {
+  .infoName {
+    font-size: 24px !important;
+  }
+}
+.prodInfoBase {
+  /* height: 100%; */
+  /* background-color: yellow; */
+}
+.prodDetails {
+  height: 100% !important;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: space-between; */
+  /* background-color: blueviolet; */
+  /* border-left: 2px solid #ca222a; */
+  /* padding: 1.5vmin !important; */
+}
+.prodBalls {
+  /* background-color: thistle; */
+  padding: 0.5vmin !important;
+  display: flex;
+  justify-content: space-evenly;
+}
+.priceInfo {
+  /* background-color: turquoise; */
+}
+.modalRoot {
+  border: none !important;
+  background-color: white;
+  margin: auto !important;
+  text-align: center;
+  width: 70%;
+}
+.modalImage {
+  object-fit: contain !important;
+  margin: auto !important;
+  /* width: 100vw !important; */
+}
+.modalBase {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.modalOtherImages {
+  /* background-color: brown; */
+  border-top: 1px solid #ca222a;
+  display: flex;
+  justify-content: space-evenly;
+  width: 70%;
+  margin: auto !important;
+}
+.modalOtherImage {
+  object-fit: contain;
 }
