@@ -263,73 +263,75 @@ const shop = (props) => {
       <div className={Styles.container}>
         {/* <HamedAbdallahWhiteSpace /> */}
         {matches ? (
-          <div className={Styles.genderBalls}>
-            <div className={Styles.ballBlock}>
-              <a href="/shop?gender=female#eyewear">
-                <div
-                  className={Styles.genderBall}
-                  style={{
-                    backgroundImage: `url('/female-eyewear.jpg')`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                  }}
-                ></div>
-              </a>
-              <br></br>
-              <Typography
-                variant="h3"
-                component="h3"
-                className={Styles.ballTitle}
-              >
-                For <strong>Her</strong>
-              </Typography>
-            </div>
-            <div className={Styles.ballBlock}>
-              <a href="/shop?gender=male#eyewear">
-                <div
-                  className={Styles.genderBall}
-                  style={{
-                    backgroundImage: `url('/male-eyewear.jpg')`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                  }}
-                ></div>
-              </a>
-              <br></br>
-              <Typography
-                variant="h3"
-                component="h3"
-                className={Styles.ballTitle}
-              >
-                For <strong>Him</strong>
-              </Typography>
-            </div>
-            <div className={Styles.ballBlock}>
-              <a href={`/shop?gender=boys&gender=girls#eyewear`}>
-                <div
-                  className={Styles.genderBall}
-                  style={{
-                    backgroundImage: `url('/kids_eyewear.jpeg')`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                  }}
-                ></div>
-              </a>
-              <br></br>
-              <Typography
-                variant="h3"
-                component="h3"
-                className={Styles.ballTitle}
-              >
-                For <strong>Kids</strong>
-              </Typography>
+          <>
+            <div className={Styles.genderBalls}>
+              <div className={Styles.ballBlock}>
+                <a href="/shop?gender=female#eyewear">
+                  <div
+                    className={Styles.genderBall}
+                    style={{
+                      backgroundImage: `url('/female-eyewear.jpg')`,
+                      backgroundSize: 'contain',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                    }}
+                  ></div>
+                </a>
+                <br></br>
+                <Typography
+                  variant="h3"
+                  component="h3"
+                  className={Styles.ballTitle}
+                >
+                  For <strong>Her</strong>
+                </Typography>
+              </div>
+              <div className={Styles.ballBlock}>
+                <a href="/shop?gender=male#eyewear">
+                  <div
+                    className={Styles.genderBall}
+                    style={{
+                      backgroundImage: `url('/male-eyewear.jpg')`,
+                      backgroundSize: 'contain',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                    }}
+                  ></div>
+                </a>
+                <br></br>
+                <Typography
+                  variant="h3"
+                  component="h3"
+                  className={Styles.ballTitle}
+                >
+                  For <strong>Him</strong>
+                </Typography>
+              </div>
+              <div className={Styles.ballBlock}>
+                <a href={`/shop?gender=boys&gender=girls#eyewear`}>
+                  <div
+                    className={Styles.genderBall}
+                    style={{
+                      backgroundImage: `url('/kids_eyewear.jpeg')`,
+                      backgroundSize: 'contain',
+                      backgroundRepeat: 'no-repeat',
+                      backgroundPosition: 'center',
+                    }}
+                  ></div>
+                </a>
+                <br></br>
+                <Typography
+                  variant="h3"
+                  component="h3"
+                  className={Styles.ballTitle}
+                >
+                  For <strong>Kids</strong>
+                </Typography>
+              </div>
             </div>
             <HamedAbdallahWhiteSpace />
             <HamedAbdallahWhiteSpace />
-          </div>
+          </>
         ) : (
           <div className={Styles.genderBallsMob}>
             <HamedAbdallahWhiteSpace />
