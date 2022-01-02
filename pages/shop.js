@@ -80,6 +80,7 @@ const shop = (props) => {
     'purple',
     'red',
     'silver',
+    'transparent',
     'white',
     'yellow',
     'other',

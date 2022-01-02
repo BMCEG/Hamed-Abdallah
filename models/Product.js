@@ -46,6 +46,7 @@ const productSchema = mongoose.Schema(
         'purple',
         'red',
         'silver',
+        'transparent',
         'white',
         'yellow',
         'other',
