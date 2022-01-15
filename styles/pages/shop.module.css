@@ -1,7 +1,9 @@
 .root {
   min-height: 100vh;
+  background-color: white !important;
 }
 .container {
+  background-color: white !important;
   min-height: 80vh;
   width: 75%;
   margin: auto;
@@ -28,8 +30,13 @@
   display: flex;
   justify-content: space-evenly;
   transition: all ease-in-out 0.2s;
-  margin: 2vmin !important;
-  height: 9vh;
+  /* margin: 2vmin !important; */
+  text-align: center !important;
+  width: 80% !important;
+  margin: auto !important;
+  /* height: 1vh; */
+  padding: 1vmin !important;
+  /* background-color: aqua; */
 }
 .ballBlock:hover {
   transform: scale(1.1);
@@ -48,6 +55,7 @@
   background-color: white;
   width: 8vh;
   height: 8vh;
+  margin-right: 2vmin !important;
   border-radius: 50%;
   box-shadow: none;
   transition: ease-in-out all 0.2s;
@@ -59,7 +67,23 @@
 .genderBall:hover .ballTitle {
   display: block !important;
 }
-
+.loadMoreBtnBase {
+  width: 100% !important;
+  padding: 2vmin !important;
+  display: flex !important;
+  justify-content: center !important;
+}
+.productCard {
+  animation: fadeIn 1s !important;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 .ballCaption {
   /* background-color: #ca222a; */
   height: 100%;
@@ -114,8 +138,8 @@
 .productPane {
   padding-left: 3vmin !important;
   padding-right: 3vmin !important;
-  height: 100vh;
-  overflow-y: scroll;
+  /* height: 100vh; */
+  /* overflow-y: scroll; */
 }
 .brands {
   width: 75% !important;
@@ -141,7 +165,9 @@
 }
 .card {
   /* background-color: red !important; */
-  min-height: 300px;
+  animation: fadeIn 1s !important;
+
+  min-height: 170px;
   object-fit: contain !important;
   transition: all ease-in-out 0.2s;
   /* text-decoration: none !important; */
@@ -232,4 +258,15 @@
   display: block;
   transition: all 0.2s ease-in-out;
   filter: brightness(100%);
+}
+.ballCarousel {
+  height: 15vh;
+  /* padding: 2vmin !important; */
+  /* width: 90vw !important; */
+  /* margin: auto !important; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* background-color: blueviolet; */
+  /* text-align: center !important; */
 }

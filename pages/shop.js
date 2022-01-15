@@ -1,13 +1,13 @@
 import Styles from '../styles/pages/shop.module.css';
-import { HamedAbdallahWhiteSpace } from '../components/index.js';
 import {
-  CardActionArea,
-  CardMedia,
-  Card,
+  HamedAbdallahWhiteSpace,
+  HamedAbdallahProductCard,
+} from '../components/index.js';
+import Carousel from 'react-bootstrap/Carousel';
+
+import {
   Grid,
-  CardContent,
   Typography,
-  CardActions,
   Button,
   List,
   ListItem,
@@ -18,41 +18,30 @@ import {
   FormControlLabel,
   Checkbox,
   Slider,
+  useMediaQuery,
   Input,
-  Link,
 } from '@material-ui/core';
 import Image from 'next/image';
-import data from '../utils/data';
-import NextLink from 'next/link';
 import db from '../utils/db';
 import Product from '../models/Product';
 import Brand from '../models/Brand';
-import axios from 'axios';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
-import { Store } from '../utils/Store';
-import Carousel from 'react-elastic-carousel';
-import noUiSlider from 'nouislider';
+import { useState } from 'react';
 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useSnackbar } from 'notistack';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faShoppingBag,
-  faHeart,
-  faFilter,
-} from '@fortawesome/free-solid-svg-icons';
-import { useMediaQuery } from '@mui/material';
-import { Box } from '@mui/system';
+import { faFilter } from '@fortawesome/free-solid-svg-icons';
 
 const shop = (props) => {
   const matches = useMediaQuery(`(min-width: 1024px)`);
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  const { state, dispatch } = useContext(Store);
-  const { userInfo } = state;
+  const { queryFilterProp, brands, maxPrice, minPrice } = props;
+  const [products, setProducts] = useState(props.products);
 
-  const { products, queryFilterProp, brands, maxPrice, minPrice } = props;
+  const [productsToShow, setProductsToShow] = useState(
+    props.products.slice(0, 9)
+  );
+
   const [queryFilter, setQueryFilter] = useState({
     type: queryFilterProp.type || [],
     gender: queryFilterProp.gender || [],
@@ -75,6 +64,7 @@ const shop = (props) => {
     'brown',
     'gold',
     'grey',
+    'hazel',
     'light-blue',
     'pink',
     'purple',
@@ -101,48 +91,9 @@ const shop = (props) => {
 
   const genders = ['unisex', 'male', 'female', 'kids'];
 
-  const addToCartHandler = async (product) => {
-    console.log(state.cart.cartItems);
-    const existItem = state.cart.cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
-
-    if (data.stock < quantity) {
-      enqueueSnackbar(`${data.name} is currently out of stock`, {
-        variant: 'error',
-      });
-      return;
-    }
-
-    dispatch({ type: 'CART_ADD_ITEM', payload: { ...product, quantity } });
-    enqueueSnackbar(`${data.name} has been added to cart`, {
-      variant: 'success',
-    });
-  };
-
-  const addToWishlistHandler = async (product) => {
-    try {
-      if (!userInfo) {
-        enqueueSnackbar(
-          'You must be logged in to add an item to your wishlist',
-          { variant: 'error' }
-        );
-        return;
-      }
-      const { data } = await axios.get(`/api/products/${product._id}`);
-      await axios.post('/api/users/wishlist', {
-        userInfo,
-        data,
-      });
-      enqueueSnackbar(`${data.name} has been added to your wishlist`, {
-        variant: 'success',
-      });
-    } catch (err) {
-      enqueueSnackbar(
-        err.response.data ? err.response.data.message : err.message,
-        { variant: 'error' }
-      );
-    }
+  const loadMoreHandler = async () => {
+    const newProducts = products.slice(0, productsToShow.length + 6);
+    setProductsToShow(newProducts);
   };
 
   const updateFilterQueryHandler = async (
@@ -150,12 +101,16 @@ const shop = (props) => {
     queryValue,
     queryChecked
   ) => {
+    console.log('lmao', queryName, queryValue, queryChecked);
     if (queryChecked) {
+      console.log('FILTER 1 true', queryFilter);
       setQueryFilter({
         ...queryFilter,
-        [queryName]: [...queryFilter[queryName], queryValue],
+        [queryName]: arr,
       });
+      console.log('FILTER 2 true', queryFilter);
     } else {
+      console.log('FILTER 1 false', queryFilter);
       let updated;
 
       if (Array.isArray(queryFilter[queryName])) {
@@ -165,8 +120,10 @@ const shop = (props) => {
       } else {
         updated = '';
       }
+      console.log('UPDATED', updated);
 
       setQueryFilter({ ...queryFilter, [queryName]: updated });
+      console.log('FILTER 2 false', queryFilter);
     }
   };
 
@@ -174,7 +131,7 @@ const shop = (props) => {
     e.preventDefault();
 
     let queryParams = `?`;
-
+    console.log(queryFilter);
     if (queryFilter.brand && queryFilter.brand.length > 0) {
       queryFilter.brand.map((param) => {
         queryParams = queryParams.concat(`brand=${param}&`);
@@ -214,7 +171,7 @@ const shop = (props) => {
     }
     queryParams = queryParams.substring(0, queryParams.length - 1);
     queryParams = queryParams.concat(`#eyewear`);
-    router.push(`/shop${queryParams}`);
+    window.location.href = `/shop${queryParams}`;
   };
 
   const checkboxCheckHandler = (queryName, queryValue) => {
@@ -243,7 +200,7 @@ const shop = (props) => {
   };
 
   return (
-    <>
+    <div className={Styles.root}>
       <div className={Styles.banner}>
         <Image
           src="/shop-hero.png"
@@ -336,79 +293,92 @@ const shop = (props) => {
         ) : (
           <div className={Styles.genderBallsMob}>
             <HamedAbdallahWhiteSpace />
-            <div className={Styles.ballBlockMob}>
-              <a href="/shop?gender=female#eyewear">
-                <div
-                  className={Styles.genderBallMob}
-                  style={{
-                    backgroundImage: `url('/female-eyewear.jpg')`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                  }}
-                ></div>
-              </a>
-              <br></br>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.ballTitleMob}
-              >
-                <span className={Styles.ballTitleSpan}>
-                  For <strong>Her</strong>
-                </span>
-              </Typography>
-            </div>
-            <div className={Styles.ballBlockMob}>
-              <a href="/shop?gender=male#eyewear">
-                <div
-                  className={Styles.genderBallMob}
-                  style={{
-                    backgroundImage: `url('/male-eyewear.jpg')`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                  }}
-                ></div>
-              </a>
-              <br></br>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.ballTitleMob}
-              >
-                <span className={Styles.ballTitleSpan}>
-                  For <strong>Him</strong>
-                </span>
-              </Typography>
-            </div>
-            <div className={Styles.ballBlockMob}>
-              <a href={`/shop?gender=boys&gender=girls#eyewear`}>
-                <div
-                  className={Styles.genderBallMob}
-                  style={{
-                    backgroundImage: `url('/kids_eyewear.jpeg')`,
-                    backgroundSize: 'contain',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundPosition: 'center',
-                  }}
-                ></div>
-              </a>
-              <br></br>
-              <Typography
-                variant="h4"
-                component="h4"
-                className={Styles.ballTitleMob}
-              >
-                <span className={Styles.ballTitleSpan}>
-                  For <strong>Kids</strong>
-                </span>
-              </Typography>
-              <HamedAbdallahWhiteSpace />
-            </div>
+            <Carousel
+              className={Styles.ballCarousel}
+              touch={true}
+              indicators={false}
+            >
+              <Carousel.Item>
+                <div className={Styles.ballBlockMob}>
+                  <a href="/shop?gender=female#eyewear">
+                    <div
+                      className={Styles.genderBallMob}
+                      style={{
+                        backgroundImage: `url('/female-eyewear.jpg')`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                      }}
+                    ></div>
+                  </a>
+                  {/* <br></br> */}
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.ballTitleMob}
+                  >
+                    <span className={Styles.ballTitleSpan}>
+                      For <strong>Her</strong>
+                    </span>
+                  </Typography>
+                </div>
+              </Carousel.Item>
+              <Carousel.Item>
+                <div className={Styles.ballBlockMob}>
+                  <a href="/shop?gender=male#eyewear">
+                    <div
+                      className={Styles.genderBallMob}
+                      style={{
+                        backgroundImage: `url('/male-eyewear.jpg')`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                      }}
+                    ></div>
+                  </a>
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.ballTitleMob}
+                  >
+                    <span className={Styles.ballTitleSpan}>
+                      For <strong>Him</strong>
+                    </span>
+                  </Typography>
+                </div>
+              </Carousel.Item>
+              <Carousel.Item>
+                <div className={Styles.ballBlockMob}>
+                  <a href={`/shop?gender=boys&gender=girls#eyewear`}>
+                    <div
+                      className={Styles.genderBallMob}
+                      style={{
+                        backgroundImage: `url('/kids_eyewear.jpeg')`,
+                        backgroundSize: 'contain',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundPosition: 'center',
+                      }}
+                    ></div>
+                  </a>
+                  <Typography
+                    variant="h4"
+                    component="h4"
+                    className={Styles.ballTitleMob}
+                  >
+                    <span className={Styles.ballTitleSpan}>
+                      For <strong>Kids</strong>
+                    </span>
+                  </Typography>
+                  <HamedAbdallahWhiteSpace />
+                </div>
+              </Carousel.Item>
+            </Carousel>
+
+            <HamedAbdallahWhiteSpace />
           </div>
         )}
 
+        {/* Filter Grid */}
         <Grid container spacing={2}>
           {matches ? (
             <Grid item md={3} xs={12}>
@@ -1172,97 +1142,32 @@ const shop = (props) => {
               </Accordion>
             </Grid>
           )}
+
+          {/* Products Grid */}
           <Grid item md={9} xs={12} id="eyewear" className={Styles.productPane}>
-            <Grid container spacing={3}>
-              {products.map((product) => (
-                <Grid item md={4} sm={6} xs={12} key={product.sku}>
-                  <Card>
-                    <NextLink href={`/product/${product.slug}`} passHref>
-                      <Link>
-                        <CardActionArea>
-                          <CardMedia
-                            className={Styles.card}
-                            component="img"
-                            image={product.featuredImage}
-                            title={`${product.brandName} ${
-                              product.type
-                            } ${``} - ${``} ${product.sku}`}
-                          ></CardMedia>
-                          <CardContent>
-                            <Typography
-                              variant="h5"
-                              component="h5"
-                              style={{
-                                color: 'black',
-                                textDecoration: 'none !important',
-                                textTransform: 'capitalize !important',
-                              }}
-                            >
-                              {`${product.brandName} ${
-                                product.type
-                              } ${``} - ${``} ${product.sku}`}{' '}
-                            </Typography>
-                            {/* <br></br> */}
-                            <Typography
-                              variant="body1"
-                              style={{ color: 'black' }}
-                              component="h6"
-                            >
-                              {product.brandName}
-                            </Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Link>
-                    </NextLink>
-                    <br></br>
-                    <CardActions className={Styles.cardAction}>
-                      {product.discountedPrice === 0 ||
-                      !product.discountedPrice ? (
-                        <Typography>
-                          <strong>{product.price} EGP</strong>
-                        </Typography>
-                      ) : (
-                        <Typography style={{ display: 'flex' }}>
-                          <div className={Styles.lineThrough}>
-                            {product.price}
-                          </div>
-                          <strong>
-                            {product.price - product.discountedPrice} EGP
-                          </strong>
-                        </Typography>
-                      )}
-                      <Button
-                        size="small"
-                        onClick={() => addToCartHandler(product)}
-                      >
-                        <FontAwesomeIcon
-                          style={{ color: '#ca222a' }}
-                          icon={faShoppingBag}
-                          size="2x"
-                        />
-                      </Button>
-                      <Button
-                        size="small"
-                        onClick={() => addToWishlistHandler(product)}
-                      >
-                        <FontAwesomeIcon
-                          style={{ color: '#ca222a' }}
-                          icon={faHeart}
-                          size="2x"
-                        />
-                      </Button>
-                    </CardActions>
-                    <br></br>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
+            <>
+              <Grid container spacing={6}>
+                {productsToShow.map((product) => (
+                  <Grid item md={4} sm={6} xs={12} key={product.sku}>
+                    <HamedAbdallahProductCard
+                      product={product}
+                      brand={product.brand}
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+              <div className={Styles.loadMoreBtnBase}>
+                <Button className={Styles.button} onClick={loadMoreHandler}>
+                  Load More
+                </Button>
+              </div>
+            </>
           </Grid>
         </Grid>
         <br></br>
       </div>
       <HamedAbdallahWhiteSpace />
-    </>
+    </div>
   );
 };
 
@@ -1270,8 +1175,10 @@ export async function getServerSideProps({ query }) {
   await db.connect();
 
   const { type, gender, material, shape, brand, price, color } = query;
-
-  let products = await Product.find({}).lean();
+  console.log(query);
+  let products = await Product.find({})
+    .populate({ path: 'brand', Model: Brand })
+    .lean();
 
   let maxPrice = Math.max.apply(
     Math,
@@ -1347,7 +1254,7 @@ export async function getServerSideProps({ query }) {
   });
 
   const allProducts = JSON.parse(JSON.stringify(products));
-
+  console.log('allProducts.length', products.length);
   let brands = await Brand.find({}).lean();
   const allBrands = JSON.parse(JSON.stringify(brands));
   await db.disconnect();

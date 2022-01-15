@@ -4,8 +4,11 @@
   width: 75%;
   margin: auto;
 }
-
+.upper {
+  background-color: white !important;
+}
 .container {
+  background-color: white !important;
   height: 70% !important;
   display: flex;
   width: 80%;

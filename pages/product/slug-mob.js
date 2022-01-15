@@ -155,7 +155,7 @@ export default function ProductScreen(props) {
         <HamedAbdallahWhiteSpace />
         <Grid container spacing={1}>
           <Grid item md={4} xs={12}>
-            <div>
+            <div className={Styles.imagesRow}>
               <Image
                 alt="image"
                 src={featuredImage}

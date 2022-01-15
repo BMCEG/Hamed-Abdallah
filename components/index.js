@@ -9,6 +9,8 @@ import HamedAbdallahAdminDrawer from './HamedAbdallahAdminDrawer';
 import HamedAbdallahImageMagnifier from './HamedAbdallahImageMagnifier';
 import HamedAbdallahProductBall from './HamedAbdallahProductBall';
 import HamedAbdallahProductBurn from './HamedAbdallahProductBurn';
+import HamedAbdallahProductCard from './HamedAbdallahProductCard';
+
 export {
   HamedAbdallahAdminDrawer,
   HamedAbdallahNav,
@@ -21,4 +23,5 @@ export {
   HamedAbdallahFooter,
   HamedAbdallahCheckoutWizard,
   HamedAbdallahProductBurn,
+  HamedAbdallahProductCard,
 };

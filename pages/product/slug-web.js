@@ -2,18 +2,11 @@ import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Store } from '../../utils/Store';
-import db from '../../utils/db';
-import Product from '../../models/Product';
-import Brand from '../../models/Brand';
-import User from '../../models/User';
-import { ReactPhotoCollage } from 'react-photo-collage';
 import Carousel from 'react-elastic-carousel';
 import { Rating, RatingView } from 'react-simple-star-rating';
-import { useMediaQuery } from '@mui/material';
 import Moment from 'react-moment';
 import {
   Button,
-  Card,
   Grid,
   List,
   TextField,
@@ -30,7 +23,6 @@ import { useSnackbar } from 'notistack';
 import Review from '../../models/Reviews';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faShoppingBag,
   faCertificate,
   faHeart as faHeartOutlined,
   faWrench,
@@ -393,13 +385,12 @@ export default function ProductScreen(props) {
             { width: 1, itemsToShow: 1 },
             { width: 500, itemsToShow: 2 },
             { width: 768, itemsToShow: 3 },
-            { width: 1200, itemsToShow: 4 },
-          ]}
-          enableMouseSwipe={true}
-          enableAutoPlay={true}
-          disableArrowsOnEnd={true}
+            { width: 1200, itemsToShow: 5 },
+          ]} // enableMouseSwipe={true}
+          // enableAutoPlay={true}
+          // disableArrowsOnEnd={true}
           className={Styles.relatedCarousel}
-          pagination={false}
+          pagination={true}
           transitionMs={2000}
         >
           {relatedItems.map((prod) => (
@@ -420,7 +411,7 @@ export default function ProductScreen(props) {
             </Button>
           ))}
         </Carousel>
-        <HamedAbdallahWhiteSpace />
+        {/* <HamedAbdallahWhiteSpace /> */}
         {/* <HamedAbdallahWhiteSpace /> */}
         <div className={Styles.ourBrands__header}>
           <div className={Styles.hr__base}>
@@ -444,14 +435,11 @@ export default function ProductScreen(props) {
             { width: 1, itemsToShow: 1 },
             { width: 500, itemsToShow: 2 },
             { width: 768, itemsToShow: 3 },
-            { width: 1200, itemsToShow: 4 },
+            { width: 1200, itemsToShow: 5 },
           ]}
-          enableMouseSwipe={true}
-          enableAutoPlay={true}
-          disableArrowsOnEnd={true}
           className={Styles.relatedCarousel}
-          pagination={false}
           transitionMs={2000}
+          pagination={false}
         >
           {recentItems.map((prod) => (
             <Button

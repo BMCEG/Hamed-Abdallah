@@ -365,6 +365,7 @@ function AdminProducts(props) {
                       <MenuItem value="brown">Brown</MenuItem>
                       <MenuItem value="gold">Gold</MenuItem>
                       <MenuItem value="grey">Grey</MenuItem>
+                      <MenuItem value="hazel">Hazel</MenuItem>
                       <MenuItem value="light-blue">Light Blue</MenuItem>
                       <MenuItem value="pink">Pink</MenuItem>
                       <MenuItem value="purple">Purple</MenuItem>

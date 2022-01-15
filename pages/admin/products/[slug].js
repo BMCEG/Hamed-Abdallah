@@ -136,7 +136,6 @@ export default function ProductScreen(props) {
   product.images.map((img) => {
     productImages.push({ source: `${img}` });
   });
-  console.log(productImages);
 
   return (
     <div className={Styles.root}>
@@ -265,6 +264,7 @@ export default function ProductScreen(props) {
                     <MenuItem value="brown">Brown</MenuItem>
                     <MenuItem value="gold">Gold</MenuItem>
                     <MenuItem value="grey">Grey</MenuItem>
+                    <MenuItem value="hazel">Hazel</MenuItem>
                     <MenuItem value="light-blue">Light Blue</MenuItem>
                     <MenuItem value="pink">Pink</MenuItem>
                     <MenuItem value="purple">Purple</MenuItem>

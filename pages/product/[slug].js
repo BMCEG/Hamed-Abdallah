@@ -630,12 +630,12 @@ export async function getServerSideProps(context) {
   const rawFilteredProductsByBrand = productsByBrand.filter((prod) => {
     return prod._id.toString() !== rawProduct._id.toString();
   });
+  const someProducts = rawFilteredProductsByBrand.slice(0, 8);
 
-  const allFilteredProductsByBrand = JSON.parse(
-    JSON.stringify(rawFilteredProductsByBrand)
-  );
+  const allFilteredProductsByBrand = JSON.parse(JSON.stringify(someProducts));
   const recentItems = await Product.find({}).sort({ createdAt: -1 });
-  const allRecentItems = JSON.parse(JSON.stringify(recentItems));
+  const someRecentItems = recentItems.slice(0, 8);
+  const allRecentItems = JSON.parse(JSON.stringify(someRecentItems));
 
   const reviews = await Review.find({ product: product._id }).lean();
   const allReviews = JSON.parse(JSON.stringify(reviews));

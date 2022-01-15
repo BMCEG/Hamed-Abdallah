@@ -28,7 +28,8 @@
   white-space: pre-line !important;
 }
 .relatedCarousel {
-  width: 85% !important;
+  width: 90% !important;
+  /* background-color: cadetblue; */
   margin: auto !important;
 }
 .review {
@@ -48,7 +49,7 @@
   transform: scale(1.05);
 }
 .thumbBtn {
-  background-color: yellow;
+  /* background-color: yellow; */
   border-radius: 10px !important;
 }
 .hrReview {
@@ -75,7 +76,14 @@
   /* background-color: aqua !important; */
   object-fit: contain !important;
 }
+.imagesRow {
+  background-color: chartreuse !important;
+  padding: 2vmin !important;
+}
 .product_image {
+  margin: auto !important;
+  /* background-color: chartreuse; */
+  /* width: 100%; */
   object-fit: contain !important;
   transition: all ease-in-out 0.2s;
 }

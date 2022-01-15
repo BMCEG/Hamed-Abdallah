@@ -1,0 +1,54 @@
+.productCard {
+  animation: fadeIn 1s !important;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.cardAction {
+  display: flex;
+  justify-content: space-evenly;
+}
+.card {
+  /* background-color: red !important; */
+  animation: fadeIn 1s !important;
+
+  min-height: 170px;
+  object-fit: contain !important;
+  transition: all ease-in-out 0.2s;
+  text-decoration: none !important;
+}
+.card:hover {
+  transform: scale(1.1);
+}
+.lineThrough {
+  color: black;
+  text-decoration: line-through #ca222a;
+}
+.brandImage {
+  object-fit: contain !important;
+}
+.prodBrand {
+  /* background-color: yellowgreen; */
+  /* width: 100% !important; */
+}
+.prodPrice {
+  /* background-color: yellow; */
+  text-align: right !important;
+  text-decoration: none !important;
+  display: flex;
+  color: #ca222a;
+  /* font-size: x-large !important; */
+  flex-direction: column;
+  justify-content: center;
+  /* width: 100% !important; */
+}
+.prodDeets {
+  /* background-color: aqua; */
+  height: 100% !important;
+  justify-content: space-evenly;
+}
