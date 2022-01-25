@@ -294,7 +294,7 @@ export default function Contact() {
                         NEW CAIRO
                       </Typography>
                       <Typography variant="h5" component="h5">
-                        Cairo Festival City
+                        Arabella Plaza
                       </Typography>
                       <Typography variant="h6" component="h6">
                         011-2629-4516
@@ -309,7 +309,7 @@ export default function Contact() {
                           scrolling="no"
                           marginHeight="0"
                           marginWidth="0"
-                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=29.9916573,31.4320945+(Hamed%20Abdallah)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                         ></iframe>
                       </div>
                     </Grid>
@@ -329,18 +329,18 @@ export default function Contact() {
                     className={Styles.accordionTitle}
                     style={{ color: 'white' }}
                   >
-                    Cairo
+                    Mansoura
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails className={Styles.accordionDetails}>
                   <Grid container spacing={1}>
                     <Grid className={Styles.storeInfo} item md={4} xs={12}>
                       <Typography variant="h4" component="h4">
-                        NEW CAIRO
+                        El-Mashaya
                       </Typography>
-                      <Typography variant="h5" component="h5">
+                      {/* <Typography variant="h5" component="h5">
                         Cairo Festival City
-                      </Typography>
+                      </Typography> */}
                       <Typography variant="h6" component="h6">
                         011-2629-4516
                       </Typography>
@@ -354,7 +354,7 @@ export default function Contact() {
                           scrolling="no"
                           marginHeight="0"
                           marginWidth="0"
-                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=31.0461103,31.3592148+(Hamed%20Abdallah)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                         ></iframe>
                       </div>
                     </Grid>
@@ -374,18 +374,18 @@ export default function Contact() {
                     className={Styles.accordionTitle}
                     style={{ color: 'white' }}
                   >
-                    Cairo
+                    Mansoura
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails className={Styles.accordionDetails}>
                   <Grid container spacing={1}>
                     <Grid className={Styles.storeInfo} item md={4} xs={12}>
                       <Typography variant="h4" component="h4">
-                        NEW CAIRO
+                        Banque Masr Street
                       </Typography>
-                      <Typography variant="h5" component="h5">
+                      {/* <Typography variant="h5" component="h5">
                         Cairo Festival City
-                      </Typography>
+                      </Typography> */}
                       <Typography variant="h6" component="h6">
                         011-2629-4516
                       </Typography>
@@ -399,7 +399,7 @@ export default function Contact() {
                           scrolling="no"
                           marginHeight="0"
                           marginWidth="0"
-                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=31.0467637,31.3849459+(Hamed%20Abdallah)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                         ></iframe>
                       </div>
                     </Grid>
@@ -419,18 +419,18 @@ export default function Contact() {
                     className={Styles.accordionTitle}
                     style={{ color: 'white' }}
                   >
-                    Cairo
+                    Mansoura
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails className={Styles.accordionDetails}>
                   <Grid container spacing={1}>
                     <Grid className={Styles.storeInfo} item md={4} xs={12}>
                       <Typography variant="h4" component="h4">
-                        NEW CAIRO
+                        Al Gama'a Plaza Mall
                       </Typography>
-                      <Typography variant="h5" component="h5">
+                      {/* <Typography variant="h5" component="h5">
                         Cairo Festival City
-                      </Typography>
+                      </Typography> */}
                       <Typography variant="h6" component="h6">
                         011-2629-4516
                       </Typography>
@@ -444,7 +444,7 @@ export default function Contact() {
                           scrolling="no"
                           marginHeight="0"
                           marginWidth="0"
-                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=31.0373927,31.3611347+(Hamed%20Abdallah)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                         ></iframe>
                       </div>
                     </Grid>
@@ -464,17 +464,17 @@ export default function Contact() {
                     className={Styles.accordionTitle}
                     style={{ color: 'white' }}
                   >
-                    Cairo
+                    El-Sharqia
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails className={Styles.accordionDetails}>
                   <Grid container spacing={1}>
                     <Grid className={Styles.storeInfo} item md={4} xs={12}>
                       <Typography variant="h4" component="h4">
-                        NEW CAIRO
+                        El-Zagazig
                       </Typography>
                       <Typography variant="h5" component="h5">
-                        Cairo Festival City
+                        Tolba Awaida Street
                       </Typography>
                       <Typography variant="h6" component="h6">
                         011-2629-4516
@@ -489,7 +489,7 @@ export default function Contact() {
                           scrolling="no"
                           marginHeight="0"
                           marginWidth="0"
-                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=cairo%20festival%20city+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+                          src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=30.5901721,31.4903909+(Hamed%20Abdallah)&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
                         ></iframe>
                       </div>
                     </Grid>
