@@ -11,8 +11,8 @@ export default function HamedAbdallahImageMagnifier({
   otherImages,
   width,
   height,
-  magnifierHeight = 400,
-  magnifieWidth = 400,
+  magnifierHeight = 300,
+  magnifieWidth = 350,
   zoomLevel = 1.5,
 }) {
   const [[x, y], setXY] = useState([0, 0]);
@@ -152,6 +152,8 @@ export default function HamedAbdallahImageMagnifier({
               src={src}
               alt="f"
               width={200}
+              // placeholder="blur  "
+              loading="eager"
               height={200}
               priority={true}
               onClick={() => pickFeaturedImageHandler(`${src}`)}
@@ -162,6 +164,8 @@ export default function HamedAbdallahImageMagnifier({
                 src={img.source}
                 alt="f"
                 width={200}
+                // placeholder="blur"
+                loading="eager"
                 height={200}
                 onClick={() => pickFeaturedImageHandler(`${img.source}`)}
                 priority={true}

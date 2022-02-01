@@ -12,10 +12,18 @@
   text-decoration: line-through #ca222a;
 }
 .genderBalls {
-  /* background-color: aqua; */
   display: flex;
   justify-content: space-evenly;
   height: 35vh !important;
+}
+#herBall {
+  background-image: "url('/Her-white.png')";
+  background-size: 'contain';
+  background-repeat: 'no-repeat';
+  background-position: 'center';
+}
+#herBall:hover {
+  background-image: "url('/Her-red.png')";
 }
 .genderBallsMob {
   /* display: flex; */
@@ -163,11 +171,33 @@
   flex-direction: column;
   justify-content: space-around;
 }
-.card {
-  /* background-color: red !important; */
-  animation: fadeIn 1s !important;
+.lmao {
+  background-color: blueviolet !important;
+  padding: 3vmin !important;
+}
+.cardImageBase {
+  /* height: 150px; */
+  background-color: blue;
+  padding: 2vmin;
+}
+.cardImage {
+  background-color: blue;
+  width: 100%;
+  /* height: 200px; */
+  object-fit: contain !important;
+}
 
-  min-height: 170px;
+.cardMedia {
+  background-color: brown !important;
+  /* width: 100px; */
+  /* height: 100px; */
+}
+
+.card {
+  background-color: green !important;
+  animation: fadeIn 1s !important;
+  /* padding: 3vmin; */
+  /* min-height: 170px; */
   object-fit: contain !important;
   transition: all ease-in-out 0.2s;
   /* text-decoration: none !important; */
@@ -269,4 +299,17 @@
   justify-content: center;
   /* background-color: blueviolet; */
   /* text-align: center !important; */
+}
+
+.removeFilterButton {
+  margin-top: 30%;
+  /* background-color: tomato; */
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+.removeFilterContent {
+  /* background-color: turquoise; */
+  text-align: center;
 }

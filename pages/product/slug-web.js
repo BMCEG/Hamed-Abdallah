@@ -153,7 +153,9 @@ export default function ProductScreen(props) {
                   alt="image"
                   src={product.featuredImage}
                   height={500}
+                  loading="eager"
                   priority={true}
+                  placeholder="blur"
                   onClick={() =>
                     pickFeaturedImageHandler(`${product.featuredImage}`)
                   }
@@ -166,6 +168,8 @@ export default function ProductScreen(props) {
                     alt="image"
                     src={`${image.source}`}
                     height={500}
+                    loading="eager"
+                    placeholder="blur"
                     width={500}
                     onClick={() => pickFeaturedImageHandler(`${image.source}`)}
                     className={Styles.product_image}
@@ -391,28 +395,37 @@ export default function ProductScreen(props) {
           // disableArrowsOnEnd={true}
           className={Styles.relatedCarousel}
           pagination={true}
-          transitionMs={2000}
+          transitionMs={1000}
         >
           {relatedItems.map((prod) => (
-            <Button
-              href={`/product/${prod.slug}`}
-              key={prod._id}
-              className={Styles.thumbBtn}
-            >
-              <Image
+            <>
+              {' '}
+              <Button
+                href={`/product/${prod.slug}`}
                 key={prod._id}
-                alt="Hamed Abdallah Brand"
-                priority={true}
-                src={prod.featuredImage}
-                width={200}
-                height={200}
-                className={Styles.thumbnail}
-              />
-            </Button>
+                className={Styles.thumbBtn}
+              >
+                {/* <Image
+                  key={prod._id}
+                  alt="Hamed Abdallah Brand"
+                  priority={true}
+                  src={prod.featuredImage}
+                  width={200}
+                  height={200}
+                  className={Styles.thumbnail}
+                />
+                <br></br> */}
+                <Typography
+                  component="h3"
+                  variant="h3"
+                  className={Styles.carouselIndexTitle}
+                >
+                  ROFL
+                </Typography>
+              </Button>
+            </>
           ))}
         </Carousel>
-        {/* <HamedAbdallahWhiteSpace /> */}
-        {/* <HamedAbdallahWhiteSpace /> */}
         <div className={Styles.ourBrands__header}>
           <div className={Styles.hr__base}>
             <hr className={Styles.hor}></hr>
@@ -438,25 +451,35 @@ export default function ProductScreen(props) {
             { width: 1200, itemsToShow: 5 },
           ]}
           className={Styles.relatedCarousel}
-          transitionMs={2000}
+          transitionMs={1000}
           pagination={false}
         >
           {recentItems.map((prod) => (
-            <Button
-              href={`/product/${prod.slug}`}
-              key={prod._id}
-              className={Styles.thumbBtn}
-            >
-              <Image
+            <>
+              <Button
+                href={`/product/${prod.slug}`}
                 key={prod._id}
-                alt="Hamed Abdallah Brand"
-                src={prod.featuredImage}
-                width={200}
-                priority={true}
-                height={200}
-                className={Styles.thumbnail}
-              />
-            </Button>
+                className={Styles.thumbBtn}
+              >
+                <Image
+                  key={prod._id}
+                  alt="Hamed Abdallah Brand"
+                  src={prod.featuredImage}
+                  width={200}
+                  priority={true}
+                  height={200}
+                  className={Styles.thumbnail}
+                />
+              </Button>
+              <br></br>
+              <Typography
+                component="h3"
+                variant="h3"
+                className={Styles.carouselIndexTitle}
+              >
+                Lmao
+              </Typography>
+            </>
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />

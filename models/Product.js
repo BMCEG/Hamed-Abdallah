@@ -40,6 +40,7 @@ const productSchema = mongoose.Schema(
         'brown',
         'blue',
         'gold',
+        'green',
         'grey',
         'hazel',
         'light-blue',

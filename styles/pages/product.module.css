@@ -32,7 +32,7 @@
   /* background-color: cadetblue; */
   margin: auto !important;
 }
-.review {
+#review {
   background-color: whitesmoke;
   padding: 2vmin;
   margin: 2vmin;
@@ -51,6 +51,10 @@
 .thumbBtn {
   /* background-color: yellow; */
   border-radius: 10px !important;
+}
+.reccomendation {
+  /* background-color: tomato; */
+  text-align: center;
 }
 .hrReview {
   background-color: #ca222a;
@@ -274,4 +278,9 @@
 }
 .modalOtherImage {
   object-fit: contain;
+}
+
+.carouselIndexTitle {
+  /* background-color: teal; */
+  max-width: 200px !important;
 }

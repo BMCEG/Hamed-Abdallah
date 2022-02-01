@@ -455,27 +455,57 @@ export default function ProductScreen(props) {
           ]}
           enableMouseSwipe={true}
           enableAutoPlay={true}
-          disableArrowsOnEnd={true}
+          disableArrowsOnEnd={false}
           className={Styles.relatedCarousel}
           pagination={false}
-          transitionMs={2000}
+          transitionMs={1000}
+          interval={3000}
+          stopOnHover={true}
+          infiniteLoop={true}
         >
           {relatedItems.map((prod) => (
-            <Button
-              href={`/product/${prod.slug}`}
-              key={prod._id}
-              className={Styles.thumbBtn}
-            >
-              <Image
+            <div className={Styles.reccomendation}>
+              <Button
+                href={`/product/${prod.slug}`}
                 key={prod._id}
-                alt="Hamed Abdallah Brand"
-                priority={true}
-                src={prod.featuredImage}
-                width={200}
-                height={200}
-                className={Styles.thumbnail}
-              />
-            </Button>
+                className={Styles.thumbBtn}
+              >
+                <Image
+                  key={prod._id}
+                  alt="Hamed Abdallah Brand"
+                  src={prod.featuredImage}
+                  width={200}
+                  priority={true}
+                  height={200}
+                  className={Styles.thumbnail}
+                />
+              </Button>
+              <br></br>
+              <br></br>
+              <Typography
+                variant="h6"
+                component="h5"
+                style={{
+                  color: 'black',
+                  textDecoration: 'none !important',
+                  textTransform: 'capitalize !important',
+                }}
+              >
+                {`${prod.brandName} ${prod.type}`}{' '}
+              </Typography>
+              <Typography
+                variant="body1"
+                component="h6"
+                style={{
+                  color: 'black',
+                  textDecoration: 'none !important',
+                  textTransform: 'uppercase !important',
+                }}
+                Name
+              >
+                {prod.sku}
+              </Typography>
+            </div>
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />
@@ -516,27 +546,57 @@ export default function ProductScreen(props) {
           ]}
           enableMouseSwipe={true}
           enableAutoPlay={true}
-          disableArrowsOnEnd={true}
+          disableArrowsOnEnd={false}
           className={Styles.relatedCarousel}
           pagination={false}
-          transitionMs={2000}
+          transitionMs={1000}
+          transitionMs={1000}
+          interval={3000}
+          infiniteLoop={true}
         >
           {recentItems.map((prod) => (
-            <Button
-              href={`/product/${prod.slug}`}
-              key={prod._id}
-              className={Styles.thumbBtn}
-            >
-              <Image
+            <div className={Styles.reccomendation}>
+              <Button
+                href={`/product/${prod.slug}`}
                 key={prod._id}
-                alt="Hamed Abdallah Brand"
-                src={prod.featuredImage}
-                width={200}
-                priority={true}
-                height={200}
-                className={Styles.thumbnail}
-              />
-            </Button>
+                className={Styles.thumbBtn}
+              >
+                <Image
+                  key={prod._id}
+                  alt="Hamed Abdallah Brand"
+                  src={prod.featuredImage}
+                  width={200}
+                  priority={true}
+                  height={200}
+                  className={Styles.thumbnail}
+                />
+              </Button>
+              <br></br>
+              <br></br>
+              <Typography
+                variant="h6"
+                component="h5"
+                style={{
+                  color: 'black',
+                  textDecoration: 'none !important',
+                  textTransform: 'capitalize !important',
+                }}
+              >
+                {`${prod.brandName} ${prod.type}`}{' '}
+              </Typography>
+              <Typography
+                variant="body1"
+                component="h6"
+                style={{
+                  color: 'black',
+                  textDecoration: 'none !important',
+                  textTransform: 'uppercase !important',
+                }}
+                Name
+              >
+                {prod.sku}
+              </Typography>
+            </div>
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />
@@ -630,11 +690,11 @@ export async function getServerSideProps(context) {
   const rawFilteredProductsByBrand = productsByBrand.filter((prod) => {
     return prod._id.toString() !== rawProduct._id.toString();
   });
-  const someProducts = rawFilteredProductsByBrand.slice(0, 8);
+  const someProducts = rawFilteredProductsByBrand.slice(0, 12);
 
   const allFilteredProductsByBrand = JSON.parse(JSON.stringify(someProducts));
   const recentItems = await Product.find({}).sort({ createdAt: -1 });
-  const someRecentItems = recentItems.slice(0, 8);
+  const someRecentItems = recentItems.slice(0, 12);
   const allRecentItems = JSON.parse(JSON.stringify(someRecentItems));
 
   const reviews = await Review.find({ product: product._id }).lean();

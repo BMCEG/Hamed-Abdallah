@@ -8,7 +8,7 @@ const HamedAbdallahCollage = () => {
       <div className={Styles.row}>
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a href="/shop?gender=boys">
+          <a href="/shop?gender=kids">
             <div
               className={Styles.block__img}
               style={{
@@ -20,7 +20,7 @@ const HamedAbdallahCollage = () => {
 
             <div className={Styles.block_caption}>
               <Typography className={Styles.block_title}>
-                <strong>Boys</strong>
+                <strong>Kids</strong>
                 <br></br>
                 Eyewear
               </Typography>

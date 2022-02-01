@@ -81,14 +81,28 @@ const HamedAbdallahProductCard = (props) => {
       <NextLink href={`/product/${product.slug}`} passHref>
         <Link style={{ textDecoration: 'none' }}>
           <CardActionArea>
-            <CardMedia
-              className={Styles.card}
+            <CardMedia>
+              <div className={Styles.card}>
+                {/* <Typography>{`Hello World ${product.featuredImage}`}</Typography> */}
+                <Image
+                  className={Styles.cardImage}
+                  width={400}
+                  height={250}
+                  priority={true}
+                  // placeholder="blur"
+                  loading="eager"
+                  src={`${product.featuredImage}`}
+                  alt="Z"
+                />
+              </div>
+              {/*    className={Styles.card}
               component="img"
               image={product.featuredImage}
               title={`${product.brandName} ${product.type} ${``} - ${``} ${
                 product.sku
               }`}
-            ></CardMedia>
+            ></CardMedia> */}
+            </CardMedia>
             <CardContent>
               {matches ? (
                 <>

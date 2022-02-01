@@ -53,6 +53,9 @@ const shop = (props) => {
   const [price, setPrice] = useState([minPrice, maxPrice]);
   const [lowPrice, setLowPrice] = useState(minPrice);
   const [highPrice, setHighPrice] = useState(maxPrice);
+  const [herImage, setHerImage] = useState('/Her-white.png');
+  const [himImage, setHimImage] = useState('/Him-white.png');
+  const [kidsImage, setKidsImage] = useState('/Kids-white.png');
 
   const [filterAnchor, setFilterAnchor] = useState(false);
   const router = useRouter();
@@ -64,6 +67,7 @@ const shop = (props) => {
     'brown',
     'gold',
     'grey',
+    'green',
     'hazel',
     'light-blue',
     'pink',
@@ -106,11 +110,9 @@ const shop = (props) => {
       console.log('FILTER 1 true', queryFilter);
       setQueryFilter({
         ...queryFilter,
-        [queryName]: arr,
+        [queryName]: [...queryFilter[queryName], queryValue],
       });
-      console.log('FILTER 2 true', queryFilter);
     } else {
-      console.log('FILTER 1 false', queryFilter);
       let updated;
 
       if (Array.isArray(queryFilter[queryName])) {
@@ -219,7 +221,8 @@ const shop = (props) => {
         />
       </div>
       <div className={Styles.container}>
-        {/* <HamedAbdallahWhiteSpace /> */}
+        <HamedAbdallahWhiteSpace />
+
         {matches ? (
           <>
             <div className={Styles.genderBalls}>
@@ -228,11 +231,13 @@ const shop = (props) => {
                   <div
                     className={Styles.genderBall}
                     style={{
-                      backgroundImage: `url('/female-eyewear.jpg')`,
+                      backgroundImage: `url(${herImage})`,
                       backgroundSize: 'contain',
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'center',
                     }}
+                    onMouseOver={() => setHerImage('/Her-Red.png')}
+                    onMouseLeave={() => setHerImage('/Her-white.png')}
                   ></div>
                 </a>
                 <br></br>
@@ -249,11 +254,13 @@ const shop = (props) => {
                   <div
                     className={Styles.genderBall}
                     style={{
-                      backgroundImage: `url('/male-eyewear.jpg')`,
+                      backgroundImage: `url(${himImage})`,
                       backgroundSize: 'contain',
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'center',
                     }}
+                    onMouseOver={() => setHimImage('/Him-Red.png')}
+                    onMouseLeave={() => setHimImage('/Him-white.png')}
                   ></div>
                 </a>
                 <br></br>
@@ -270,11 +277,13 @@ const shop = (props) => {
                   <div
                     className={Styles.genderBall}
                     style={{
-                      backgroundImage: `url('/kids_eyewear.jpeg')`,
+                      backgroundImage: `url(${kidsImage})`,
                       backgroundSize: 'contain',
                       backgroundRepeat: 'no-repeat',
                       backgroundPosition: 'center',
                     }}
+                    onMouseOver={() => setKidsImage('/Kids-Red.png')}
+                    onMouseLeave={() => setKidsImage('/Kids-white.png')}
                   ></div>
                 </a>
                 <br></br>
@@ -304,7 +313,7 @@ const shop = (props) => {
                     <div
                       className={Styles.genderBallMob}
                       style={{
-                        backgroundImage: `url('/female-eyewear.jpg')`,
+                        backgroundImage: `url(${herImage})`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
@@ -329,7 +338,7 @@ const shop = (props) => {
                     <div
                       className={Styles.genderBallMob}
                       style={{
-                        backgroundImage: `url('/male-eyewear.jpg')`,
+                        backgroundImage: `url(${himImage})`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
@@ -353,7 +362,7 @@ const shop = (props) => {
                     <div
                       className={Styles.genderBallMob}
                       style={{
-                        backgroundImage: `url('/kids_eyewear.jpeg')`,
+                        backgroundImage: `url(${kidsImage})`,
                         backgroundSize: 'contain',
                         backgroundRepeat: 'no-repeat',
                         backgroundPosition: 'center',
@@ -1156,11 +1165,25 @@ const shop = (props) => {
                   </Grid>
                 ))}
               </Grid>
-              <div className={Styles.loadMoreBtnBase}>
-                <Button className={Styles.button} onClick={loadMoreHandler}>
-                  Load More
-                </Button>
-              </div>
+              {productsToShow.length === 0 ? (
+                <div className={Styles.removeFilterButton}>
+                  <div className={Styles.removeFilterContent}>
+                    <Typography variant="h4" component="h4">
+                      Check Back Later
+                    </Typography>
+                    <br></br>
+                    <Button className={Styles.button} href="/shop#eyewear">
+                      Remove Filters
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <div className={Styles.loadMoreBtnBase}>
+                  <Button className={Styles.button} onClick={loadMoreHandler}>
+                    Load More
+                  </Button>
+                </div>
+              )}
             </>
           </Grid>
         </Grid>
