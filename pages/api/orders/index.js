@@ -5,6 +5,7 @@ import { onError } from '../../../utils/error.js';
 import { isAuth } from '../../../utils/auth.js';
 import Product from '../../../models/Product';
 import { customAlphabet } from 'nanoid';
+import nodemailer from 'nodemailer';
 
 const handler = nc({
   onError,
@@ -13,27 +14,31 @@ const handler = nc({
 handler.use(isAuth);
 
 handler.post(async (req, res) => {
-  await db.connect();
+  try {
+    await db.connect();
 
-  const shortID = await createShortID();
+    const shortID = await createShortID();
 
-  const newOrder = new Order({
-    ...req.body,
-    shortID,
-    user: req.user._id,
-  });
+    const newOrder = new Order({
+      ...req.body,
+      shortID,
+      user: req.user._id,
+    });
 
-  const order = await newOrder.save();
+    const order = await newOrder.save();
 
-  console.log(req.body);
+    req.body.orderItems.map(async (prod) => {
+      let product = await Product.findById({ _id: prod._id });
+      product.stock = product.stock - prod.quantity;
+      await product.save();
+    });
 
-  req.body.orderItems.map(async (prod) => {
-    let product = await Product.findById({ _id: prod._id });
-    product.stock = product.stock - prod.quantity;
-    await product.save();
-  });
+    await sendMail(order._id);
 
-  res.status(201).send(order);
+    res.status(201).send(order);
+  } catch (err) {
+    res.status(400).send(err);
+  }
 });
 export default handler;
 
@@ -47,4 +52,27 @@ const createShortID = async () => {
   } else {
     return createShortID();
   }
+};
+
+const sendMail = async (payload) => {
+  let transporter = nodemailer.createTransport({
+    host: 'smtp.mail.yahoo.com',
+    port: 587,
+    secure: false,
+    service: 'yahoo',
+    logger: true,
+    auth: {
+      user: 'ali_moneib@yahoo.com',
+      pass: 'wjxmqjxmmnlpbupm',
+    },
+  });
+
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Hamed Abdallah Optics 👻" <ali_moneib@yahoo.com>', // sender address
+    to: 'ali_moneib@yahoo.com, ali.moneib@gmail.com', // list of receivers
+    subject: 'New Order from Hamed Abdallah website ✔', // Subject line
+    text: 'New Order has been placed. Login to admin panel and check it out', // plain text body
+    html: `<b>New Order has been placed. Login to admin panel and check it out at http://www.hamedabdallah.com/order/${payload}</b>`, // html body
+  });
 };
