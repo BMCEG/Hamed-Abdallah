@@ -45,6 +45,7 @@ export default function ProductScreen(props) {
 
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
+  // const reviewInput = ;
 
   const router = useRouter();
   const { slug } = router.query;
@@ -415,13 +416,13 @@ export default function ProductScreen(props) {
                   className={Styles.thumbnail}
                 />
                 <br></br> */}
-                <Typography
+                {/* <Typography
                   component="h3"
                   variant="h3"
                   className={Styles.carouselIndexTitle}
                 >
                   ROFL
-                </Typography>
+                </Typography> */}
               </Button>
             </>
           ))}
@@ -471,26 +472,19 @@ export default function ProductScreen(props) {
                   className={Styles.thumbnail}
                 />
               </Button>
-              <br></br>
+              {/* <br></br>
               <Typography
                 component="h3"
                 variant="h3"
                 className={Styles.carouselIndexTitle}
               >
                 Lmao
-              </Typography>
+              </Typography> */}
             </>
           ))}
         </Carousel>
         <HamedAbdallahWhiteSpace />
       </div>
-      <Image
-        src="/wave-red-bottom.png"
-        alt="ds"
-        priority={true}
-        width="1980"
-        height="250"
-      />
       <div className={Styles.reviews_base}>
         <div className={Styles.reviews}>
           <HamedAbdallahWhiteSpace />
@@ -524,14 +518,20 @@ export default function ProductScreen(props) {
             <List>
               <ListItem>
                 <TextField
-                  variant="filled"
+                  // variant="filled"
                   fullWidth
                   onChange={(e) => setReview(e.target.value)}
-                  id="review"
                   label="Review"
                   rows={5}
+                  className={Styles.reviewInput}
+                  style={{ backgroundColor: 'blue !important' }}
                   multiline
-                  inputProps={{ maxLength: 500, type: 'text' }}
+                  inputProps={{
+                    maxLength: 500,
+                    type: 'text',
+                    color: 'white',
+                    className: Styles.reviewInput,
+                  }}
                 ></TextField>
               </ListItem>
               <ListItem>

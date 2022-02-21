@@ -22,7 +22,15 @@ const returnSchema = mongoose.Schema(
         type: String,
         required: true,
       },
-      address: {
+      address1: {
+        type: String,
+        required: true,
+      },
+      address2: {
+        type: String,
+        required: true,
+      },
+      landmark: {
         type: String,
         required: true,
       },

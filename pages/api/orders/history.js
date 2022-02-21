@@ -13,7 +13,13 @@ handler.use(isAuth);
 handler.get(async (req, res) => {
   await db.connect();
 
-  let orders = await Order.find({ user: req.user._id });
+  let allOrders = await Order.find({ user: req.user._id });
+
+  let orders = allOrders.filter((order) => {
+    return order.status !== 'returned' && order.status !== 'returnPending'
+  });
+
+  console.log(orders);
 
   orders = orders.sort(function (a, b) {
     // Turn your strings into dates, and then subtract them

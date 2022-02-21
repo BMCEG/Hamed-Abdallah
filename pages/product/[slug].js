@@ -645,10 +645,14 @@ export default function ProductScreen(props) {
                   fullWidth
                   onChange={(e) => setReview(e.target.value)}
                   id="review"
+                  className={Styles.reviewInput}
                   label="Review"
                   rows={5}
                   multiline
-                  inputProps={{ maxLength: 500, type: 'text' }}
+                  inputProps={{
+                    maxLength: 500,
+                    type: 'text',
+                  }}
                 ></TextField>
               </ListItem>
               <ListItem>
@@ -658,8 +662,6 @@ export default function ProductScreen(props) {
                 />
               </ListItem>
               <ListItem>
-                {/* Add your own review */}
-                {/* <br></br> */}
                 <Button
                   variant="contained"
                   className={Styles.reviewBtn}

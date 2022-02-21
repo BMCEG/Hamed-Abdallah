@@ -59,7 +59,7 @@ function OrderHistory() {
         const { data } = await axios.get(`/api/orders/history`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
-        console.log('DATA ORDER HISTORY', data);
+        // console.log('DATA ORDER HISTORY', data);
 
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {
@@ -126,8 +126,7 @@ function OrderHistory() {
                             <TableCell>ID</TableCell>
                             <TableCell>DATE</TableCell>
                             <TableCell>TOTAL</TableCell>
-                            <TableCell>PAID</TableCell>
-                            <TableCell>DELIVERED</TableCell>
+                            <TableCell>Status</TableCell>
                             <TableCell>ACTION</TableCell>
                           </TableRow>
                         </TableHead>
@@ -141,16 +140,7 @@ function OrderHistory() {
                                 </Moment>
                               </TableCell>
                               <TableCell>{order.totalPrice}</TableCell>
-                              <TableCell>
-                                {order.isPaid
-                                  ? `Paid at ${order.paidAt}`
-                                  : 'Not Paid'}
-                              </TableCell>
-                              <TableCell>
-                                {order.isDelivered
-                                  ? `Delivered at ${order.deliveredAt}`
-                                  : 'Not Delivered'}
-                              </TableCell>
+                              <TableCell>{order.status}</TableCell>
                               <TableCell>
                                 <NextLink href={`/order/${order._id}`} passHref>
                                   <Button

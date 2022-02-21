@@ -32,11 +32,11 @@
   /* background-color: cadetblue; */
   margin: auto !important;
 }
-#review {
-  background-color: whitesmoke;
+.reviewInput {
+  background-color: white !important;
   padding: 2vmin;
   margin: 2vmin;
-  color: black !important;
+  color: #ca222a !important;
   border-radius: 10px;
 }
 .thumbnail {

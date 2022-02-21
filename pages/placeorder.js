@@ -97,195 +97,201 @@ function PlaceOrder() {
   };
 
   return (
-    <div className={Styles.container}>
-      <HamedAbdallahWhiteSpace />
-      <HamedAbdallahCheckoutWizard activeStep={3} />
-      <HamedAbdallahWhiteSpace />
-      <Typography variant="h3" component="h1">
-        Place Order
-      </Typography>
-      <div className={Styles.grid__container}>
-        <Grid container>
-          <Grid item md={9} xs={12}>
-            <Card className={Styles.section}>
-              <List>
-                <ListItem>
-                  <Typography component="h5" variant="h5">
-                    Order Items
-                  </Typography>
-                </ListItem>
-                <ListItem>
-                  <TableContainer>
-                    <Table>
-                      <TableHead>
-                        <TableRow>
-                          <TableCell>Image</TableCell>
-                          <TableCell>Name</TableCell>
-                          <TableCell align="right">Quantity</TableCell>
-                          <TableCell align="right">Price</TableCell>
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {cartItems.map((item) => (
-                          <TableRow key={item.name}>
-                            <TableCell>
-                              <Button
-                                variant="text"
-                                href={`/product/${item.slug}`}
-                              >
-                                <Image
-                                  className={Styles.product_image}
-                                  src={`${item.featuredImage}`}
-                                  alt={item.name}
-                                  width={50}
-                                  height={50}
-                                />
-                              </Button>
-                            </TableCell>
-                            <TableCell>
-                              <Button
-                                variant="text"
-                                href={`/product/${item.slug}`}
-                              >
-                                <Typography>{item.name}</Typography>
-                              </Button>
-                            </TableCell>
-                            <TableCell align="right">
-                              <Typography>{item.quantity}</Typography>
-                            </TableCell>
-                            {item.discountedPrice === 0 ? (
-                              <TableCell align="right">{item.price}</TableCell>
-                            ) : (
-                              <TableCell align="right">
-                                <div className={Styles.lineThrough}>
-                                  {item.price}
-                                </div>{' '}
-                                {item.price - item.discountedPrice} EGP
-                              </TableCell>
-                            )}
+    <div style={{ backgroundColor: 'white' }}>
+      <div className={Styles.container}>
+        <HamedAbdallahWhiteSpace />
+        <HamedAbdallahCheckoutWizard activeStep={3} />
+        <HamedAbdallahWhiteSpace />
+        <Typography variant="h3" component="h1">
+          Place Order
+        </Typography>
+        <div className={Styles.grid__container}>
+          <Grid container>
+            <Grid item md={9} xs={12}>
+              <Card className={Styles.section}>
+                <List>
+                  <ListItem>
+                    <Typography component="h5" variant="h5">
+                      Order Items
+                    </Typography>
+                  </ListItem>
+                  <ListItem>
+                    <TableContainer>
+                      <Table>
+                        <TableHead>
+                          <TableRow>
+                            <TableCell>Image</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell align="right">Quantity</TableCell>
+                            <TableCell align="right">Price</TableCell>
                           </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </ListItem>
-              </List>
-            </Card>
-            <Card className={Styles.section}>
-              <List>
-                <ListItem>
-                  <Typography component="h5" variant="h5">
-                    Shipping Address
-                  </Typography>
-                </ListItem>
-                <ListItem>
-                  {shippingAddress.fullName},<br></br>
-                  {shippingAddress.phone}
-                  <br></br>
-                  {shippingAddress.address1}, {shippingAddress.address2},
-                  <br></br>
-                  {shippingAddress.landmark}, <br></br>
-                  {shippingAddress.city}, <br></br>
-                  {shippingAddress.postalCode}
-                </ListItem>
-              </List>
-            </Card>
-            <Card className={Styles.section}>
-              <List>
-                <ListItem>
-                  <Typography component="h5" variant="h5">
-                    Payment Method
-                  </Typography>
-                </ListItem>
-                <ListItem>{paymentMethod}</ListItem>
-              </List>
-            </Card>
+                        </TableHead>
+                        <TableBody>
+                          {cartItems.map((item) => (
+                            <TableRow key={item.name}>
+                              <TableCell>
+                                <Button
+                                  variant="text"
+                                  href={`/product/${item.slug}`}
+                                >
+                                  <Image
+                                    className={Styles.product_image}
+                                    src={`${item.featuredImage}`}
+                                    alt={item.name}
+                                    width={50}
+                                    height={50}
+                                  />
+                                </Button>
+                              </TableCell>
+                              <TableCell>
+                                <Button
+                                  variant="text"
+                                  href={`/product/${item.slug}`}
+                                >
+                                  <Typography>{item.name}</Typography>
+                                </Button>
+                              </TableCell>
+                              <TableCell align="right">
+                                <Typography>{item.quantity}</Typography>
+                              </TableCell>
+                              {item.discountedPrice === 0 ? (
+                                <TableCell align="right">
+                                  {item.price}
+                                </TableCell>
+                              ) : (
+                                <TableCell align="right">
+                                  <div className={Styles.lineThrough}>
+                                    {item.price}
+                                  </div>{' '}
+                                  {item.price - item.discountedPrice} EGP
+                                </TableCell>
+                              )}
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </ListItem>
+                </List>
+              </Card>
+              <Card className={Styles.section}>
+                <List>
+                  <ListItem>
+                    <Typography component="h5" variant="h5">
+                      Shipping Address
+                    </Typography>
+                  </ListItem>
+                  <ListItem>
+                    {shippingAddress.fullName},<br></br>
+                    {shippingAddress.phone}
+                    <br></br>
+                    {shippingAddress.address1}, {shippingAddress.address2},
+                    <br></br>
+                    {shippingAddress.landmark}, <br></br>
+                    {shippingAddress.city}, <br></br>
+                    {shippingAddress.postalCode}
+                  </ListItem>
+                </List>
+              </Card>
+              <Card className={Styles.section}>
+                <List>
+                  <ListItem>
+                    <Typography component="h5" variant="h5">
+                      Payment Method
+                    </Typography>
+                  </ListItem>
+                  <ListItem>{paymentMethod}</ListItem>
+                </List>
+              </Card>
+            </Grid>
+            <Grid item md={3} xs={12}>
+              <Card className={Styles.section}>
+                <List>
+                  <ListItem>
+                    <Typography variant="h5">Order Summary</Typography>
+                  </ListItem>
+                  <hr></hr>
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <Typography>Items:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">{itemsPrice} EGP</Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <Typography>Discoutned:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">
+                          <strong style={{ color: '#ca222a' }}>
+                            -{discountedPrice} EGP
+                          </strong>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <Typography>Shipping:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">
+                          {shippingPrice} EGP
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>{' '}
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <Typography>VAT:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">{vat} EGP</Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                  <ListItem>
+                    <Grid container>
+                      <Grid item xs={6}>
+                        <Typography>Total:</Typography>
+                      </Grid>{' '}
+                      <Grid item xs={6}>
+                        <Typography align="right">
+                          <strong>{totalPrice} EGP</strong>
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </ListItem>
+                  <ListItem>
+                    <Button
+                      onClick={placeOrderHandler}
+                      variant="contained"
+                      color="primary"
+                      className={Styles.btn}
+                    >
+                      {loading ? (
+                        <ListItem>
+                          <CircularProgress />{' '}
+                        </ListItem>
+                      ) : (
+                        `Place Order`
+                      )}
+                    </Button>
+                  </ListItem>
+                </List>
+              </Card>
+            </Grid>
           </Grid>
-          <Grid item md={3} xs={12}>
-            <Card className={Styles.section}>
-              <List>
-                <ListItem>
-                  <Typography variant="h5">Order Summary</Typography>
-                </ListItem>
-                <hr></hr>
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>Items:</Typography>
-                    </Grid>{' '}
-                    <Grid item xs={6}>
-                      <Typography align="right">{itemsPrice} EGP</Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>{' '}
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>Discoutned:</Typography>
-                    </Grid>{' '}
-                    <Grid item xs={6}>
-                      <Typography align="right">
-                        <strong style={{ color: '#ca222a' }}>
-                          -{discountedPrice} EGP
-                        </strong>
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>{' '}
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>Shipping:</Typography>
-                    </Grid>{' '}
-                    <Grid item xs={6}>
-                      <Typography align="right">{shippingPrice} EGP</Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>{' '}
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>VAT:</Typography>
-                    </Grid>{' '}
-                    <Grid item xs={6}>
-                      <Typography align="right">{vat} EGP</Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem>
-                  <Grid container>
-                    <Grid item xs={6}>
-                      <Typography>Total:</Typography>
-                    </Grid>{' '}
-                    <Grid item xs={6}>
-                      <Typography align="right">
-                        <strong>{totalPrice} EGP</strong>
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </ListItem>
-                <ListItem>
-                  <Button
-                    onClick={placeOrderHandler}
-                    variant="contained"
-                    color="primary"
-                    className={Styles.btn}
-                  >
-                    {loading ? (
-                      <ListItem>
-                        <CircularProgress />{' '}
-                      </ListItem>
-                    ) : (
-                      `Place Order`
-                    )}
-                  </Button>
-                </ListItem>
-              </List>
-            </Card>
-          </Grid>
-        </Grid>
+        </div>
+        <HamedAbdallahWhiteSpace />
       </div>
-      <HamedAbdallahWhiteSpace />
     </div>
   );
 }

@@ -1,5 +1,17 @@
 import mongoose from 'mongoose';
 
+const subSchema = new mongoose.Schema({
+  author: {
+    type: String,
+  },
+  note: {
+    type: String,
+  },
+  date: {
+    type: Date,
+  },
+});
+
 const orderSchema = mongoose.Schema(
   {
     user: {
@@ -16,6 +28,18 @@ const orderSchema = mongoose.Schema(
         ref: 'Product',
       },
     ],
+    status: {
+      type: String,
+      enum: [
+        'pending',
+        'processing',
+        'shipping',
+        'delivered',
+        'returnPending',
+        'returned',
+      ],
+      default: 'pending',
+    },
     shippingAddress: {
       fullName: {
         type: String,
@@ -80,11 +104,17 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    isRead: {
+      type: Boolean,
+      default: false,
+    },
+    notes: [subSchema],
     paidAt: {
       type: Date,
     },
     deliveredAt: {
       type: Date,
+      default: null,
     },
   },
   {

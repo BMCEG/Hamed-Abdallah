@@ -130,24 +130,35 @@ function ReturnPage() {
                             <TableCell>DATE</TableCell>
                             <TableCell align="right">ITEMS PRICE</TableCell>
                             <TableCell align="right">RETURN STATUS</TableCell>
+                            <TableCell align="right"></TableCell>
                           </TableRow>
                         </TableHead>
                         <TableBody>
-                          {returns.map((item) => (
-                            <TableRow key={item._id}>
-                              <TableCell>{item.order.shortID}</TableCell>
+                          {returns.map((order) => (
+                            <TableRow key={order._id}>
+                              <TableCell>{order.shortID}</TableCell>
                               <TableCell>
                                 <Moment format="dddd DD MMM YYYY">
-                                  {item.createdAt}
+                                  {order.createdAt}
                                 </Moment>
                               </TableCell>
                               <TableCell align="right">
-                                {item.itemsPrice}
+                                {order.itemsPrice}
                               </TableCell>
                               <TableCell align="right">
-                                {item.returnStatus === 'pending'
-                                  ? `Pending`
+                                {order.status === 'returnPending'
+                                  ? `Return Pending`
                                   : `Returned`}
+                              </TableCell>
+                              <TableCell align="right">
+                                <NextLink href={`/order/${order._id}`} passHref>
+                                  <Button
+                                    className={Styles.btn}
+                                    variant="contained"
+                                  >
+                                    Details
+                                  </Button>
+                                </NextLink>
                               </TableCell>
                             </TableRow>
                           ))}

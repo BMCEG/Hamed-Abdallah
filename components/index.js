@@ -10,7 +10,8 @@ import HamedAbdallahImageMagnifier from './HamedAbdallahImageMagnifier';
 import HamedAbdallahProductBall from './HamedAbdallahProductBall';
 import HamedAbdallahProductBurn from './HamedAbdallahProductBurn';
 import HamedAbdallahProductCard from './HamedAbdallahProductCard';
-
+import HamedAbdallahProcessingWizard from './HamedAbdallahProcessingWizard';
+import HamedAbdallahReturnWizard from './HamedAbdallahReturnWizard';
 export {
   HamedAbdallahAdminDrawer,
   HamedAbdallahNav,
@@ -22,6 +23,8 @@ export {
   HamedAbdallahWhiteSpace,
   HamedAbdallahFooter,
   HamedAbdallahCheckoutWizard,
+  HamedAbdallahProcessingWizard,
+  HamedAbdallahReturnWizard,
   HamedAbdallahProductBurn,
   HamedAbdallahProductCard,
 };

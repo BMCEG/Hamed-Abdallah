@@ -16,7 +16,10 @@ import db from '../../utils/db';
 import MaterialTable from 'material-table';
 import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
-import Return from '../../models/Return';
+// import Return from '../../models/Return';
+import Order from '../../models/Order';
+import User from '../../models/User';
+import Moment from 'react-moment';
 
 function AdminReturns(props) {
   const [isOpened, setIsOpened] = useState(false);
@@ -24,32 +27,97 @@ function AdminReturns(props) {
 
   const columns = [
     {
-      title: 'Return ID',
-      field: '_id',
+      title: 'Order ID',
+      field: 'shortID',
+      render: (rowData) =>
+        rowData.isRead ? rowData.shortID : <strong>{rowData.shortID}</strong>,
     },
-    // {title: 'Return Type'}
-    // {
-    //   title: 'Number of Items',
-    //   field: 'orderItems',
-    //   render: (rowData) => rowData.orderItems.length,
-    // },
-    { title: 'User', field: 'user.name' },
-    { title: 'Shipping Address', field: 'shippingAddress.address' },
-    { title: 'Shipping Phone', field: 'shippingAddress.phone' },
-    { title: 'Items Price', field: 'itemsPrice', type: 'numeric' },
-
-    { title: 'Return Status', field: 'returnStatus' },
-    { title: 'Date Created', field: 'createdAt', type: 'numeric' },
     {
-      title: 'Date Returned',
-      field: 'returnedAt',
+      title: 'User',
+      field: 'user.name',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.user.name
+        ) : (
+          <strong>{rowData.user.name}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Name',
+      field: 'shippingAddress.fullName',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.fullName
+        ) : (
+          <strong>{rowData.shippingAddress.fullName}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Address',
+      field: 'shippingAddress.address1',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.address1
+        ) : (
+          <strong>{rowData.shippingAddress.address1}</strong>
+        ),
+    },
+    {
+      title: 'Shipping City',
+      field: 'shippingAddress.city',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.city
+        ) : (
+          <strong>{rowData.shippingAddress.city}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Phone',
+      field: 'shippingAddress.phone',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.phone
+        ) : (
+          <strong>{rowData.shippingAddress.phone}</strong>
+        ),
+    },
+    {
+      title: 'Items Price',
+      field: 'itemsPrice',
       type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.itemsPrice
+        ) : (
+          <strong>{rowData.itemsPrice}</strong>
+        ),
+    },
+
+    {
+      title: 'Return Status',
+      field: 'status',
+      render: (rowData) =>
+        rowData.isRead ? rowData.status : <strong>{rowData.status}</strong>,
+    },
+    {
+      title: 'Date Created',
+      field: 'createdAt',
+      type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? (
+          <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
+        ) : (
+          <strong>
+            <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
+          </strong>
+        ),
     },
     {
       title: 'Actions',
       field: '',
       render: (rowData) => (
-        <Button variant="contained" href={`/admin/returns/${rowData._id}`}>
+        <Button variant="contained" href={`/admin/orders/${rowData._id}`}>
           Details
         </Button>
       ),
@@ -147,10 +215,13 @@ function AdminReturns(props) {
 
 export async function getServerSideProps({ query }) {
   await db.connect();
-
-  let returns = await Return.find({}).lean().populate('user');
-
-  const allReturns = JSON.parse(JSON.stringify(returns));
+  let returns = await Order.find({})
+    .lean()
+    .populate({ path: 'user', Model: User });
+  let allReturns = JSON.parse(JSON.stringify(returns));
+  allReturns = allReturns.filter((order) => {
+    return order.status === 'returnPending' || order.status === 'returned';
+  });
   await db.disconnect();
 
   return {
@@ -159,5 +230,4 @@ export async function getServerSideProps({ query }) {
     },
   };
 }
-
 export default AdminReturns;

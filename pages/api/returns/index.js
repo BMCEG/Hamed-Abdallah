@@ -12,22 +12,24 @@ const handler = nc({
 handler.use(isAuth);
 
 handler.post(async (req, res) => {
-  const { userInfo, orderId, returnType } = req.body;
+  const { userInfo, orderId } = req.body;
   await db.connect();
   try {
     const order = await Order.findById({ _id: orderId });
+    console.log(order);
+    order.status = 'returnPending';
+    await order.save();
 
-    const newReturn = new Return({
-      user: userInfo._id,
-      order: orderId,
-      returnType,
-      shippingAddress: order.shippingAddress,
-      paymentMethod: order.paymentMethod,
-      itemsPrice: order.itemsPrice,
-    });
+    // const newReturn = new Return({
+    //   user: userInfo._id,
+    //   order: orderId,
+    //   shippingAddress: order.shippingAddress,
+    //   paymentMethod: order.paymentMethod,
+    //   itemsPrice: order.itemsPrice,
+    // });
 
-    await newReturn.save();
-    res.status(201).send(newReturn);
+    // await newReturn.save();
+    res.status(201).send(order);
   } catch (error) {
     console.log(error);
     res.status(401).send({ message: error });

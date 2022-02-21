@@ -12,7 +12,12 @@ handler.use(isAuth);
 
 handler.get(async (req, res) => {
   await db.connect();
-  let returns = await Return.find({ user: req.user._id }).populate('order');
+  let userOrders = await Order.find({ user: req.user._id });
+
+  let returns = userOrders.filter(
+    (order) => order.status === 'returnPending' || order.status === 'returned'
+  );
+
   returns = returns.sort(function (a, b) {
     // Turn your strings into dates, and then subtract them
     // to get a value that is either negative, positive, or zero.

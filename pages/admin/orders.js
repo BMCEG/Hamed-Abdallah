@@ -29,37 +29,154 @@ function AdminOrders(props) {
     {
       title: 'Order ID',
       field: 'shortID',
+      render: (rowData) =>
+        rowData.isRead ? rowData.shortID : <strong>{rowData.shortID}</strong>,
     },
     {
       title: 'Number of Items',
       field: 'orderItems',
-      render: (rowData) => rowData.orderItems.length,
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.orderItems.length
+        ) : (
+          <strong>{rowData.orderItems.length}</strong>
+        ),
     },
-    { title: 'User', field: 'user.name' },
-    { title: 'Shipping Name', field: 'shippingAddress.fullName' },
-    { title: 'Shipping Address', field: 'shippingAddress.address' },
-    { title: 'Shipping Phone', field: 'shippingAddress.phone' },
-    { title: 'Items Price', field: 'itemsPrice', type: 'numeric' },
-    { title: 'Discount Value', field: 'discountValue', type: 'numeric' },
-    { title: 'Shipping Price', field: 'shippingPrice', type: 'numeric' },
-    { title: 'VAT', field: 'vat', type: 'numeric' },
-    { title: 'Total Price', field: 'totalPrice', type: 'numeric' },
-    { title: 'Is Paid', field: 'isPaid', type: 'boolean' },
+    {
+      title: 'User',
+      field: 'user.name',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.user.name
+        ) : (
+          <strong>{rowData.user.name}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Name',
+      field: 'shippingAddress.fullName',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.fullName
+        ) : (
+          <strong>{rowData.shippingAddress.fullName}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Address',
+      field: 'shippingAddress.address1',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.address1
+        ) : (
+          <strong>{rowData.shippingAddress.address1}</strong>
+        ),
+    },
+    {
+      title: 'Shipping City',
+      field: 'shippingAddress.city',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.city
+        ) : (
+          <strong>{rowData.shippingAddress.city}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Phone',
+      field: 'shippingAddress.phone',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingAddress.phone
+        ) : (
+          <strong>{rowData.shippingAddress.phone}</strong>
+        ),
+    },
+    {
+      title: 'Items Price',
+      field: 'itemsPrice',
+      type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.itemsPrice
+        ) : (
+          <strong>{rowData.itemsPrice}</strong>
+        ),
+    },
+    {
+      title: 'Discount Value',
+      field: 'discountValue',
+      type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.discountValue
+        ) : (
+          <strong>{rowData.discountValue}</strong>
+        ),
+    },
+    {
+      title: 'Shipping Price',
+      field: 'shippingPrice',
+      type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.shippingPrice
+        ) : (
+          <strong>{rowData.shippingPrice}</strong>
+        ),
+    },
+    {
+      title: 'VAT',
+      field: 'vat',
+      type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? rowData.vat : <strong>{rowData.vat}</strong>,
+    },
+    {
+      title: 'Total Price',
+      field: 'totalPrice',
+      type: 'numeric',
+      render: (rowData) =>
+        rowData.isRead ? (
+          rowData.totalPrice
+        ) : (
+          <strong>{rowData.totalPrice}</strong>
+        ),
+    },
+    {
+      title: 'Order Status',
+      field: 'status',
+      // type: 'boolean',
+      render: (rowData) =>
+        rowData.isRead ? rowData.status : <strong>{rowData.status}</strong>,
+    },
     {
       title: 'Date Created',
       field: 'createdAt',
       type: 'numeric',
-      render: (rowData) => (
-        <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
-      ),
+      render: (rowData) =>
+        rowData.isRead ? (
+          <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
+        ) : (
+          <strong>
+            <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
+          </strong>
+        ),
     },
     {
       title: 'Date Delivered',
       field: 'deliveredAt',
       type: 'numeric',
-      render: (rowData) => (
-        <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.deliveredAt}</Moment>
-      ),
+      render: (rowData) =>
+        rowData.isRead ? (
+          <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.deliveredAt}</Moment>
+        ) : (
+          <strong>
+            <Moment format="dddd DD/MM/YYYY hh:ss">
+              {rowData.deliveredAt}
+            </Moment>
+          </strong>
+        ),
     },
     {
       title: 'Actions',
@@ -107,7 +224,7 @@ function AdminOrders(props) {
                     alt="Hamed Abdallah"
                     src={'/Hamed-logo-Fullcolor.png'}
                     width={152.5}
-                    height={175}
+                    height={87.5}
                   />
                 </ListItem>
                 <hr></hr>
@@ -175,8 +292,10 @@ export async function getServerSideProps({ query }) {
   let orders = await Order.find({})
     .lean()
     .populate({ path: 'user', Model: User });
-  console.log(orders);
-  const allOrders = JSON.parse(JSON.stringify(orders));
+  let allOrders = JSON.parse(JSON.stringify(orders));
+  allOrders = allOrders.filter((order) => {
+    return order.status !== 'returnPending' && order.status !== 'returned';
+  });
   await db.disconnect();
 
   return {

@@ -47,61 +47,63 @@ export default function Payment() {
   };
 
   return (
-    <div className={Styles.container}>
-      <HamedAbdallahWhiteSpace />
-      <HamedAbdallahCheckoutWizard activeStep={2} />
-      <HamedAbdallahWhiteSpace />
-      <form className={Styles.form} onSubmit={submitHandler}>
-        <Typography variant="h3" component="h3">
-          Payment Method
-        </Typography>
-        <List>
-          <ListItem>
-            <FormControl component="fieldset">
-              <RadioGroup
-                aria-label="Payment Method"
-                name="paymentMethod"
-                value={paymentMethod}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              >
-                <FormControlLabel
-                  label="Debit/Credit Card"
-                  value="Debit/Credit Card"
-                  control={<Radio disabled />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Cash on Delivery"
-                  value="Cash on Delivery"
-                  control={<Radio />}
-                ></FormControlLabel>
-              </RadioGroup>
-            </FormControl>
-          </ListItem>
-          <div className={Styles.btnRow}>
+    <div style={{ backgroundColor: 'white' }}>
+      <div className={Styles.container}>
+        <HamedAbdallahWhiteSpace />
+        <HamedAbdallahCheckoutWizard activeStep={2} />
+        <HamedAbdallahWhiteSpace />
+        <form className={Styles.form} onSubmit={submitHandler}>
+          <Typography variant="h3" component="h3">
+            Payment Method
+          </Typography>
+          <List>
             <ListItem>
-              <Button
-                className={Styles.btn}
-                type="submit"
-                variant="contained"
-                color="primary"
-              >
-                Continue
-              </Button>
-            </ListItem>{' '}
-            <ListItem>
-              <Button
-                type="button"
-                variant="contained"
-                className={Styles.btnBack}
-                onClick={() => router.push('/shipping')}
-              >
-                Back
-              </Button>
+              <FormControl component="fieldset">
+                <RadioGroup
+                  aria-label="Payment Method"
+                  name="paymentMethod"
+                  value={paymentMethod}
+                  onChange={(e) => setPaymentMethod(e.target.value)}
+                >
+                  <FormControlLabel
+                    label="Debit/Credit Card"
+                    value="Debit/Credit Card"
+                    control={<Radio disabled />}
+                  ></FormControlLabel>
+                  <FormControlLabel
+                    label="Cash on Delivery"
+                    value="Cash on Delivery"
+                    control={<Radio />}
+                  ></FormControlLabel>
+                </RadioGroup>
+              </FormControl>
             </ListItem>
-          </div>
-        </List>
-      </form>
-      <HamedAbdallahWhiteSpace />
+            <div className={Styles.btnRow}>
+              <ListItem>
+                <Button
+                  className={Styles.btn}
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >
+                  Continue
+                </Button>
+              </ListItem>{' '}
+              <ListItem>
+                <Button
+                  type="button"
+                  variant="contained"
+                  className={Styles.btnBack}
+                  onClick={() => router.push('/shipping')}
+                >
+                  Back
+                </Button>
+              </ListItem>
+            </div>
+          </List>
+        </form>
+        <HamedAbdallahWhiteSpace />
+      </div>
     </div>
   );
 }

@@ -54,32 +54,17 @@ export default function BrandScreen(props) {
   const { state, dispatch } = useContext(Store);
   const { userInfo } = state;
   const [isOpened, setIsOpened] = useState(false);
+  const [note, setNote] = useState('');
 
   const router = useRouter();
   const { id } = router.query;
   const { order } = props;
+  const [status, setStatus] = useState(order.status);
+  const [isPaid, setIsPaid] = useState(order.isPaid);
+  const [isRead, setIsRead] = useState(order.isRead);
 
-  if (!order) {
-    return (
-      <div>
-        <h1>Order not found</h1>
-      </div>
-    );
-  }
-  const fileInput = React.useRef();
-  const filesInput = React.useRef();
-  const toggleDrawer = (open) => (event) => {
-    if (
-      event.type === 'keydown' &&
-      (event.key === 'Tab' || event.key === 'Shift')
-    ) {
-      return;
-    }
-
-    setIsOpened(open);
-  };
-
-  const paidStatusHandler = async () => {
+  const handlePaymentChange = async (event) => {
+    setIsPaid(event.target.checked);
     await axios
       .post(
         `/api/admin/orders/paid`,
@@ -91,16 +76,20 @@ export default function BrandScreen(props) {
         }
       )
       .then((res) => {
-        window.location.reload();
+        // window.location.reload();
+        enqueueSnackbar('Order payment Status changed successfully', {
+          variant: 'success',
+        });
       })
       .catch((err) => {
-        console.log(err);
+        enqueueSnackbar(err.message, { variant: 'error' });
       });
   };
-  const deliveredStatusHandler = async () => {
+  const handleReadChange = async (event) => {
+    setIsRead(event.target.checked);
     await axios
       .post(
-        `/api/admin/orders/delivered`,
+        `/api/admin/orders/read`,
         {
           orderID: order._id,
         },
@@ -109,32 +98,79 @@ export default function BrandScreen(props) {
         }
       )
       .then((res) => {
-        window.location.reload();
+        // window.location.reload();
+        enqueueSnackbar('Order read status changed successfully', {
+          variant: 'success',
+        });
       })
       .catch((err) => {
-        console.log(err);
+        enqueueSnackbar(err.message, { variant: 'error' });
       });
   };
 
-  const onSubmitHandler = async () => {
-    const editedBrand = await axios
+  if (!order) {
+    return (
+      <div>
+        <h1>Order not found</h1>
+      </div>
+    );
+  }
+
+  const toggleDrawer = (open) => (event) => {
+    if (
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+
+    setIsOpened(open);
+  };
+
+  const submitNoteHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        '/api/admin/orders/notes',
+        {
+          userInfo,
+          orderID: order._id,
+          note,
+        },
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      enqueueSnackbar('Note added successfully', { variant: 'success' });
+      window.location.reload();
+    } catch (err) {
+      enqueueSnackbar(err.message, { variant: 'error' });
+    }
+  };
+
+  const changeHandler = async (e) => {
+    setStatus(e.target.value);
+
+    await axios
       .post(
-        `/api/admin/orders/edit`,
+        `/api/admin/orders/status`,
         {
           orderID: order._id,
-          //   editedName,
-          //   brandProducts,
+          status: e.target.value,
         },
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
         }
       )
       .then((res) => {
-        alert('Successfully edited');
-        window.location.reload();
+        if (res.status === 200) {
+          enqueueSnackbar('Order Status changed successfully', {
+            variant: 'success',
+          });
+        }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((error) => {
+        enqueueSnackbar(err.message, { variant: 'error' });
       });
   };
 
@@ -165,67 +201,84 @@ export default function BrandScreen(props) {
                         </ListItem>{' '}
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            User Name: {order.user.name}
+                            <strong>User Name:</strong> {order.user.name}
                           </Typography>
                         </ListItem>{' '}
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Payment Method: {order.paymentMethod}
+                            <strong>Payment Method:</strong>{' '}
+                            {order.paymentMethod}
                           </Typography>
                         </ListItem>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Is Paid: {order.isPaid ? 'True' : 'False'}
-                          </Typography>
-                        </ListItem>{' '}
-                        <ListItem>
-                          <Typography variant="body1" component="body1">
-                            Is Delivered: {order.isDelivered ? 'True' : 'False'}
-                          </Typography>
-                        </ListItem>{' '}
-                        <ListItem>
-                          <Typography variant="body1" component="body1">
-                            Order Created At:{' '}
+                            <strong>Order Created At:</strong>{' '}
                             <Moment format="dddd DD MMM YYYY">
                               {order.createdAt}
                             </Moment>
                           </Typography>
                         </ListItem>
+                        {/*  */}
+                        <ListItem>
+                          <Typography variant="body1" component="body1">
+                            <strong>Status:</strong>
+                          </Typography>
+                          <Select
+                            value={status}
+                            variant="filled"
+                            label="Change Status"
+                            fullWidth
+                            onChange={changeHandler}
+                          >
+                            <MenuItem disabled value="none">
+                              Change Order Status
+                            </MenuItem>
+                            <MenuItem value="pending">Pending</MenuItem>
+                            <MenuItem value="processing">Processing</MenuItem>
+                            <MenuItem value="shipping">Shipping</MenuItem>
+                            <MenuItem value="delivered">Delivered</MenuItem>
+                            <MenuItem value="returnPending">
+                              Return Pending
+                            </MenuItem>
+                            <MenuItem value="returned">Returned</MenuItem>
+                          </Select>
+                        </ListItem>{' '}
+                        <ListItem>
+                          <Typography variant="body1" component="body1">
+                            <strong>Is Paid:</strong>{' '}
+                            <Switch
+                              checked={isPaid}
+                              onChange={handlePaymentChange}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                          </Typography>
+                        </ListItem>{' '}
+                        <ListItem>
+                          <Typography variant="body1" component="body1">
+                            <strong>Is Read:</strong>{' '}
+                            <Switch
+                              checked={isRead}
+                              onChange={handleReadChange}
+                              inputProps={{ 'aria-label': 'controlled' }}
+                            />
+                          </Typography>
+                        </ListItem>{' '}
                         <hr></hr>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Cart Price: {order.itemsPrice} EGP
+                            <strong>Cart Price:</strong> {order.itemsPrice} EGP
                           </Typography>
                         </ListItem>{' '}
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Shipping Price: {order.shippingPrice} EGP
+                            <strong>Shipping Price:</strong>{' '}
+                            {order.shippingPrice} EGP
                           </Typography>
                         </ListItem>{' '}
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Total Price: {order.totalPrice} EGP
+                            <strong>Total Price:</strong> {order.totalPrice} EGP
                           </Typography>
-                        </ListItem>
-                        <ListItem>
-                          <Grid container spacing={2}>
-                            <Grid item md={6} xs={12}>
-                              <Button
-                                variant="contained"
-                                onClick={paidStatusHandler}
-                              >
-                                Change Paid Status
-                              </Button>
-                            </Grid>
-                            <Grid item md={6} xs={12}>
-                              <Button
-                                variant="contained"
-                                onClick={deliveredStatusHandler}
-                              >
-                                Change Delivered Status
-                              </Button>
-                            </Grid>
-                          </Grid>
                         </ListItem>
                       </List>
                     </Card>
@@ -240,30 +293,106 @@ export default function BrandScreen(props) {
                         </ListItem>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Name: {order.shippingAddress.fullName}
+                            <strong> Name:</strong>{' '}
+                            {order.shippingAddress.fullName}
                           </Typography>{' '}
                         </ListItem>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Mobile Number: {order.shippingAddress.phone}
+                            <strong> Mobile Number:</strong>{' '}
+                            {order.shippingAddress.phone}
                           </Typography>{' '}
                         </ListItem>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Address: {order.shippingAddress.address}
+                            <strong> Address 1:</strong>{' '}
+                            {order.shippingAddress.address1}
                           </Typography>{' '}
                         </ListItem>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            City: {order.shippingAddress.city}
+                            <strong> Address 2:</strong>{' '}
+                            {order.shippingAddress.address2}
                           </Typography>{' '}
                         </ListItem>
                         <ListItem>
                           <Typography variant="body1" component="body1">
-                            Postal Code: {order.shippingAddress.postalCode}
+                            <strong> City:</strong> {order.shippingAddress.city}
+                          </Typography>{' '}
+                        </ListItem>
+                        <ListItem>
+                          <Typography variant="body1" component="body1">
+                            <strong> Postal Code:</strong>{' '}
+                            {order.shippingAddress.postalCode}
                           </Typography>
                         </ListItem>
                         {/* </ListItem> */}
+                      </List>
+                    </Card>
+                  </ListItem>
+                  <ListItem>
+                    <Card className={Styles.card}>
+                      <List>
+                        <ListItem>
+                          <Typography variant="h4" component="h4">
+                            Comments:
+                          </Typography>
+                        </ListItem>
+                        {order.notes.map((note, idx) => (
+                          <ListItem key={idx}>
+                            <div className={Styles.noteBase}>
+                              <Typography
+                                variant="subtitle1"
+                                component="subtitle1"
+                              >
+                                {note.note}
+                              </Typography>
+                              <hr></hr>
+                              <div className={Styles.noteInfo}>
+                                <Typography
+                                  variant="subtitle2"
+                                  component="subtitle2"
+                                >
+                                  {note.author}
+                                </Typography>
+                                <Typography
+                                  variant="subtitle2"
+                                  component="subtitle2"
+                                >
+                                  <Moment format="dddd DD/MM/YYYY hh:mm">
+                                    {note.date}
+                                  </Moment>
+                                </Typography>
+                              </div>
+                            </div>
+                          </ListItem>
+                        ))}
+                        <hr></hr>
+                        <ListItem>
+                          <TextField
+                            variant="filled"
+                            fullWidth
+                            onChange={(e) => setNote(e.target.value)}
+                            id="review"
+                            // className={Styles.reviewInput}
+                            label="Add Note..."
+                            rows={5}
+                            multiline
+                            inputProps={{
+                              maxLength: 500,
+                              type: 'text',
+                            }}
+                          ></TextField>{' '}
+                        </ListItem>
+                        <ListItem>
+                          <Button
+                            variant="contained"
+                            className={Styles.reviewBtn}
+                            onClick={submitNoteHandler}
+                          >
+                            Add Review
+                          </Button>
+                        </ListItem>
                       </List>
                     </Card>
                   </ListItem>
@@ -311,7 +440,7 @@ export default function BrandScreen(props) {
                             <TableCell align="right">
                               <div className={Styles.lineThrough}>
                                 {item.price}
-                              </div>{' '}
+                              </div>
                               {item.price - item.discountedPrice} EGP
                             </TableCell>
                           )}

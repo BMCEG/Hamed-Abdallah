@@ -47,3 +47,15 @@
   display: flex;
   justify-content: center;
 }
+.newOrdersCard {
+  padding: 2vmax;
+  height: 50vh;
+  overflow-y: auto !important;
+}
+.newOrdersCount {
+  /* background-color: antiquewhite; */
+  width: fit-content;
+  margin: auto;
+  color: #ca222a;
+  text-align: center;
+}
