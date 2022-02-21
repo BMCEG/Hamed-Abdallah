@@ -98,7 +98,6 @@ function AdminBrands(props) {
       },
     });
 
-    // console.log('IMAGE', img.data.filename);
     const brand = await axios
       .post(`/api/admin/brands/create`, {
         name,

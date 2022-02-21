@@ -296,7 +296,6 @@ export async function getServerSideProps({ query }) {
 
   let products = await Product.find({ stock: { $lte: 2 } });
   let lowStockProducts = JSON.parse(JSON.stringify(products));
-  console.log(lowStockProducts);
   await db.disconnect();
 
   return {

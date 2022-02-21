@@ -112,7 +112,6 @@ function Order({ params }) {
       }
     );
 
-    console.log(returnOrder);
   };
 
   return (
@@ -343,7 +342,6 @@ function Order({ params }) {
 }
 
 export async function getServerSideProps({ params }) {
-  console.log('HERE', params);
   return { props: { params } };
 }
 

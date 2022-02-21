@@ -4,7 +4,7 @@ const withLess = require('@zeit/next-less');
 const withCSS = require('@zeit/next-css');
 
 module.exports = {
-  webpack5: false,
+  webpack5: true,
   images: {
     minimumCacheTTL: 31536000,
     domains: ['images-uploads.fra1.digitaloceanspaces.com'],

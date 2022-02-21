@@ -19,8 +19,6 @@ handler.get(async (req, res) => {
     return order.status !== 'returned' && order.status !== 'returnPending'
   });
 
-  console.log(orders);
-
   orders = orders.sort(function (a, b) {
     // Turn your strings into dates, and then subtract them
     // to get a value that is either negative, positive, or zero.

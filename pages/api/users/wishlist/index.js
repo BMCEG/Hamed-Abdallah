@@ -9,7 +9,6 @@ handler.post(async (req, res) => {
   const user = await User.findOne({ email: req.body.userInfo.email });
 
   const existingWishlistItem = user.wishlist.some(function (el) {
-    console.log(el._id.toString());
     return el._id.toString() === req.body.data._id;
   });
 

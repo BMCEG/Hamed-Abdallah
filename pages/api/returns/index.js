@@ -16,19 +16,9 @@ handler.post(async (req, res) => {
   await db.connect();
   try {
     const order = await Order.findById({ _id: orderId });
-    console.log(order);
     order.status = 'returnPending';
     await order.save();
 
-    // const newReturn = new Return({
-    //   user: userInfo._id,
-    //   order: orderId,
-    //   shippingAddress: order.shippingAddress,
-    //   paymentMethod: order.paymentMethod,
-    //   itemsPrice: order.itemsPrice,
-    // });
-
-    // await newReturn.save();
     res.status(201).send(order);
   } catch (error) {
     console.log(error);

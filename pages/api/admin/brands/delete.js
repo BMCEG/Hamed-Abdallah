@@ -6,7 +6,6 @@ const handler = nc();
 handler.post(async (req, res) => {
   await db.connect();
   try {
-    console.log(req.body._id);
     const brand = await Brand.deleteOne({ _id: req.body._id });
 
     await db.disconnect();

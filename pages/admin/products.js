@@ -139,8 +139,6 @@ function AdminProducts(props) {
   }) => {
     closeSnackbar();
     setLoadingState(true);
-    console.log(discountedPrice);
-    console.log(price);
     if (discountedPrice > price) {
       enqueueSnackbar(
         `Discoutned Price can't be larger than price (${discountedPrice} > ${price})`,
@@ -177,7 +175,6 @@ function AdminProducts(props) {
       })
       .then((res) => {
         otherImagesUrls = res.data;
-        console.log('res.data', res.data);
       });
 
     const product = await axios

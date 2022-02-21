@@ -11,7 +11,6 @@ const upload = multer({
   storage: multer.diskStorage({
     destination: `./public/uploads/products`,
     filename: (req, file, cb) => {
-      console.log(file);
       const newFileName = `${Date.now()}_${file.originalname.replace(
         /\s+/g,
         '-'

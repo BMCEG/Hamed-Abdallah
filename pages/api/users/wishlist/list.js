@@ -22,7 +22,6 @@ handler.get(async (req, res) => {
     wishlist.push(x);
   }
   await db.disconnect();
-  console.log(wishlist);
   res.send(wishlist);
 });
 export default handler;

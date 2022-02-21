@@ -30,7 +30,6 @@ import {
 import { useSnackbar } from 'notistack';
 import { RatingView } from 'react-simple-star-rating';
 function reducer(state, action) {
-  console.log('action.payload', action.payload);
   switch (action.type) {
     case 'FETCH_REQUEST':
       return { ...state, loading: true, error: '' };

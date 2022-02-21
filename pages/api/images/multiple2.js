@@ -33,7 +33,6 @@ handler.post(async (req, res) => {
       if (err || !fields.id) return res.status(500);
 
       await getResult(files, fields).then((response) => {
-        console.log('res', response);
         // imagesArr = response;
         res.status(200).send({ imagesArr: response });
       });
@@ -48,7 +47,6 @@ export default handler;
 const getResult = async (files, fields) => {
   let imagesLocations = new Array();
   for (let i = 0; i < files.files.length; i++) {
-    // console.log('Here');
     const file = fs.readFileSync(files.files[i].path);
 
     const stored = await s3
@@ -66,7 +64,6 @@ const getResult = async (files, fields) => {
       )
       .promise();
     imagesLocations.push(stored.Location);
-    // console.log(stored);
   }
   return imagesLocations;
 };

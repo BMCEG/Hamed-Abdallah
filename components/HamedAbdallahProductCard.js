@@ -33,7 +33,6 @@ const HamedAbdallahProductCard = (props) => {
   const { userInfo } = state;
 
   const addToCartHandler = async (product) => {
-    console.log(state.cart.cartItems);
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);

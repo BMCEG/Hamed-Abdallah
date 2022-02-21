@@ -15,7 +15,6 @@ handler.get(async (req, res) => {
   await db.connect();
 
   let reviews = await Review.find({ user: req.user._id }).populate('product');
-  console.log(reviews);
 
   await db.disconnect();
   res.send(reviews);

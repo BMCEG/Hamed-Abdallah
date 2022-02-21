@@ -14,7 +14,6 @@ const handler = nc({
 
 handler.post(async (req, res) => {
   const { name, logo } = req.body;
-  console.log(req.body);
   await db.connect();
   try {
     // const brand = await Brand.findById({ _id: orderId });

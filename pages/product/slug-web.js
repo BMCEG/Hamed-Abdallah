@@ -561,5 +561,4 @@ export default function ProductScreen(props) {
 }
 
 export async function getServerSideProps(context) {
-  console.log(context);
 }

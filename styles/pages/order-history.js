@@ -58,7 +58,6 @@ function OrderHistory() {
         const { data } = await axios.get(`/api/orders/history`, {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
-        console.log('DATA ORDER HISTORY', data);
 
         dispatch({ type: 'FETCH_SUCCESS', payload: data });
       } catch (err) {

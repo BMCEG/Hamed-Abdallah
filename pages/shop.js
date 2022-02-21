@@ -105,9 +105,7 @@ const shop = (props) => {
     queryValue,
     queryChecked
   ) => {
-    console.log('lmao', queryName, queryValue, queryChecked);
     if (queryChecked) {
-      console.log('FILTER 1 true', queryFilter);
       setQueryFilter({
         ...queryFilter,
         [queryName]: [...queryFilter[queryName], queryValue],
@@ -122,10 +120,8 @@ const shop = (props) => {
       } else {
         updated = '';
       }
-      console.log('UPDATED', updated);
 
       setQueryFilter({ ...queryFilter, [queryName]: updated });
-      console.log('FILTER 2 false', queryFilter);
     }
   };
 
@@ -133,7 +129,6 @@ const shop = (props) => {
     e.preventDefault();
 
     let queryParams = `?`;
-    console.log(queryFilter);
     if (queryFilter.brand && queryFilter.brand.length > 0) {
       queryFilter.brand.map((param) => {
         queryParams = queryParams.concat(`brand=${param}&`);
@@ -1198,7 +1193,6 @@ export async function getServerSideProps({ query }) {
   await db.connect();
 
   const { type, gender, material, shape, brand, price, color } = query;
-  console.log(query);
   let products = await Product.find({})
     .populate({ path: 'brand', Model: Brand })
     .lean();
@@ -1277,7 +1271,6 @@ export async function getServerSideProps({ query }) {
   });
 
   const allProducts = JSON.parse(JSON.stringify(products));
-  console.log('allProducts.length', products.length);
   let brands = await Brand.find({}).lean();
   const allBrands = JSON.parse(JSON.stringify(brands));
   await db.disconnect();

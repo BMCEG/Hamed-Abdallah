@@ -12,7 +12,6 @@ handler.use(isAuth);
 
 handler.post(async (req, res) => {
   const { orderID, note, userInfo } = req.body;
-  console.log(req.body);
   try {
     await db.connect();
     const order = await Order.findById({ _id: orderID });
