@@ -69,9 +69,9 @@ const sendMail = async (payload) => {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Hamed Abdallah Optics 👻" <ali_moneib@yahoo.com>', // sender address
+    from: '"Hamed Abdallah Optics 👓" <ali_moneib@yahoo.com>', // sender address
     to: 'AhmadWagdy108@gmail.com, ali.moneib@gmail.com, mohamed@bmceg.com', // list of receivers
-    subject: 'New Order from Hamed Abdallah Website 👓', // Subject line
+    subject: 'New Order from Hamed Abdallah Website', // Subject line
     text: 'New Order has been placed. Login to admin panel and check it out', // plain text body
     html: `<b>New Order has been placed. Login to admin panel and check it out at http://www.hamedabdallah.com/order/${payload}</b>`, // html body
   });
