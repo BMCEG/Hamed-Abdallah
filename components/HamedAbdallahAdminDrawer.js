@@ -51,6 +51,11 @@ export default function HamedAbdallahAdminDrawer() {
             USERS
           </Button>
         </ListItem>
+        <ListItem>
+          <Button className={Styles.boxButton} href="/admin/offers">
+            Offers
+          </Button>
+        </ListItem>
       </List>
     </Box>
   );

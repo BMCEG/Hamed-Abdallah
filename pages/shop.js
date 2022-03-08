@@ -53,9 +53,6 @@ const shop = (props) => {
   const [price, setPrice] = useState([minPrice, maxPrice]);
   const [lowPrice, setLowPrice] = useState(minPrice);
   const [highPrice, setHighPrice] = useState(maxPrice);
-  const [herImage, setHerImage] = useState('/Her-white.png');
-  const [himImage, setHimImage] = useState('/Him-white.png');
-  const [kidsImage, setKidsImage] = useState('/Kids-white.png');
 
   const [filterAnchor, setFilterAnchor] = useState(false);
   const router = useRouter();
@@ -115,6 +112,7 @@ const shop = (props) => {
 
       if (Array.isArray(queryFilter[queryName])) {
         updated = queryFilter[queryName].filter((element) => {
+          console.log('element', element);
           return element !== queryValue;
         });
       } else {
@@ -129,6 +127,7 @@ const shop = (props) => {
     e.preventDefault();
 
     let queryParams = `?`;
+
     if (queryFilter.brand && queryFilter.brand.length > 0) {
       queryFilter.brand.map((param) => {
         queryParams = queryParams.concat(`brand=${param}&`);
@@ -168,6 +167,7 @@ const shop = (props) => {
     }
     queryParams = queryParams.substring(0, queryParams.length - 1);
     queryParams = queryParams.concat(`#eyewear`);
+
     window.location.href = `/shop${queryParams}`;
   };
 
@@ -196,6 +196,21 @@ const shop = (props) => {
     setPrice([lowPrice, highPrice]);
   };
 
+  const updateQuery = async (e) => {
+    e.preventDefault();
+
+    const returnVal = queryFilter.type.includes(e.target.value);
+
+    if (!returnVal) {
+      let queryParams = `?`;
+
+      await updateFilterQueryHandler(e.target.name, e.target.value, true);
+      queryParams = queryParams.concat(`type=${e.target.value}#eyewear`);
+
+      window.location.href = `/shop${queryParams}`;
+    }
+  };
+
   return (
     <div className={Styles.root}>
       <div className={Styles.banner}>
@@ -218,170 +233,34 @@ const shop = (props) => {
       <div className={Styles.container}>
         <HamedAbdallahWhiteSpace />
 
-        {matches ? (
-          <>
-            <div className={Styles.genderBalls}>
-              <div className={Styles.ballBlock}>
-                <a href="/shop?gender=female#eyewear">
-                  <div
-                    className={Styles.genderBall}
-                    style={{
-                      backgroundImage: `url(${herImage})`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                    onMouseOver={() => setHerImage('/Her-Red.png')}
-                    onMouseLeave={() => setHerImage('/Her-white.png')}
-                  ></div>
-                </a>
-                <br></br>
-                <Typography
-                  variant="h3"
-                  component="h3"
-                  className={Styles.ballTitle}
-                >
-                  For <strong>Her</strong>
-                </Typography>
-              </div>
-              <div className={Styles.ballBlock}>
-                <a href="/shop?gender=male#eyewear">
-                  <div
-                    className={Styles.genderBall}
-                    style={{
-                      backgroundImage: `url(${himImage})`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                    onMouseOver={() => setHimImage('/Him-Red.png')}
-                    onMouseLeave={() => setHimImage('/Him-white.png')}
-                  ></div>
-                </a>
-                <br></br>
-                <Typography
-                  variant="h3"
-                  component="h3"
-                  className={Styles.ballTitle}
-                >
-                  For <strong>Him</strong>
-                </Typography>
-              </div>
-              <div className={Styles.ballBlock}>
-                <a href={`/shop?gender=boys&gender=girls#eyewear`}>
-                  <div
-                    className={Styles.genderBall}
-                    style={{
-                      backgroundImage: `url(${kidsImage})`,
-                      backgroundSize: 'contain',
-                      backgroundRepeat: 'no-repeat',
-                      backgroundPosition: 'center',
-                    }}
-                    onMouseOver={() => setKidsImage('/Kids-Red.png')}
-                    onMouseLeave={() => setKidsImage('/Kids-white.png')}
-                  ></div>
-                </a>
-                <br></br>
-                <Typography
-                  variant="h3"
-                  component="h3"
-                  className={Styles.ballTitle}
-                >
-                  For <strong>Kids</strong>
-                </Typography>
-              </div>
-            </div>
-            <HamedAbdallahWhiteSpace />
-            <HamedAbdallahWhiteSpace />
-          </>
-        ) : (
-          <div className={Styles.genderBallsMob}>
-            <HamedAbdallahWhiteSpace />
-            <Carousel
-              className={Styles.ballCarousel}
-              touch={true}
-              indicators={false}
+        <div className={Styles.typeBlock}>
+          <div className={Styles.typeButtonBase}>
+            <Button
+              className={Styles.typeButton_sunglasses}
+              name="type"
+              value="sunglasses"
+              onClick={(e) => updateQuery(e)}
             >
-              <Carousel.Item>
-                <div className={Styles.ballBlockMob}>
-                  <a href="/shop?gender=female#eyewear">
-                    <div
-                      className={Styles.genderBallMob}
-                      style={{
-                        backgroundImage: `url(${herImage})`,
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                      }}
-                    ></div>
-                  </a>
-                  {/* <br></br> */}
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={Styles.ballTitleMob}
-                  >
-                    <span className={Styles.ballTitleSpan}>
-                      For <strong>Her</strong>
-                    </span>
-                  </Typography>
-                </div>
-              </Carousel.Item>
-              <Carousel.Item>
-                <div className={Styles.ballBlockMob}>
-                  <a href="/shop?gender=male#eyewear">
-                    <div
-                      className={Styles.genderBallMob}
-                      style={{
-                        backgroundImage: `url(${himImage})`,
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                      }}
-                    ></div>
-                  </a>
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={Styles.ballTitleMob}
-                  >
-                    <span className={Styles.ballTitleSpan}>
-                      For <strong>Him</strong>
-                    </span>
-                  </Typography>
-                </div>
-              </Carousel.Item>
-              <Carousel.Item>
-                <div className={Styles.ballBlockMob}>
-                  <a href={`/shop?gender=boys&gender=girls#eyewear`}>
-                    <div
-                      className={Styles.genderBallMob}
-                      style={{
-                        backgroundImage: `url(${kidsImage})`,
-                        backgroundSize: 'contain',
-                        backgroundRepeat: 'no-repeat',
-                        backgroundPosition: 'center',
-                      }}
-                    ></div>
-                  </a>
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={Styles.ballTitleMob}
-                  >
-                    <span className={Styles.ballTitleSpan}>
-                      For <strong>Kids</strong>
-                    </span>
-                  </Typography>
-                  <HamedAbdallahWhiteSpace />
-                </div>
-              </Carousel.Item>
-            </Carousel>
-
-            <HamedAbdallahWhiteSpace />
+              <Typography component="h1" className={Styles.typeButtonText}>
+                Sunglasses
+              </Typography>
+            </Button>
           </div>
-        )}
-
+          <div className={Styles.typeButtonBase}>
+            <Button
+              className={Styles.typeButton_eyeglasses}
+              name="type"
+              value="eyeglasses"
+              onClick={(e) => updateQuery(e)}
+            >
+              <Typography component="h1" className={Styles.typeButtonText}>
+                Optical
+                <br></br>
+                Eyewear
+              </Typography>
+            </Button>
+          </div>
+        </div>
         {/* Filter Grid */}
         <Grid container spacing={2}>
           {matches ? (
@@ -437,7 +316,7 @@ const shop = (props) => {
                                 )}
                               />
                             }
-                            label="Eye Glasses"
+                            label="Optical Eyewear"
                             name="type"
                             value="eyeglasses"
                             onChange={(e) =>
@@ -826,7 +705,7 @@ const shop = (props) => {
                                       )}
                                     />
                                   }
-                                  label="Eye Glasses"
+                                  label="Optical Eyewear"
                                   name="type"
                                   value="eyeglasses"
                                   onChange={(e) =>
@@ -1265,8 +1144,6 @@ export async function getServerSideProps({ query }) {
   }
 
   products = products.sort(function (a, b) {
-    // Turn your strings into dates, and then subtract them
-    // to get a value that is either negative, positive, or zero.
     return new Date(b.createdAt) - new Date(a.createdAt);
   });
 
@@ -1274,6 +1151,13 @@ export async function getServerSideProps({ query }) {
   let brands = await Brand.find({}).lean();
   const allBrands = JSON.parse(JSON.stringify(brands));
   await db.disconnect();
+
+  if (query.gender && !Array.isArray(query.gender)) {
+    let arr = [];
+    arr.push(query.gender);
+
+    query.gender = arr;
+  }
 
   return {
     props: {

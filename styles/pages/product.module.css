@@ -160,6 +160,8 @@
   display: flex;
 }
 .lineThrough {
+  font-weight: 300;
+
   text-decoration: line-through #ca222a;
 }
 .infoDiv {

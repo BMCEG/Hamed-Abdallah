@@ -52,6 +52,7 @@ function AdminProducts(props) {
     control,
     formState: { errors },
   } = useForm();
+  
   const handleFeaturedChange = (event) => {
     setfeaturedImage(event.target.files[0]);
   };

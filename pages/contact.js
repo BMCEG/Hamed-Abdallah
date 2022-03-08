@@ -316,7 +316,6 @@ export default function Contact() {
                   </Grid>
                 </AccordionDetails>
               </Accordion>
-              <br></br>{' '}
               <Accordion className={Styles.accordion}>
                 <AccordionSummary
                   aria-controls="panel1a-content"
@@ -359,25 +358,7 @@ export default function Contact() {
                       </div>
                     </Grid>
                   </Grid>
-                </AccordionDetails>
-              </Accordion>
-              <br></br>{' '}
-              <Accordion className={Styles.accordion}>
-                <AccordionSummary
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                  className={Styles.accordionSummary}
-                >
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={Styles.accordionTitle}
-                    style={{ color: 'white' }}
-                  >
-                    Mansoura
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails className={Styles.accordionDetails}>
+                  <br></br>{' '}
                   <Grid container spacing={1}>
                     <Grid className={Styles.storeInfo} item md={4} xs={12}>
                       <Typography variant="h4" component="h4">
@@ -404,25 +385,7 @@ export default function Contact() {
                       </div>
                     </Grid>
                   </Grid>
-                </AccordionDetails>
-              </Accordion>
-              <br></br>{' '}
-              <Accordion className={Styles.accordion}>
-                <AccordionSummary
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                  className={Styles.accordionSummary}
-                >
-                  <Typography
-                    variant="h4"
-                    component="h4"
-                    className={Styles.accordionTitle}
-                    style={{ color: 'white' }}
-                  >
-                    Mansoura
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails className={Styles.accordionDetails}>
+                  <br></br>
                   <Grid container spacing={1}>
                     <Grid className={Styles.storeInfo} item md={4} xs={12}>
                       <Typography variant="h4" component="h4">
@@ -451,7 +414,6 @@ export default function Contact() {
                   </Grid>
                 </AccordionDetails>
               </Accordion>
-              <br></br>{' '}
               <Accordion className={Styles.accordion}>
                 <AccordionSummary
                   aria-controls="panel1a-content"

@@ -8,28 +8,6 @@ const HamedAbdallahCollage = () => {
       <div className={Styles.row}>
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a href="/shop?gender=kids">
-            <div
-              className={Styles.block__img}
-              style={{
-                backgroundImage: `url('/glasses-1.png')`,
-                backgroundSize: 'contain',
-                backgroundRepeat: 'no-repeat',
-              }}
-            ></div>
-
-            <div className={Styles.block_caption}>
-              <Typography className={Styles.block_title}>
-                <strong>Kids</strong>
-                <br></br>
-                Eyewear
-              </Typography>
-            </div>
-          </a>
-        </div>
-
-        <div className={Styles.block}>
-          <div className={Styles.block__bg}></div>
           <a href="/shop?gender=male">
             <div
               className={Styles.block__img}
@@ -48,12 +26,9 @@ const HamedAbdallahCollage = () => {
             </div>
           </a>
         </div>
-      </div>
-      {/* <br></br> */}
-      <div className={Styles.row}>
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a href="/shop?type=sunglasses">
+          <a href="/shop?gender=female">
             <div
               className={Styles.block__img}
               style={{
@@ -62,9 +37,33 @@ const HamedAbdallahCollage = () => {
                 backgroundRepeat: 'no-repeat',
               }}
             ></div>
+
             <div className={Styles.block_caption}>
               <Typography className={Styles.block_title}>
-                <strong>Hottest</strong>
+                <strong>Women</strong>
+                <br></br>
+                Eyewear
+              </Typography>
+            </div>
+          </a>
+        </div>
+      </div>
+      {/* <br></br> */}
+      <div className={Styles.row}>
+        <div className={Styles.block}>
+          <div className={Styles.block__bg}></div>
+          <a href="/shop?gender=kids">
+            <div
+              className={Styles.block__img}
+              style={{
+                backgroundImage: `url('/glasses-1.png')`,
+                backgroundSize: 'contain',
+                backgroundRepeat: 'no-repeat',
+              }}
+            ></div>
+            <div className={Styles.block_caption}>
+              <Typography className={Styles.block_title}>
+                <strong>Kids</strong>
                 <br></br>
                 Sunglasses
               </Typography>
@@ -74,7 +73,7 @@ const HamedAbdallahCollage = () => {
 
         <div className={Styles.block}>
           <div className={Styles.block__bg}></div>
-          <a href="/shop?type=eyeglasses">
+          <a href="/shop">
             <div
               className={Styles.block__img}
               style={{
@@ -85,9 +84,9 @@ const HamedAbdallahCollage = () => {
             ></div>
             <div className={Styles.block_caption}>
               <Typography className={Styles.block_title}>
-                <strong>Elegant</strong>
+                <strong>Special</strong>
                 <br></br>
-                Eyeglasses
+                Offers
               </Typography>
             </div>
           </a>

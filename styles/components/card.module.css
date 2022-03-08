@@ -27,6 +27,7 @@
 }
 .lineThrough {
   color: black;
+  font-weight: 300;
   text-decoration: line-through #ca222a;
 }
 .brandImage {

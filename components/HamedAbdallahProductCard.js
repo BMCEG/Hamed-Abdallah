@@ -18,12 +18,26 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import { useSnackbar } from 'notistack';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
 
 const HamedAbdallahProductCard = (props) => {
   const matches = useMediaQuery(`(min-width: 1024px)`);
+  const [validOffer, setValidOffer] = useState({});
+
+  useEffect(async () => {
+    await axios
+      .get(`/api/offers/valid`)
+      .then((res) => {
+        if (res.status === 200) {
+          setValidOffer(res.data.validOffer[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const product = props.product;
   const brand = props.brand;
@@ -82,25 +96,16 @@ const HamedAbdallahProductCard = (props) => {
           <CardActionArea>
             <CardMedia>
               <div className={Styles.card}>
-                {/* <Typography>{`Hello World ${product.featuredImage}`}</Typography> */}
                 <Image
                   className={Styles.cardImage}
                   width={400}
                   height={250}
                   priority={true}
-                  // placeholder="blur"
                   loading="eager"
                   src={`${product.featuredImage}`}
                   alt="Z"
                 />
               </div>
-              {/*    className={Styles.card}
-              component="img"
-              image={product.featuredImage}
-              title={`${product.brandName} ${product.type} ${``} - ${``} ${
-                product.sku
-              }`}
-            ></CardMedia> */}
             </CardMedia>
             <CardContent>
               {matches ? (
@@ -169,7 +174,7 @@ const HamedAbdallahProductCard = (props) => {
                   />
                 </Grid>
                 <Grid item md={8} className={Styles.prodPrice}>
-                  {product.discountedPrice ? (
+                  {validOffer ? (
                     <Typography
                       variant="h6"
                       style={{
@@ -182,7 +187,9 @@ const HamedAbdallahProductCard = (props) => {
                       <strong>
                         {'\u00A0'}
                         {'\u00A0'}
-                        {product.price - 50} EGP
+                        {product.price -
+                          product.price * (validOffer.value / 100)}{' '}
+                        EGP
                       </strong>
                     </Typography>
                   ) : (

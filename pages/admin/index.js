@@ -24,12 +24,14 @@ import db from '../../utils/db.js';
 import Order from '../../models/Order';
 import User from '../../models/User';
 import Product from '../../models/Product';
+import { HamedAbdallahAdminDrawer } from '../../components';
+import Contact from '../../models/Contact';
 
 function Dashboard(props) {
   const [isOpened, setIsOpened] = useState(false);
   const { state } = useContext(Store);
   const { userInfo } = state;
-  const { orders, returns, lowStockProducts } = props;
+  const { orders, returns, lowStockProducts, contacts } = props;
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -50,54 +52,7 @@ function Dashboard(props) {
             <FontAwesomeIcon icon={faArrowAltCircleRight} size="3x" />
           </Button>
           <Drawer anchor={'left'} open={isOpened} onClose={toggleDrawer(false)}>
-            <Box className={Styles.box}>
-              <List>
-                <ListItem>
-                  <Image
-                    alt="Hamed Abdallah"
-                    src={'/Hamed-logo-Fullcolor.png'}
-                    width={152.5}
-                    height={87.5}
-                  />
-                </ListItem>
-                <hr></hr>
-                <ListItem selected>
-                  <Button className={Styles.boxButton} href="/admin">
-                    DASHBOARD
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/products">
-                    PRODUCTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/brands">
-                    BRANDS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/orders">
-                    ORDERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/returns">
-                    RETURNS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/contacts">
-                    CONTACTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/users">
-                    USERS
-                  </Button>
-                </ListItem>
-              </List>
-            </Box>
+            <HamedAbdallahAdminDrawer />
           </Drawer>
         </Grid>
         <Grid item md={11} className={Styles.layout}>
@@ -163,6 +118,49 @@ function Dashboard(props) {
                                 Details
                               </Button>
                             </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    ) : null}
+                  </Table>
+                </div>
+              </Card>
+              <br></br>
+              <Card className={Styles.newOrdersCard}>
+                <Typography variant="h5" component="h5">
+                  New Contact Messages:
+                </Typography>
+                <div className={Styles.newOrdersCount}>
+                  <Typography
+                    style={{ fontWeight: '800' }}
+                    variant="h1"
+                    component="h1"
+                  >
+                    {contacts.length}
+                  </Typography>
+                  <Typography variant="h5" component="h5">
+                    {contacts.length === 1
+                      ? 'Unread Message'
+                      : `Unread Messages`}
+                  </Typography>
+                  <br></br>
+                  <Table style={{ width: '100%' }}>
+                    <TableHead>
+                      <TableCell>Name</TableCell>
+                      <TableCell>Email</TableCell>
+                      <TableCell>Mobile</TableCell>
+                      <TableCell>Message</TableCell>
+                    </TableHead>
+                    {contacts.length > 0 ? (
+                      <TableBody>
+                        {contacts.map((contact) => (
+                          <TableRow>
+                            <TableCell>
+                              {contact.firstName} {contact.lastName}
+                            </TableCell>
+                            <TableCell>{contact.email}</TableCell>
+                            <TableCell>{contact.mobile}</TableCell>
+                            <TableCell>{contact.message}</TableCell>
                           </TableRow>
                         ))}
                       </TableBody>
@@ -279,6 +277,7 @@ export async function getServerSideProps({ query }) {
   let orders = await Order.find({})
     .lean()
     .populate({ path: 'user', Model: User });
+
   let unreadOrders = orders.filter(
     (order) =>
       order.isRead === false &&
@@ -296,6 +295,10 @@ export async function getServerSideProps({ query }) {
 
   let products = await Product.find({ stock: { $lte: 2 } });
   let lowStockProducts = JSON.parse(JSON.stringify(products));
+
+  const contacts = await Contact.find({ isRead: false }).lean();
+  const allContacts = JSON.parse(JSON.stringify(contacts));
+
   await db.disconnect();
 
   return {
@@ -303,6 +306,7 @@ export async function getServerSideProps({ query }) {
       returns: allReturns,
       orders: allOrders,
       lowStockProducts: lowStockProducts,
+      contacts: allContacts,
     },
   };
 }

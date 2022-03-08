@@ -9,6 +9,7 @@
   margin: auto;
 }
 .lineThrough {
+  font-weight: 300;
   text-decoration: line-through #ca222a;
 }
 .genderBalls {
@@ -303,13 +304,55 @@
 
 .removeFilterButton {
   margin-top: 30%;
-  /* background-color: tomato; */
   height: 100%;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 .removeFilterContent {
-  /* background-color: turquoise; */
   text-align: center;
+}
+.typeBlock {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4vmin;
+  height: 35vh;
+}
+.typeButtonBase {
+  width: 49%;
+}
+.typeButton_sunglasses {
+  width: 100% !important;
+  border-radius: 0 !important;
+  height: 100%;
+  background-image: url('/glasses-3.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all ease-in-out 0.5s !important;
+  box-shadow: none !important;
+}
+.typeButton_eyeglasses {
+  width: 100% !important;
+  border-radius: 0 !important;
+  height: 100%;
+  background-image: url('/glasses-4.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-shadow: none !important;
+  transition: all ease-in-out 0.5s !important;
+}
+.typeButton_sunglasses:hover {
+  background-position: top;
+  box-shadow: 0px 8px 8px -8px black !important;
+}
+.typeButton_eyeglasses:hover {
+  box-shadow: 0px 8px 8px -8px black !important;
+  background-position: top;
+}
+.typeButtonText {
+  font-size: 2.5vmax !important;
+  font-weight: bold !important;
+  color: white !important;
+  text-shadow: 0px 2px 2px #ca222a !important;
 }

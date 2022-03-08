@@ -51,6 +51,21 @@ function Order({ params }) {
   const router = useRouter();
   const { state } = useContext(Store);
 
+  const [validOffer, setValidOffer] = useState({});
+
+  useEffect(async () => {
+    await axios
+      .get(`/api/offers/valid`)
+      .then((res) => {
+        if (res.status === 200) {
+          setValidOffer(res.data.validOffer[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   const { userInfo } = state;
 
   const [{ loading, error, order }, dispatch] = useReducer(reducer, {
@@ -111,7 +126,6 @@ function Order({ params }) {
         },
       }
     );
-
   };
 
   return (
@@ -204,16 +218,22 @@ function Order({ params }) {
                                 <TableCell align="right">
                                   <Typography>{item.quantity}</Typography>
                                 </TableCell>
-                                {item.discountedPrice === 0 ? (
+                                {!validOffer ? (
                                   <TableCell align="right">
                                     {item.price}
                                   </TableCell>
                                 ) : (
-                                  <TableCell align="right">
+                                  <TableCell
+                                    align="right"
+                                    style={{ fontWeight: '500' }}
+                                  >
                                     <div className={Styles.lineThrough}>
                                       {item.price}
                                     </div>{' '}
-                                    {item.price - item.discountedPrice} EGP
+                                    {item.price -
+                                      item.price *
+                                        (validOffer.value / 100)}{' '}
+                                    EGP
                                   </TableCell>
                                 )}{' '}
                               </TableRow>
@@ -307,16 +327,6 @@ function Order({ params }) {
                         </Grid>
                       </Grid>
                     </ListItem>{' '}
-                    <ListItem>
-                      <Grid container>
-                        <Grid item xs={6}>
-                          <Typography>VAT:</Typography>
-                        </Grid>{' '}
-                        <Grid item xs={6}>
-                          <Typography align="right">{vat} EGP</Typography>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
                     <ListItem>
                       <Grid container>
                         <Grid item xs={6}>

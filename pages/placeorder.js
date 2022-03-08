@@ -31,6 +31,20 @@ import Cookies from 'js-cookie';
 function PlaceOrder() {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
+  const [validOffer, setValidOffer] = useState({});
+
+  useEffect(async () => {
+    await axios
+      .get(`/api/offers/valid`)
+      .then((res) => {
+        if (res.status === 200) {
+          setValidOffer(res.data.validOffer[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const {
     userInfo,
@@ -47,12 +61,18 @@ function PlaceOrder() {
       0
     )
   );
-  const discountedPrice = round2(
-    cartItems.reduce((a, c) => a + c.discountedPrice * c.quantity, 0)
-  );
-  const vat = round2(itemsPrice * 0.14);
+  const discountedPrice = validOffer
+    ? round2(
+        cartItems.reduce(
+          (a, c) =>
+            a + (c.price - c.price * (validOffer.value / 100)) * c.quantity,
+          0
+        )
+      )
+    : 0;
+  // const vat = round2(itemsPrice * 0.14);
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
-  const totalPrice = round2(netPrice + shippingPrice + vat);
+  const totalPrice = round2(netPrice + shippingPrice - discountedPrice);
 
   useEffect(() => {
     if (!paymentMethod) {
@@ -77,7 +97,6 @@ function PlaceOrder() {
           itemsPrice,
           discountValue: discountedPrice,
           shippingPrice,
-          vat,
           totalPrice,
         },
         {
@@ -154,16 +173,21 @@ function PlaceOrder() {
                               <TableCell align="right">
                                 <Typography>{item.quantity}</Typography>
                               </TableCell>
-                              {item.discountedPrice === 0 ? (
+                              {!validOffer ? (
                                 <TableCell align="right">
                                   {item.price}
                                 </TableCell>
                               ) : (
-                                <TableCell align="right">
+                                <TableCell
+                                  align="right"
+                                  style={{ fontWeight: '500' }}
+                                >
                                   <div className={Styles.lineThrough}>
                                     {item.price}
                                   </div>{' '}
-                                  {item.price - item.discountedPrice} EGP
+                                  {item.price -
+                                    (item.price * validOffer.value) / 100}{' '}
+                                  EGP
                                 </TableCell>
                               )}
                             </TableRow>
@@ -221,20 +245,22 @@ function PlaceOrder() {
                       </Grid>
                     </Grid>
                   </ListItem>{' '}
-                  <ListItem>
-                    <Grid container>
-                      <Grid item xs={6}>
-                        <Typography>Discoutned:</Typography>
-                      </Grid>{' '}
-                      <Grid item xs={6}>
-                        <Typography align="right">
-                          <strong style={{ color: '#ca222a' }}>
-                            -{discountedPrice} EGP
-                          </strong>
-                        </Typography>
+                  {validOffer ? (
+                    <ListItem>
+                      <Grid container>
+                        <Grid item xs={6}>
+                          <Typography>Discoutned:</Typography>
+                        </Grid>{' '}
+                        <Grid item xs={6}>
+                          <Typography align="right">
+                            <strong style={{ color: '#ca222a' }}>
+                              -{discountedPrice} EGP
+                            </strong>
+                          </Typography>
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </ListItem>{' '}
+                    </ListItem>
+                  ) : null}{' '}
                   <ListItem>
                     <Grid container>
                       <Grid item xs={6}>
@@ -247,16 +273,6 @@ function PlaceOrder() {
                       </Grid>
                     </Grid>
                   </ListItem>{' '}
-                  <ListItem>
-                    <Grid container>
-                      <Grid item xs={6}>
-                        <Typography>VAT:</Typography>
-                      </Grid>{' '}
-                      <Grid item xs={6}>
-                        <Typography align="right">{vat} EGP</Typography>
-                      </Grid>
-                    </Grid>
-                  </ListItem>
                   <ListItem>
                     <Grid container>
                       <Grid item xs={6}>

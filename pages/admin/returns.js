@@ -20,6 +20,7 @@ import axios from 'axios';
 import Order from '../../models/Order';
 import User from '../../models/User';
 import Moment from 'react-moment';
+import { HamedAbdallahAdminDrawer } from '../../components';
 
 function AdminReturns(props) {
   const [isOpened, setIsOpened] = useState(false);
@@ -143,54 +144,8 @@ function AdminReturns(props) {
             <FontAwesomeIcon icon={faArrowAltCircleRight} size="3x" />
           </Button>
           <Drawer anchor={'left'} open={isOpened} onClose={toggleDrawer(false)}>
-            <Box className={Styles.box}>
-              <List>
-                <ListItem>
-                  <Image
-                    alt="Hamed Abdallah"
-                    src={'/Hamed-logo-Fullcolor.png'}
-                    width={152.5}
-                    height={87.5}
-                  />
-                </ListItem>
-                <hr></hr>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin">
-                    DASHBOARD
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/products">
-                    PRODUCTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/brands">
-                    BRANDS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/orders">
-                    ORDERS
-                  </Button>
-                </ListItem>
-                <ListItem selected>
-                  <Button className={Styles.boxButton} href="/admin/returns">
-                    RETURNS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/contacts">
-                    CONTACTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/users">
-                    USERS
-                  </Button>
-                </ListItem>
-              </List>
-            </Box>
+          <HamedAbdallahAdminDrawer />
+
           </Drawer>
         </Grid>
         <Grid item md={11} className={Styles.layout}>

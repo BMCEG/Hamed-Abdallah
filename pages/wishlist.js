@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useReducer } from 'react';
+import React, { useContext, useEffect, useReducer, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Store } from '../utils/Store';
 import { useRouter } from 'next/router';
@@ -66,6 +66,7 @@ function Wishlist() {
   const { state } = useContext(Store);
   const { userInfo, cart } = state;
   const router = useRouter();
+  const [validOffer, setValidOffer] = useState({});
 
   const [{ loading, error, wishlist }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -74,23 +75,30 @@ function Wishlist() {
     cart: cart,
   });
 
-  useEffect(() => {
+  useEffect(async () => {
     if (!userInfo) {
       router.push('/login');
     }
-    const fetchWishlist = async () => {
-      try {
-        dispatch({ type: 'FETCH_REQUEST' });
-        const { data } = await axios.get(`/api/users/wishlist/list`, {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        });
+    await axios
+      .get(`/api/offers/valid`)
+      .then((res) => {
+        if (res.status === 200) {
+          setValidOffer(res.data.validOffer[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    try {
+      dispatch({ type: 'FETCH_REQUEST' });
+      const { data } = await axios.get(`/api/users/wishlist/list`, {
+        headers: { authorization: `Bearer ${userInfo.token}` },
+      });
 
-        dispatch({ type: 'FETCH_SUCCESS', payload: data });
-      } catch (err) {
-        dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
-      }
-    };
-    fetchWishlist();
+      dispatch({ type: 'FETCH_SUCCESS', payload: data });
+    } catch (err) {
+      dispatch({ type: 'FETCH_FAIL', payload: getError(err) });
+    }
   }, []);
 
   const addToCartHandler = async (product) => {
@@ -205,16 +213,22 @@ function Wishlist() {
                                   </TableCell>
                                   <TableCell>{item.name}</TableCell>
                                   <TableCell>{item.brand.name}</TableCell>
-                                  {item.discountedPrice === 0 ? (
+                                  {!validOffer ? (
                                     <TableCell align="right">
                                       {item.price}
                                     </TableCell>
                                   ) : (
-                                    <TableCell align="right">
+                                    <TableCell
+                                      style={{ fontWeight: '500' }}
+                                      align="right"
+                                    >
                                       <div className={Styles.lineThrough}>
                                         {item.price}
                                       </div>{' '}
-                                      {item.price - item.discountedPrice} EGP
+                                      {item.price -
+                                        item.price *
+                                          (validOffer.value / 100)}{' '}
+                                      EGP
                                     </TableCell>
                                   )}{' '}
                                   <TableCell>

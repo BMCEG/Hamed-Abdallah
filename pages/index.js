@@ -21,9 +21,7 @@ export default function Home() {
           name="description"
           content="Hamed Abdallah Optics | Buy from out trusted brands on hamedabdallah.com"
         />
-        {/* <link rel="icon" href="/Hamed-logo-White.png" /> */}
       </Head>
-      {/* <HamedAbdallahWhiteSpace /> */}
       <HamedAbdallahCarousel />
       <HamedAbdallahWhiteSpace />
       <HamedAbdallahCollage />
@@ -54,14 +52,6 @@ export default function Home() {
           brands such as: Mont Blanc, Ray Ban, Fossil, Police, Versace, Gucci,
           Persol, Prada, vogue, Bvlgari, Tommy Hilfiger and many other brands.
           <br></br>
-          {/* In addition to exclusive brands only at Hamed Abdallah: Stiffany,
-          Mackwezard and villar At Hamed Abdallah we are committed to our
-          customers, we ensure to help them choosing the best pair of glasses
-          that suits their face, we also help them choosing the right frames and
-          lens that fit with them We aim to inspire our customers with
-          exceptional eyewear designs We have life time free maintenance on all
-          our products and a warranty against manufacturing defects and the
-          possibility of replacement within 15 days. */}
         </p>
       </div>
       <HamedAbdallahWhiteSpace />

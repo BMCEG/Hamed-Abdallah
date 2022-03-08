@@ -12,6 +12,11 @@
 .grid__container {
   /* background-color: red !important; */
 }
+.lineThrough {
+  font-weight: 300;
+
+  text-decoration: line-through #ca222a;
+}
 
 .section {
   margin: 1rem;

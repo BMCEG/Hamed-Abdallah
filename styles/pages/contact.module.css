@@ -8,8 +8,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  /* background-color: cyan; */
+  justify-content: space-evenly;
 }
 .storesGrid {
   display: flex !important;
@@ -65,4 +64,6 @@
 }
 .accordionDetails {
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }

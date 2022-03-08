@@ -84,7 +84,6 @@ const orderSchema = mongoose.Schema(
     },
     vat: {
       type: Number,
-      required: true,
     },
     discountValue: {
       type: Number,

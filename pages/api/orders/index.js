@@ -40,6 +40,7 @@ handler.post(async (req, res) => {
     res.status(400).send(err);
   }
 });
+
 export default handler;
 
 const createShortID = async () => {

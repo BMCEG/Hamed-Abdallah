@@ -18,6 +18,8 @@ import tableIcons from '../../components/MaterialTableIcons';
 import axios from 'axios';
 import Contact from '../../models/Contact';
 import { Store } from '../../utils/Store';
+import { HamedAbdallahAdminDrawer } from '../../components';
+import Moment from 'react-moment';
 
 function AdminUsers(props) {
   const [isOpened, setIsOpened] = useState(false);
@@ -31,6 +33,13 @@ function AdminUsers(props) {
     { title: 'E-Mail', field: 'email' },
     { title: 'Mobile Number', field: 'mobile' },
     { title: 'Message', field: 'message' },
+    {
+      title: 'Date',
+      field: 'createdAt',
+      render: (rowData) => (
+        <Moment format="dddd DD/MM/YYYY hh:ss">{rowData.createdAt}</Moment>
+      ),
+    },
   ];
 
   const toggleDrawer = (open) => (event) => {
@@ -52,54 +61,7 @@ function AdminUsers(props) {
             <FontAwesomeIcon icon={faArrowAltCircleRight} size="3x" />
           </Button>
           <Drawer anchor={'left'} open={isOpened} onClose={toggleDrawer(false)}>
-            <Box className={Styles.box}>
-              <List>
-                <ListItem>
-                  <Image
-                    alt="Hamed Abdallah"
-                    src={'/Hamed-logo-Fullcolor.png'}
-                    width={152.5}
-                    height={87.5}
-                  />
-                </ListItem>
-                <hr></hr>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin">
-                    DASHBOARD
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/products">
-                    PRODUCTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/brands">
-                    BRANDS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/orders">
-                    ORDERS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/returns">
-                    RETURNS
-                  </Button>
-                </ListItem>
-                <ListItem selected>
-                  <Button className={Styles.boxButton} href="/admin/contacts">
-                    CONTACTS
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button className={Styles.boxButton} href="/admin/users">
-                    USERS
-                  </Button>
-                </ListItem>
-              </List>
-            </Box>
+            <HamedAbdallahAdminDrawer />
           </Drawer>
         </Grid>
         <Grid item md={11} className={Styles.layout}>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { HamedAbdallahWhiteSpace } from '../components/index.js';
 import Styles from '../styles/pages/cart.module.css';
 import { Store } from '../utils/Store';
@@ -26,6 +26,21 @@ import axios from 'axios';
 function Cart() {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
+
+  const [validOffer, setValidOffer] = useState({});
+
+  useEffect(async () => {
+    await axios
+      .get(`/api/offers/valid`)
+      .then((res) => {
+        if (res.status === 200) {
+          setValidOffer(res.data.validOffer[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const {
     cart: { cartItems },
@@ -132,14 +147,19 @@ function Cart() {
                               ))}
                             </Select>
                           </TableCell>
-                          {item.discountedPrice === 0 ? (
+                          {!validOffer ? (
                             <TableCell align="right">{item.price}</TableCell>
                           ) : (
-                            <TableCell align="right">
+                            <TableCell
+                              align="right"
+                              style={{ fontWeight: '500' }}
+                            >
                               <div className={Styles.lineThrough}>
                                 {item.price}
                               </div>{' '}
-                              {item.price - item.discountedPrice} EGP
+                              {item.price -
+                                item.price * (validOffer.value / 100)}{' '}
+                              EGP
                             </TableCell>
                           )}
                           <TableCell align="right">
@@ -165,45 +185,67 @@ function Cart() {
                       <Typography variant="h5">
                         Subtotal (
                         {cartItems.reduce((a, c) => a + c.quantity, 0)} items) :
-                        <hr></hr>
-                        {/* <br></br> */}
-                        <Typography variant="body1" component="body1">
-                          <span style={{ display: 'flex' }}>
-                            Original Price:
-                            <div className={Styles.lineThrough}>
-                              {cartItems.reduce(
-                                (a, c) => a + c.quantity * c.price,
-                                0
-                              )}{' '}
-                              EGP
-                            </div>
-                          </span>
-                        </Typography>
-                        <Typography variant="body1" component="body1">
-                          <span style={{ display: 'flex' }}>
-                            Discounted Price:
-                            {/* <strong> */}
-                            {cartItems.reduce(
-                              (a, c) => a + c.quantity * c.discountedPrice,
-                              0
-                            )}{' '}
-                            EGP
-                            {/* </strong> */}
-                          </span>
-                        </Typography>
+                        {validOffer ? (
+                          <>
+                            {' '}
+                            <hr></hr>
+                            <Typography variant="body1" component="body1">
+                              <span style={{ display: 'flex' }}>
+                                Original Price:
+                                <div className={Styles.lineThrough}>
+                                  <strong>
+                                    {cartItems.reduce(
+                                      (a, c) => a + c.quantity * c.price,
+                                      0
+                                    )}{' '}
+                                    EGP
+                                  </strong>
+                                </div>
+                              </span>
+                            </Typography>
+                            <Typography variant="body1" component="body1">
+                              <span
+                                style={{ display: 'flex', color: '#ca222a' }}
+                              >
+                                Discounted Price:{' '}
+                                <strong>
+                                  {cartItems.reduce(
+                                    (a, c) =>
+                                      a +
+                                      c.quantity * c.price -
+                                      c.price * (validOffer.value / 100),
+                                    0
+                                  )}{' '}
+                                  EGP
+                                </strong>
+                              </span>
+                            </Typography>
+                          </>
+                        ) : null}{' '}
                         <hr></hr>
                         <Typography variant="h6" component="h6">
                           <span style={{ display: 'flex' }}>
                             Net Price:
-                            <strong>
-                              {cartItems.reduce(
-                                (a, c) =>
-                                  a +
-                                  c.quantity * (c.price - c.discountedPrice),
-                                0
-                              )}{' '}
-                              EGP
-                            </strong>
+                            {validOffer ? (
+                              <strong>
+                                {cartItems.reduce(
+                                  (a, c) =>
+                                    a +
+                                    c.quantity * c.price -
+                                    c.price * (validOffer.value / 100),
+                                  0
+                                )}{' '}
+                                EGP
+                              </strong>
+                            ) : (
+                              <strong>
+                                {cartItems.reduce(
+                                  (a, c) => a + c.quantity * c.price,
+                                  0
+                                )}{' '}
+                                EGP
+                              </strong>
+                            )}
                           </span>
                         </Typography>
                       </Typography>

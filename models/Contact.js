@@ -17,6 +17,10 @@ const contactSchema = mongoose.Schema(
     mobile: {
       type: Number,
     },
+    isRead: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

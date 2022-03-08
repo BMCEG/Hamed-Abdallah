@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 import { Store } from '../../utils/Store';
@@ -45,6 +45,21 @@ export default function ProductScreen(props) {
   const matches = useMediaQuery('(min-width:1024px');
   const { product, reviews, relatedItems, recentItems, isWishlistedProp } =
     props;
+
+  const [validOffer, setValidOffer] = useState({});
+
+  useEffect(async () => {
+    await axios
+      .get(`/api/offers/valid`)
+      .then((res) => {
+        if (res.status === 200) {
+          setValidOffer(res.data.validOffer[0]);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [review, setReview] = useState('');
@@ -333,12 +348,12 @@ export default function ProductScreen(props) {
                 </List>
                 <List className={Styles.priceInfo}>
                   <ListItem>
-                    {product.discountedPrice === 0 ? (
+                    {!validOffer ? (
                       <Typography variant="h4" component="h4">
                         <strong>{product.price} EGP</strong>
                       </Typography>
                     ) : (
-                      <div style={{ display: 'flex' }}>
+                      <div>
                         <Typography variant="h4" component="h4">
                           <div className={Styles.lineThrough}>
                             {product.price}
@@ -346,7 +361,9 @@ export default function ProductScreen(props) {
                         </Typography>
                         <Typography variant="h4" component="h4">
                           <strong>
-                            {product.price - product.discountedPrice} EGP
+                            {product.price -
+                              product.price * (validOffer.value / 100)}{' '}
+                            EGP
                           </strong>
                         </Typography>
                       </div>
@@ -549,7 +566,6 @@ export default function ProductScreen(props) {
           disableArrowsOnEnd={false}
           className={Styles.relatedCarousel}
           pagination={false}
-          transitionMs={1000}
           transitionMs={1000}
           interval={3000}
           infiniteLoop={true}
