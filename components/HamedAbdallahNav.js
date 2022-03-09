@@ -28,12 +28,15 @@ const DynamicComponentWithNoSSR = dynamic(
 
 const HamedAbdallahNav = () => {
   const [validOffer, setValidOffer] = useState({});
+  const [validOfferFlag, setValidOfferFlag] = useState(false);
+
   useEffect(async () => {
     await axios
       .get(`/api/offers/valid`)
       .then((res) => {
         if (res.status === 200) {
           setValidOffer(res.data.validOffer[0]);
+          setValidOfferFlag(res.data.validOfferFlag);
         }
       })
       .catch((error) => {
@@ -181,7 +184,7 @@ const HamedAbdallahNav = () => {
               </Button>
             )}
           </Toolbar>
-          {validOffer ? (
+          {validOfferFlag ? (
             <div className={Styles.belowNav}>
               <div className={Styles.belowNavContainer}>
                 <Marquee speed={70} gradientWidth={10} style={{ width: '50%' }}>
@@ -328,7 +331,7 @@ const HamedAbdallahNav = () => {
               </Button>
             </div>
           </Toolbar>
-          {validOffer ? (
+          {validOfferFlag ? (
             <div className={Styles.belowNavMob}>
               <div className={Styles.belowNavContainerMob}>
                 <Marquee speed={45} gradientWidth={10}>

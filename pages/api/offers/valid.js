@@ -13,8 +13,10 @@ handler.get(async (req, res) => {
     ],
   });
 
+  const validOfferFlag = offer && offer._id ? true : false;
+
   await db.disconnect();
-  res.status(200).send({ validOffer: offer });
+  res.status(200).send({ validOffer: offer, validOfferFlag });
 });
 
 export default handler;
