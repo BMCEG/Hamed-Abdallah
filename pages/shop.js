@@ -219,6 +219,7 @@ const shop = (props) => {
           alt="placeholder"
           width={1980}
           priority={true}
+          quality={30}
           height={350}
           objectFit="cover"
         />
@@ -227,6 +228,7 @@ const shop = (props) => {
           alt="placeholder"
           width={1980}
           priority={true}
+          quality={30}
           height={100}
         />
       </div>

@@ -41,7 +41,8 @@
 }
 .thumbnail {
   background-color: white;
-  border: 1px solid black !important;
+
+  /* border: 1px solid black !important; */
   transition: all ease-in-out 0.2s;
   object-fit: contain !important;
 }
@@ -49,6 +50,7 @@
   transform: scale(1.05);
 }
 .thumbBtn {
+  box-shadow: 0px 8px 8px -8px black !important;
   /* background-color: yellow; */
   border-radius: 10px !important;
 }
@@ -81,7 +83,7 @@
   object-fit: contain !important;
 }
 .imagesRow {
-  background-color: chartreuse !important;
+  /* background-color: chartreuse !important; */
   padding: 2vmin !important;
 }
 .product_image {
@@ -91,6 +93,7 @@
   object-fit: contain !important;
   transition: all ease-in-out 0.2s;
 }
+
 .product_image_mob {
   object-fit: contain !important;
   padding: 1vmin !important;
@@ -110,9 +113,10 @@
   /* background-color: chartreuse; */
 }
 .featuredImage {
+  box-shadow: 0px 8px 8px -8px black !important;
   /* background-color: aqua !important; */
   /* height: 100%; */
-  padding: 1vmax !important;
+  margin: 1vmax !important;
   animation: fadeIn 1s !important;
 }
 @keyframes fadeIn {

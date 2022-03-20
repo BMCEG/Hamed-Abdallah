@@ -23,9 +23,7 @@ import {
 import Image from 'next/image';
 import {
   HamedAbdallahWhiteSpace,
-  HamedAbdallahProductBurn,
   HamedAbdallahImageMagnifier,
-  HamedAbdallahProductBall,
 } from '../../components/index.js';
 import Styles from '../../styles/pages/product.module.css';
 import { useSnackbar } from 'notistack';
@@ -47,6 +45,7 @@ export default function ProductScreen(props) {
     props;
 
   const [validOffer, setValidOffer] = useState({});
+  const [validOfferFlag, setValidOfferFlag] = useState(false);
 
   useEffect(async () => {
     await axios
@@ -54,6 +53,7 @@ export default function ProductScreen(props) {
       .then((res) => {
         if (res.status === 200) {
           setValidOffer(res.data.validOffer[0]);
+          setValidOfferFlag(res.data.validOfferFlag);
         }
       })
       .catch((error) => {
@@ -184,6 +184,7 @@ export default function ProductScreen(props) {
                     alt="image"
                     src={product.featuredImage}
                     height={500}
+                    quality={40}
                     priority={true}
                     onClick={() =>
                       pickFeaturedImageHandler(`${product.featuredImage}`)
@@ -193,7 +194,8 @@ export default function ProductScreen(props) {
                   />
                   {productImages.map((image) => (
                     <Image
-                      priority={true}
+                      // priority={true}
+                      quality={40}
                       alt="image"
                       src={`${image.source}`}
                       height={500}
@@ -221,6 +223,7 @@ export default function ProductScreen(props) {
                   height={500}
                   priority={true}
                   width={500}
+                  quality={20}
                   className={Styles.product_image}
                 />
                 <div className={Styles.product_images_inline}>
@@ -228,6 +231,7 @@ export default function ProductScreen(props) {
                     alt="image"
                     src={`${product.featuredImage}`}
                     height={500}
+                    quality={20}
                     priority={true}
                     onClick={() =>
                       pickFeaturedImageHandler(`${product.featuredImage}`)
@@ -240,6 +244,7 @@ export default function ProductScreen(props) {
                       alt="image"
                       src={`${image.source}`}
                       priority={true}
+                      quality={20}
                       height={500}
                       width={500}
                       onClick={() =>
@@ -266,11 +271,13 @@ export default function ProductScreen(props) {
                   priority={true}
                   className={Styles.brandLogo}
                   width={50}
+                  quality={20}
                   height={50}
                 />
               ) : (
                 <Image
                   alt={product.brand.name}
+                  quality={20}
                   src={product.brand.logo}
                   priority={true}
                   className={Styles.brandLogo}
@@ -348,7 +355,7 @@ export default function ProductScreen(props) {
                 </List>
                 <List className={Styles.priceInfo}>
                   <ListItem>
-                    {!validOffer ? (
+                    {!validOfferFlag ? (
                       <Typography variant="h4" component="h4">
                         <strong>{product.price} EGP</strong>
                       </Typography>
@@ -488,6 +495,7 @@ export default function ProductScreen(props) {
                 className={Styles.thumbBtn}
               >
                 <Image
+                  quality={20}
                   key={prod._id}
                   alt="Hamed Abdallah Brand"
                   src={prod.featuredImage}
@@ -582,6 +590,7 @@ export default function ProductScreen(props) {
                   alt="Hamed Abdallah Brand"
                   src={prod.featuredImage}
                   width={200}
+                  quality={20}
                   priority={true}
                   height={200}
                   className={Styles.thumbnail}

@@ -25,12 +25,15 @@ import { useRouter } from 'next/router';
 const HamedAbdallahProductCard = (props) => {
   const matches = useMediaQuery(`(min-width: 1024px)`);
   const [validOffer, setValidOffer] = useState({});
+  const [validOfferFlag, setValidOfferFlag] = useState(false);
 
   useEffect(async () => {
     await axios
       .get(`/api/offers/valid`)
       .then((res) => {
         if (res.status === 200) {
+          setValidOfferFlag(res.data.validOfferFlag);
+
           setValidOffer(res.data.validOffer[0]);
         }
       })
@@ -99,9 +102,10 @@ const HamedAbdallahProductCard = (props) => {
                 <Image
                   className={Styles.cardImage}
                   width={400}
+                  quality={40}
                   height={250}
-                  priority={true}
-                  loading="eager"
+                  // priority={true}
+                  // loading="eager"
                   src={`${product.featuredImage}`}
                   alt="Z"
                 />
@@ -168,13 +172,14 @@ const HamedAbdallahProductCard = (props) => {
                     alt={brand.name}
                     src={brand.logo}
                     width={80}
+                    quality={20}
                     height={40}
                     priority={true}
                     className={Styles.brandImage}
                   />
                 </Grid>
                 <Grid item md={8} className={Styles.prodPrice}>
-                  {validOffer ? (
+                  {validOfferFlag ? (
                     <Typography
                       variant="h6"
                       style={{
