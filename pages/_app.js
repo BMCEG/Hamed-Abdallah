@@ -38,6 +38,20 @@ export default function MyApp(props) {
     'https://connect.facebook.net/en_US/fbevents.js');
      fbq('init', '689405399107163'); 
     fbq('track', 'PageView');
+    fbq('track', 'AddPaymentInfo');
+    fbq('track', 'AddToCart');
+    fbq('track', 'AddToWishlist');
+    fbq('track', 'CompleteRegistration');
+    fbq('track', 'Contact');
+    fbq('track', 'CustomizeProduct');
+    fbq('track', 'Donate');
+    fbq('track', 'FindLocation');
+    fbq('track', 'InitiateCheckout');
+    fbq('track', 'Lead');
+    fbq('track', 'Schedule');
+    fbq('track', 'Search');
+    fbq('track', 'SubmitApplication');
+    fbq('track', 'ViewContent');
   `,
   }}
 />
