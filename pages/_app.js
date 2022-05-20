@@ -38,8 +38,6 @@ export default function MyApp(props) {
     'https://connect.facebook.net/en_US/fbevents.js');
      fbq('init', '689405399107163'); 
     fbq('track', 'PageView');
-
-
   `,
   }}
 />
@@ -48,7 +46,7 @@ export default function MyApp(props) {
 src="https://www.facebook.com/tr?id=689405399107163&ev=PageView
 &noscript=1"/>
 </noscript>
-        <title>updated Optics</title>
+        <title>Hamed Abdallah Optics</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
