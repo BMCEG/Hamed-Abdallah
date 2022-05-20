@@ -6,7 +6,7 @@ import Script from 'next/script';
 
 export default class MyDocument extends Document {
   render() {
-    return (
+    return ( 
       <Html lang="en">
         <Head>
                 <Script

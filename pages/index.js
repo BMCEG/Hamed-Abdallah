@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>dfhvbkdfhvnk</title>
+        <title>Hamed Abdallah Optics</title>
         <meta name="keywords" content="optics ecommerce" />
         <meta
           name="description"
@@ -42,13 +42,15 @@ export default function Home() {
             }}
             className={styles.text__header}
           >
-            dsjknfdk
+            ABOUT US
           </Typography>
         </div>
         <br></br>
         <p className={styles.text__p}>
-          <span className={styles.text__p__bold}>sdvhdsj</span> was
-         vsdfnvkjsdnkvjnsdkvnsdkvn
+          <span className={styles.text__p__bold}>HAMED ABDALLAH</span> was
+          founded in 1911 to introduce to you many special worldwide eyewear
+          brands such as: Mont Blanc, Ray Ban, Fossil, Police, Versace, Gucci,
+          Persol, Prada, vogue, Bvlgari, Tommy Hilfiger and many other brands.
           <br></br>
         </p>
       </div>
