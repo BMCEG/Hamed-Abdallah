@@ -38,6 +38,8 @@ export default function MyApp(props) {
     'https://connect.facebook.net/en_US/fbevents.js');
      fbq('init', '689405399107163'); 
     fbq('track', 'PageView');
+       
+
     fbq('track', 'AddPaymentInfo');
     fbq('track', 'AddToCart');
     fbq('track', 'AddToWishlist');
@@ -56,9 +58,7 @@ export default function MyApp(props) {
   }}
 />
       <noscript>
- <img height="1" width="1" 
-src="https://www.facebook.com/tr?id=689405399107163&ev=PageView
-&noscript=1"/>
+ <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=PageView&noscript=1"/>
 </noscript>
         <title>Hamed Abdallah Optics</title>
         <meta
