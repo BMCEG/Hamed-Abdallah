@@ -23,8 +23,8 @@ export default function MyApp(props) {
 
   return (
     <React.Fragment>
-      <Head>
-      <Script strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `
+           <Script strategy="afterInteractive" dangerouslySetInnerHTML={{
+__html: `
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
     n.queue=[];t=b.createElement(e);t.async=!0;
@@ -51,6 +51,8 @@ export default function MyApp(props) {
   `,
   }}
 />
+      <Head>
+ 
       <noscript>
  <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=PageView&noscript=1"/>
  <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=AddToCart&noscript=1"/>

@@ -8,8 +8,7 @@ export default class MyDocument extends Document {
   render() {
     return ( 
       <Html lang="en">
-        <Head>
-                <Script
+           <Script
   strategy="afterInteractive"
   dangerouslySetInnerHTML={{
     __html: `
@@ -39,6 +38,20 @@ export default class MyDocument extends Document {
   `,
   }}
 />
+<noscript>
+            <img height="1" width="1" style={{ display: 'none' }} src={`https://www.facebook.com/tr?id=689405399107163&ev=PageView&noscript=1`}/>
+</noscript>
+
+      <noscript>
+      <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=PageView&noscript=1"/>
+      <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=AddToCart&noscript=1"/>
+</noscript>
+
+        <Head>
+        <noscript>
+            <img height="1" width="1" style={{ display: 'none' }} src={`https://www.facebook.com/tr?id=689405399107163&ev=PageView&noscript=1`}/>
+</noscript>
+
       <noscript>
       <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=PageView&noscript=1"/>
       <img height="1" width="1" src="https://www.facebook.com/tr?id=689405399107163&ev=AddToCart&noscript=1"/>
