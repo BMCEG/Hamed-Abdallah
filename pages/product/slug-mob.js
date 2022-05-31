@@ -317,9 +317,9 @@ export default function ProductScreen(props) {
                   <Grid item md={10}>
                     {product.stock > 0 ? (
                       <Button
+                      onClick={() => addToCartHandler(product)}
                         fullWidth
                         variant="contained"
-                        onClick={() => addToCartHandler(product)}
                         className={Styles.button}
                       >
                         Add to Cart
