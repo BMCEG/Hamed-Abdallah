@@ -297,7 +297,7 @@ export default function Contact() {
                         Arabella Plaza
                       </Typography>
                       <Typography variant="h6" component="h6">
-                        011-2629-4516
+                        01013007175
                       </Typography>
                     </Grid>
                     <Grid item md={8} xs={12}>
@@ -341,7 +341,7 @@ export default function Contact() {
                         Cairo Festival City
                       </Typography> */}
                       <Typography variant="h6" component="h6">
-                        011-2629-4516
+                        01013007175
                       </Typography>
                     </Grid>
                     <Grid item md={8} xs={12}>
@@ -368,7 +368,7 @@ export default function Contact() {
                         Cairo Festival City
                       </Typography> */}
                       <Typography variant="h6" component="h6">
-                        011-2629-4516
+                        01013007175
                       </Typography>
                     </Grid>
                     <Grid item md={8} xs={12}>
@@ -395,7 +395,7 @@ export default function Contact() {
                         Cairo Festival City
                       </Typography> */}
                       <Typography variant="h6" component="h6">
-                        011-2629-4516
+                        01013007175
                       </Typography>
                     </Grid>
                     <Grid item md={8} xs={12}>
@@ -439,7 +439,7 @@ export default function Contact() {
                         Tolba Awaida Street
                       </Typography>
                       <Typography variant="h6" component="h6">
-                        011-2629-4516
+                        01013007175
                       </Typography>
                     </Grid>
                     <Grid item md={8} xs={12}>

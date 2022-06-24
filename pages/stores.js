@@ -22,7 +22,7 @@ export default function ourStores() {
                 Cairo Festival City
               </Typography>
               <Typography variant="h6" component="h6">
-                011-2629-4516
+                01013007175
               </Typography>
             </Grid>
             <Grid item md={6}>
@@ -51,7 +51,7 @@ export default function ourStores() {
                 Point 90
               </Typography>
               <Typography variant="h6" component="h6">
-                011-2629-4516
+                01013007175
               </Typography>
             </Grid>
             <Grid item md={6}>
